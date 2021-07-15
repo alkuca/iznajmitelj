@@ -20,8 +20,7 @@
 
 @mixin center_vertical {
   display: flex;
-  justify-content: center;
-  flex-direction: column;
+  align-items: center;
 }
 
 @mixin drop_shadow_center {
@@ -43,10 +42,9 @@
   height:66px
 }
 
-
 .logo-container {
   @include center_vertical;
-  width: 220px;
+  width: 250px;
 
   p {
     padding-left: 45px;
@@ -56,13 +54,13 @@
 
 .search-container {
   @include center_vertical;
-  width: calc(100% - 220px);
   padding: 0 20px;
 
   .inner-container {
     display: flex;
-    img {
+    i {
       padding: 0 6px 1px 3px;
+      @include center_vertical;
     }
     input {
       height: 30px;
@@ -71,7 +69,7 @@
       outline: none;
       font-size: 18px;
     }
-    input::placeholder{
+    input::placeholder {
       font-size: 18px;
     }
   }
@@ -80,22 +78,26 @@
 .navbar-menu-container {
   display: flex;
   padding: 0 45px 0 0;
-  .bell{
-    padding:0 4px;
-    width:20px;
+  margin-left: auto;
+
+  .bell {
+    padding:0 5px;
+    font-size: 20px;
+    @include center_vertical
   }
-  .avatar{
+  .avatar {
     padding:0 15px;
     width:40px;
   }
-  .name-container{
+  .name-container {
     display: flex;
 
-    img{
-      width:13px;
-      padding: 5px 0 0 7px;
+    i {
+      padding: 4px 0 0 7px;
+      @include center_vertical;
+      font-size: 19px;
     }
-    p{
+    p {
       @include center_vertical;
       font-weight: bold;
       font-size: 17px;
@@ -103,4 +105,61 @@
     }
   }
 }
+
+/* #####################################  START OF SIDEBAR  ###################################### */
+
+.sidebar-container {
+  width: 250px;
+  height: calc(100vh - 66px);
+  position: fixed;
+  left: 0;
+  top: 66px;
+
+  .inner-container{
+    padding-left: 50px;
+
+    .links-container {
+      margin-top: 30px;
+    }
+  }
+}
+
+.sidebar-link{
+  @include center_vertical;
+  padding: 20px 0;
+
+  i {
+    font-size: 18px;
+    padding: 5px 18px 0 0;
+  }
+  a {
+    font-size: 18px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
