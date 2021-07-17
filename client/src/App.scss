@@ -32,7 +32,9 @@
   cursor: pointer;
 }
 
-
+body{
+  font-family: 'Mada', sans-serif;
+}
 
 /* #####################################  START OF NAVBAR  ###################################### */
 
@@ -116,7 +118,7 @@
   top: 66px;
 
   .inner-container{
-    padding-left: 50px;
+    padding-left: 45px;
 
     .links-container {
       margin-top: 30px;
@@ -134,6 +136,23 @@
   }
   a {
     font-size: 18px;
+    font-weight: 500;
+  }
+}
+
+.dashboard-container{
+  background: #F6F6F6;
+  width:calc(100% - 250px);
+  height: calc(100% - 66px);
+  position: absolute;
+  left:250px;
+  top:66px;
+
+  .dashboard-content{
+    background: white;
+    width:calc(100% - 10px);
+    height: calc(100% - 10px);
+    margin: 10px 0 0 10px;
   }
 }
 
