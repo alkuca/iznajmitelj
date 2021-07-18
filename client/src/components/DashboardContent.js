@@ -8,6 +8,7 @@ class DashboardContent extends React.Component {
             <div className="dashboard-container">
                 <div className="dashboard-content">
                     <ItemCard/>
+                    <ItemCard/>
                 </div>
             </div>
         )
