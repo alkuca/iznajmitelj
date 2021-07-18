@@ -23,13 +23,23 @@
   align-items: center;
 }
 
+@mixin center_vertical_column{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 @mixin drop_shadow_center {
-  box-shadow: 0 0 7px rgba(0, 0, 0, 0.20);
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.12);
 }
 
 @mixin button_hover {
   opacity: 0.8;
   cursor: pointer;
+}
+
+@mixin navbar_height{
+  height:66px;
 }
 
 body{
@@ -47,6 +57,8 @@ body{
 .logo-container {
   @include center_vertical;
   width: 250px;
+  position: fixed;
+  height: 66px;
 
   p {
     padding-left: 45px;
@@ -56,7 +68,7 @@ body{
 
 .search-container {
   @include center_vertical;
-  padding: 0 20px;
+  padding: 0 20px 0 260px;
 
   .inner-container {
     display: flex;
@@ -140,6 +152,8 @@ body{
   }
 }
 
+
+
 .dashboard-container{
   background: #F6F6F6;
   width:calc(100% - 250px);
@@ -150,17 +164,68 @@ body{
 
   .dashboard-content{
     background: white;
-    width:calc(100% - 10px);
-    height: calc(100% - 10px);
+    padding: 15px 0 0 15px;
+    width: calc(100% - 25px);
+    height: calc(100% - 25px);
     margin: 10px 0 0 10px;
   }
 }
 
 
 
+.item-card-container {
+  width: 260px;
+  border-radius: 8px;
+  @include drop_shadow_center;
 
+  .image-container {
+    img {
+      width: 100%;
+      border-radius: 8px 8px 0 0;
+    }
+  }
+  .data-container {
+    @include center_vertical_column;
+    padding: 10px 20px;
 
+    h1 {
+      font-size: 20px;
+      text-align: center;
+      margin:0;
+      padding: 0 0 8px 0;
+      border-bottom: 1px solid #e0e0e0;
+      font-weight: 600;
+    }
 
+    .location-container {
+      margin: 10px 0 5px 0;
+      @include center_vertical;
+      p {
+        margin: 0 18px 0 0;
+        font-weight: 600;
+        font-size: 16px;
+        color:#3C7BFF;
+      }
+      i {
+        margin: 4px 4px 0 0;
+        font-size: 18px;
+        color:#3C7BFF;
+      }
+    }
+    .price-container{
+      @include center_vertical;
+      h2{
+        margin: 0;
+        color:#3C7BFF;
+      }
+      p{
+        margin: 3px 0 0 3px;
+        font-weight: 500;
+        color: #828282;
+      }
+    }
+  }
+}
 
 
 

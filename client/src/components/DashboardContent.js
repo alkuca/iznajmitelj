@@ -1,4 +1,5 @@
 import React from "react";
+import ItemCard from "./ItemCard";
 
 
 class DashboardContent extends React.Component {
@@ -6,7 +7,7 @@ class DashboardContent extends React.Component {
         return (
             <div className="dashboard-container">
                 <div className="dashboard-content">
-
+                    <ItemCard/>
                 </div>
             </div>
         )
