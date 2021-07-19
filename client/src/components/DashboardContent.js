@@ -1,5 +1,6 @@
 import React from "react";
 import ItemCard from "./ItemCard";
+import PageTitle from "./PageTitle";
 
 
 class DashboardContent extends React.Component {
@@ -7,7 +8,7 @@ class DashboardContent extends React.Component {
         return (
             <div className="dashboard-container">
                 <div className="dashboard-content">
-                    <ItemCard/>
+                    <PageTitle title="Moje stvari" renderButton={true} buttonText="Dodaj"/>
                     <ItemCard/>
                 </div>
             </div>

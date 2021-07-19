@@ -230,6 +230,28 @@ body{
 
 
 
+.title-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 50px 20px 0;
+  h1 {
+    margin:0;
+    font-size: 22px;
+    font-weight: 600;
+  }
+  button {
+    border-radius: 3px;
+    padding: 10px 28px;
+    font-size: 15px;
+    font-weight: 600;
+    background: #3C7BFF;
+    color:white;
+    border:none;
+  }
+}
+
+
+
 
 
 
