@@ -1,5 +1,7 @@
 import React from "react";
 import item from "../images/drone.png";
+import PriceWithTime from "./PriceWithTime";
+import LocationWithIcon from "./LocationWithIcon";
 
 class ItemCard extends React.Component {
     render(){
@@ -10,14 +12,8 @@ class ItemCard extends React.Component {
                 </div>
                 <div className="data-container">
                     <h1>Oculus Rift 2020 sa controlerima</h1>
-                    <div className="location-container">
-                        <i className="fi-br-marker"/>
-                        <p>Slavonski brod</p>
-                    </div>
-                    <div className="price-container">
-                        <h2>$20</h2>
-                        <p>/24h</p>
-                    </div>
+                    <LocationWithIcon/>
+                    <PriceWithTime/>
                 </div>
             </div>
         )
