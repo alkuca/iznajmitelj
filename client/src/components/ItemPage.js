@@ -34,6 +34,12 @@ class ItemPage extends React.Component {
                         <button>Postavi pitanje</button>
                     </div>
                 </div>
+                <div className="details-container">
+                    details
+                </div>
+                <div className="map-container">
+                    map
+                </div>
             </div>
         )
     }
