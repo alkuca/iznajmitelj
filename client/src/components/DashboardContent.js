@@ -1,5 +1,6 @@
 import React from "react";
 import ItemPage from "./ItemPage";
+import InputModal from "./InputModal";
 
 
 class DashboardContent extends React.Component {
@@ -8,6 +9,7 @@ class DashboardContent extends React.Component {
             <div className="dashboard-container">
                 <div className="dashboard-content">
                     <ItemPage/>
+                    <InputModal/>
                 </div>
             </div>
         )

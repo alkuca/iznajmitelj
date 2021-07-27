@@ -344,12 +344,24 @@ body{
     }
   }
   .details-container{
+    border-top:1px solid #d7d7d7;
+    width:100%;
+    margin: 20px 50px 20px 0;
+    padding-top:10px;
+    h1{
+      font-size: 20px;
+    }
+    p{
+      max-width: 700px;
+    }
+  }
+  .map-container{
     width:100%;
     height:400px;
     border: 1px solid grey;
     margin: 20px 50px 20px 0;
   }
-  .map-container{
+  .contact-container{
     width:100%;
     height:400px;
     border: 1px solid grey;
@@ -412,7 +424,23 @@ body{
   }
 }
 
-
+.input-modal-container{
+  position: fixed;
+  top:66px;
+  left: 250px;
+  width: calc(100% - 250px);
+  height: calc(100vh - 66px);
+  background: rgba(42, 42, 42, 0.5);
+  @include center;
+  .input-modal{
+    background: rgba(255, 255, 255, 1);
+    border-radius: 5px;
+    @include center_vertical_column;
+    padding: 35px 60px 25px 60px;
+    width:80%;
+    height: 670px;
+  }
+}
 
 
 

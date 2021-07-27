@@ -35,10 +35,16 @@ class ItemPage extends React.Component {
                     </div>
                 </div>
                 <div className="details-container">
-                    details
+                    <h1>Dodatan opis</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget suscipit arcu, at pretium risus.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget suscipit arcu, at pretium risus.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget suscipit arcu, at pretium risus.</p>
                 </div>
                 <div className="map-container">
                     map
+                </div>
+                <div className="contact-container">
+                    contact
                 </div>
             </div>
         )
