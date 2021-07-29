@@ -1,5 +1,5 @@
 import React from "react";
-import InputField from "./InputField";
+
 
 
 class InputModal extends React.Component {
@@ -7,15 +7,7 @@ class InputModal extends React.Component {
         return (
             <div className="input-modal-container">
                 <div className="input-modal">
-                    <InputField
-                        className="className"
-                        type="text"
-                        value="text"
-                        placeholder="Product Name"
-                        label="Name"
-                        name="name"
-                        onChange="text"
-                    />
+                    {this.props.children}
                 </div>
             </div>
         )

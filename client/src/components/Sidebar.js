@@ -1,5 +1,5 @@
 import React from "react";
-import SidebarLink from "./SidebarLink";
+import LinkWithIcon from "./LinkWithIcon";
 
 class Sidebar extends React.Component {
     render(){
@@ -7,11 +7,11 @@ class Sidebar extends React.Component {
             <div className="sidebar-container">
                 <div className="inner-container">
                     <div className="links-container">
-                        <SidebarLink text="Nadzorna ploča" icon="home"/>
-                        <SidebarLink text="Moje stvari" icon="comment-alt"/>
-                        <SidebarLink text="Moje objave" icon="document"/>
-                        <SidebarLink text="Unajmljeno" icon="box"/>
-                        <SidebarLink text="Poruke" icon="bell"/>
+                        <LinkWithIcon text="Nadzorna ploča" icon="home"/>
+                        <LinkWithIcon text="Moje stvari" icon="box"/>
+                        <LinkWithIcon text="Moje objave" icon="document"/>
+                        <LinkWithIcon text="Unajmljeno" icon="box"/>
+                        <LinkWithIcon text="Poruke" icon="comment-alt"/>
                     </div>
                 </div>
             </div>

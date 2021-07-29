@@ -115,7 +115,7 @@ body{
   display: flex;
   padding: 0 45px 0 0;
   margin-left: auto;
-
+  position: relative;
   .bell {
     padding:0 5px;
     font-size: 20px;
@@ -140,6 +140,35 @@ body{
       white-space: nowrap;
     }
   }
+  .navbar-dropdown{
+    width:calc(100% - 70px);
+    z-index: 10;
+    padding: 6px 0;
+    background:white;
+    border:1px solid #d4d4d4;
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    position: absolute;
+    top:58px;
+    right:30px;
+    .link-with-icon{
+      padding: 10px 20px;
+      i{
+        font-size: 16px;
+        padding: 5px 14px 0 0;
+      }
+      a{
+        font-size: 16px;
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+.links-line{
+  width: 90%;
+  margin: 10px 5%;
+  border-bottom: 1px solid #d4d4d4;
 }
 
 /* #####################################  START OF SIDEBAR  ###################################### */
@@ -160,10 +189,11 @@ body{
   }
 }
 
-.sidebar-link{
+.link-with-icon{
   @include center_vertical;
   padding: 20px 0;
-
+  cursor: pointer;
+  transition: 0.2s;
   i {
     font-size: 18px;
     padding: 5px 18px 0 0;
@@ -174,6 +204,9 @@ body{
   }
 }
 
+.link-with-icon:hover{
+  color:#3C7BFF;
+}
 
 
 .dashboard-container{
@@ -442,11 +475,107 @@ body{
   }
 }
 
+.number-input{
+  width:100px;
+}
+.input-container{
+  position: relative;
+  margin:40px 0 80px 0;
+  label{
+    position:absolute;
+    left:-20px;
+    top:-30px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #494949;
+  }
+  input{
+    border:none;
+    border-bottom: 1px solid #b1b1b1;
+    margin-left:-10px;
+    background: none;
+    outline:none;
+    width:100%;
+    max-width: 600px;
+    padding: 0 0 2px 4px;
+    font-size: 18px;
+  }
+}
 
+.textarea-container{
+  position: relative;
+  margin:40px 0 80px 0;
+  label{
+    position:absolute;
+    left:-20px;
+    top:-30px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #494949;
+  }
+  textarea{
+    margin-left:-10px;
+    outline:none;
+    width:100%;
+    max-width: 600px;
+    font-size: 16px;
+    border:none;
+    border-bottom: 1px solid #b1b1b1;
+  }
+}
 
+.add-item-modal-container{
+  width:100%;
+  justify-content: space-between;
+  display: flex;
+  .data-input-container{
+    width: 50%;
+  }
+  .image-input-container{
+    width: 50%;
+    margin: 0 25px;
+    @include center_vertical_column;
+    .main-image-container{
+      @include center;
+      height: 100%;
+      img{
+        max-width:100%;
+        margin: 10px 0;
+      }
+      input{
+        margin: 30px 0;
+      }
+    }
+  }
+}
 
+.modal-confirm-button {
+  margin: 30px 0;
+  padding: 10px 37px;
+  border: none;
+  background: #3C7BFF;
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+  border-radius: 3px;
+  cursor: pointer;
+}
 
+input[type="file"] {
+  display: none;
+}
 
+.custom-file-upload{
+  border: 2px solid #3C7BFF;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  color: #3C7BFF;
+  font-weight: 600;
+  border-radius: 3px;
+  font-size: 16px;
+  margin: 20px 0;
+}
 
 
 
