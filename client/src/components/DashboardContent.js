@@ -1,11 +1,11 @@
 import React from "react";
-import ItemPage from "./ItemPage";
+import SearchPage from "./SeacthPage";
 
 function DashboardContent () {
     return(
         <div className="dashboard-container">
             <div className="dashboard-content">
-                <ItemPage/>
+                <SearchPage/>
             </div>
         </div>
     );

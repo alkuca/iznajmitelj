@@ -213,6 +213,57 @@ body{
   border-bottom: 1px solid #d4d4d4;
 }
 
+.select-dropdown-container{
+  padding-right: 40px;
+  .dropdown-select{
+    display: flex;
+    cursor: pointer;
+    .select-label{
+      color: #a0a0a0;
+      font-weight: 500;
+    }
+    .select-container{
+      position: relative;
+      .select-title{
+        @include center_vertical;
+        margin: 0 0 0 7px;
+        p{
+          font-weight: 600;
+          color:#3C7BFF;
+        }
+        i{
+          margin: 6px 0 0 4px;
+          color:#3C7BFF;
+        }
+      }
+      .select-dropdown{
+        position: absolute;
+        top:42px;
+        left:5px;
+        z-index: 9;
+        background: white;
+        border-radius: 4px;
+        border:1px solid #d4d4d4;
+        animation-name:opacity;
+        animation-duration: 0.2s;
+        animation-fill-mode: forwards;
+        box-shadow: 0 3px 7px rgba(0, 0, 0, 0.12);
+        p{
+          padding: 12px 40px 12px 20px;
+          margin: 0;
+          transition: 0.2s;
+          color: #4b4b4b;
+          font-weight: 500;
+        }
+        p:hover{
+          color:#3C7BFF;
+        }
+      }
+    }
+  }
+}
+
+
 /* #####################################  START OF SIDEBAR  ###################################### */
 
 .sidebar-container {
@@ -441,6 +492,54 @@ body{
     height:400px;
     border: 1px solid grey;
     margin: 20px 50px 20px 0;
+  }
+}
+
+.search-page-container{
+  padding: 0 30px 0 10px ;
+  .item-search-container{
+    padding: 10px 5px 10px 0;
+    display: flex;
+    background: #3C7BFF;
+    border-radius: 50px;
+    @include center_vertical;
+    .icon-container{
+      background: white;
+      width: 43px;
+      height: 40px;
+      border-radius: 100%;
+      margin-left: 10px;
+      @include center;
+      i{
+        color:#3C7BFF;
+        margin: 4px 0 0 0;
+        font-size: 20px;
+      }
+    }
+    input{
+      border: none;
+      margin: 0 0 0 13px;
+      outline: none;
+      font-size: 16px;
+      font-weight: 500;
+      width: 100%;
+      background: #3C7BFF;
+      color:white;
+    }
+    input::placeholder {
+      font-weight: 600;
+      font-size: 18px;
+      color:white;
+    }
+  }
+  .filters-container{
+    display: flex;
+    margin: 15px 10px;
+  }
+  .card-container{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px 30px 10px;
   }
 }
 
