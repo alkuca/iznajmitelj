@@ -1,10 +1,13 @@
 import React from "react";
 import LinkWithIcon from "./LinkWithIcon";
+import classnames from "classnames";
 
-
-function NavbarDropdown () {
+function NavbarDropdown (props) {
+    const dropdown = props.dropdown
     return (
-        <div className="navbar-dropdown">
+        <div className={classnames("navbar-dropdown", {
+            "t": dropdown
+        })}>
             <LinkWithIcon text="Profil" icon="user"/>
             <LinkWithIcon text="Poruke" icon="comment-alt"/>
             <LinkWithIcon text="Postavke" icon="settings-sliders"/>
