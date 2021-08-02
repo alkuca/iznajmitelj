@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 
-function SelectDropdown () {
+function SelectDropdown (props) {
     const [dropdown, toggleDropdown] = useState(false)
     const ref = useRef(null);
     const ref2 = useRef(null)
@@ -33,10 +33,9 @@ function SelectDropdown () {
                     </div>
                     {dropdown &&
                     <div ref={ref} className="select-dropdown">
-                        <p>Popularno</p>
-                        <p>Novo</p>
-                        <p>Cijena</p>
-                        <p>Udaljenosti</p>
+                        {props.selectItems.map(selectItem =>{
+                            return <p key={selectItem}>{selectItem}</p>
+                        })}
                     </div>
                     }
                 </div>

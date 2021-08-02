@@ -1,11 +1,18 @@
 import React from "react";
-import SearchPage from "./SeacthPage";
+import MyItemsPage from "./MyItemsPage";
+import Navbar from "./Navbar";
+import Sidebar from "./Sidebar";
 
-function DashboardContent () {
+
+function DashboardContent (props) {
     return(
-        <div className="dashboard-container">
-            <div className="dashboard-content">
-                <SearchPage/>
+        <div>
+            <Navbar/>
+            <Sidebar/>
+            <div className="dashboard-container">
+                <div className="dashboard-content">
+                    {props.children}
+                </div>
             </div>
         </div>
     );

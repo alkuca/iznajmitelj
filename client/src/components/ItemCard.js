@@ -2,6 +2,7 @@ import React from "react";
 import item from "../images/drone.png";
 import PriceWithTime from "./PriceWithTime";
 import LocationWithIcon from "./LocationWithIcon";
+import SettingsDropdown from "./SettingsDropdown";
 
 class ItemCard extends React.Component {
     render(){
@@ -15,6 +16,7 @@ class ItemCard extends React.Component {
                     <LocationWithIcon/>
                     <PriceWithTime/>
                 </div>
+                <SettingsDropdown/>
             </div>
         )
     }
