@@ -1,5 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import classnames from "classnames";
+import {Link} from "react-router-dom";
 
 function SettingsDropdown (props) {
     const [dropdown, toggleDropdown] = useState(false)
@@ -32,15 +33,17 @@ function SettingsDropdown (props) {
             })}/>
             {dropdown &&
             <div ref={ref} className="settings-dropdown">
-                <div className="dropdown-item">
+                <div className="dropdown-item" onClick={props.postConfirmation}>
                     <i className="fi-br-document"/>
                     <p>Objavi</p>
                 </div>
-                <div className="dropdown-item">
-                    <i className="fi-br-edit"/>
-                    <p>Uredi</p>
-                </div>
-                <div className="dropdown-item red-font">
+                <Link to="/">
+                    <div className="dropdown-item">
+                        <i className="fi-br-edit"/>
+                        <p>Uredi</p>
+                    </div>
+                </Link>
+                <div className="dropdown-item red-font" onClick={props.deleteConfirmation}>
                     <i className="fi-br-bell red-font"/>
                     <p>Ukloni</p>
                 </div>

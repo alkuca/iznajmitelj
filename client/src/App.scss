@@ -45,7 +45,8 @@
 @mixin button_fill_blue{
   border: 3px solid #3C7BFF;
   border-radius: 3px;
-  padding: 10px 23px;
+  width:110px;
+  height: 38px;
   font-size: 15px;
   font-weight: 600;
   background: #3C7BFF;
@@ -56,7 +57,8 @@
 @mixin button_blue_border{
   border: 3px solid #3C7BFF;
   border-radius: 3px;
-  padding: 10px 23px;
+  width:110px;
+  height: 38px;
   font-size: 15px;
   font-weight: 600;
   background: none;
@@ -67,6 +69,17 @@
 
 body{
   font-family: 'Mada', sans-serif;
+}
+
+a{
+  text-decoration: none;
+  color:black;
+}
+
+button:hover{
+  opacity: 0.8;
+  transition: 0.1s;
+  cursor: pointer;
 }
 
 /* #####################################  START OF NAVBAR  ###################################### */
@@ -158,9 +171,10 @@ body{
         font-size: 16px;
         padding: 5px 14px 0 0;
       }
-      a{
+      p{
         font-size: 16px;
         font-weight: 600;
+        margin:0;
       }
     }
     .links-line{
@@ -292,13 +306,18 @@ body{
     font-size: 18px;
     padding: 5px 18px 0 0;
   }
-  a {
+  p {
     font-size: 18px;
     font-weight: 500;
+    margin: 0;
   }
 }
 
 .link-with-icon:hover{
+  color:#3C7BFF;
+}
+
+.link-with-icon:hover a{
   color:#3C7BFF;
 }
 
@@ -370,6 +389,10 @@ body{
       animation-name:opacity;
       animation-duration: 0.2s;
       animation-fill-mode: forwards;
+      a{
+        text-decoration: none;
+        color:black;
+      }
       .dropdown-item{
         cursor: pointer;
         @include center_vertical;
@@ -508,6 +531,10 @@ body{
     }
     .button-container{
       margin-top:35px;
+      button:hover{
+        opacity: 0.8;
+        transition: 0.1s;
+      }
       button:nth-child(1){
         @include button_fill_blue;
         margin-right: 25px;
@@ -598,11 +625,16 @@ body{
   left: 250px;
   width: calc(100% - 250px);
   height: calc(100vh - 66px);
+  animation-name:opacity;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
   background: rgba(42, 42, 42, 0.5);
   @include center;
   .confirm-modal{
     background: rgba(255, 255, 255, 1);
+    max-width: 500px;
     border-radius: 5px;
+    text-align: center;
     @include center_vertical_column;
     padding: 35px 60px 25px 60px;
     i {
@@ -618,38 +650,69 @@ body{
       margin: 5px 0;
       font-size: 20px;
     }
-    .button-container {
-      margin: 25px 0 5px 0;
-      .confirm {
-        margin: 0 10px;
-        width:100px;
-        height: 36px;
-        background: #ff5252;
-        border: none;
-        border-radius: 3px;
-        color:white;
-        font-weight: 600;
-        cursor: pointer;
-      }
-      .cancel {
-        margin: 0 10px ;
-        width:100px;
-        height: 36px;
-        background: none;
-        border: 2px solid #959595;
-        border-radius: 3px;
-        color: #5e5e5e;
-        font-weight: 600;
-        cursor: pointer;
-      }
-    }
   }
 }
+
+.button-container {
+  margin: 10px 0 5px 0;
+  .confirm {
+    margin: 0 10px;
+    width:100px;
+    height: 36px;
+    background: #3C7BFF;
+    border: none;
+    border-radius: 3px;
+    color:white;
+    font-weight: 600;
+    transition: 0.1s;
+    cursor: pointer;
+  }
+  .cancel {
+    margin: 0 10px ;
+    width:100px;
+    height: 36px;
+    background: none;
+    border: 2px solid #959595;
+    border-radius: 3px;
+    color: #5e5e5e;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.1s;
+  }
+  .confirm:hover, .cancel:hover{
+    opacity: 0.8;
+    transition: 0.1s;
+  }
+}
+
+.background-blue{
+  background: #3C7BFF !important;
+}
+
+.background-red{
+  background: #ff5252 !important;
+}
+
+.color-blue{
+  color: #3C7BFF !important;
+}
+
+.color-red{
+  color: #ff5252 !important;
+}
+
+.border-red{
+  border-color: #ff5252 !important;
+}
+
 
 .input-modal-container{
   position: fixed;
   top:66px;
   left: 250px;
+  animation-name:opacity;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
   width: calc(100% - 250px);
   height: calc(100vh - 66px);
   background: rgba(42, 42, 42, 0.5);
@@ -658,9 +721,8 @@ body{
     background: rgba(255, 255, 255, 1);
     border-radius: 5px;
     @include center_vertical_column;
-    padding: 35px 60px 25px 60px;
+    padding: 40px 50px 50px 50px;
     width:80%;
-    height: 670px;
   }
 }
 
@@ -669,7 +731,7 @@ body{
 }
 .input-container{
   position: relative;
-  margin:40px 0 70px 0;
+  margin:40px 0 50px 0;
   label{
     position:absolute;
     font-size: 16px;
@@ -678,7 +740,7 @@ body{
     top:-4px;
     color: #494949;
     transition: 0.2s;
-    z-index: -1;
+    pointer-events: none;
   }
   input{
     border:none;
@@ -706,23 +768,24 @@ body{
 
 .textarea-container{
   position: relative;
-  margin:40px 0 80px 0;
+  margin: 70px 0 30px 0;
   label{
     position:absolute;
-    left:-20px;
-    top:-30px;
+    left:-7px;
+    top:-10px;
     font-size: 16px;
     font-weight: 500;
     color: #494949;
   }
   textarea{
-    margin-left:-10px;
+    margin: 10px 0 0 -10px;
     outline:none;
     width:100%;
     max-width: 600px;
     font-size: 16px;
     border:none;
     border-bottom: 1px solid #b1b1b1;
+    resize: none;
   }
 }
 

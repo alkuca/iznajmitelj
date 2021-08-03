@@ -1,17 +1,14 @@
 import React from "react";
 
+function InputModal (props) {
 
-
-class InputModal extends React.Component {
-    render(){
-        return (
-            <div className="input-modal-container">
-                <div className="input-modal">
-                    {this.props.children}
-                </div>
+    return (
+        <div className="input-modal-container">
+            <div className="input-modal">
+                {props.children}
             </div>
-        )
-    }
+        </div>
+    )
 }
 
 export default InputModal;

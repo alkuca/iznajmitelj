@@ -1,14 +1,15 @@
 import React from "react";
+import {Link} from "react-router-dom";
 
-class LinkWithIcon extends React.Component {
-    render(){
-        return (
+function LinkWithIcon(props) {
+    return (
+        <Link to={props.location}>
             <div className="link-with-icon">
-                <i className={`fi-br-${this.props.icon}`}/>
-                <a>{this.props.text}</a>
+                <i className={`fi-br-${props.icon}`}/>
+                <p>{props.text}</p>
             </div>
-        )
-    }
+        </Link>
+    )
 }
 
 export default LinkWithIcon;

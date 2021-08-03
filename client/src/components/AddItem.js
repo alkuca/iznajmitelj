@@ -6,7 +6,7 @@ import emptyImage from "../images/icons/empty_picture.png";
 
 
 
-function AddProduct ()  {
+function AddItem (props)  {
     const [mainImage, setMainImage] = useState(null)
 
     const handleClick = e => setMainImage(URL.createObjectURL(e.target.files[0]))
@@ -14,13 +14,10 @@ function AddProduct ()  {
         <InputModal>
             <div className="add-item-modal-container">
                 <div className="data-input-container">
-                    <InputField className="input-container" type="text" label="Naziv" name="name" onChange="text"/>
-                    <InputField className="input-container" type="text" label="Lokacija" name="name"
-                                onChange="text"/>
-                    <InputField className="input-container number-input" type="number" label="Cijena (kn/24h)"
-                                name="name" onChange="text"/>
-                    <InputTextarea id="opis" name="opis" rows="6" cols="50" value="" className="textarea-container"
-                                   label="Opis"/>
+                    <InputField className="input-container" type="text" label="Naziv" name="name"/>
+                    <InputField className="input-container" type="text" label="Lokacija" name="name"/>
+                    <InputField className="input-container number-input" type="number" label="Cijena (kn/24h)" name="name"/>
+                    <InputTextarea id="opis" name="opis" rows={4} className="textarea-container" label="Opis"/>
                 </div>
                 <div className="image-input-container">
                     <div className="main-image-container">
@@ -34,10 +31,13 @@ function AddProduct ()  {
                     </div>
                 </div>
             </div>
-            <button className="modal-confirm-button">Dodaj</button>
+            <div className="button-container">
+                <button className="confirm">Dodaj</button>
+                <button onClick={props.closeModal} className="cancel">Odustani</button>
+            </div>
         </InputModal>
     );
 }
 
-export default AddProduct;
+export default AddItem;
 

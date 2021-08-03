@@ -13,18 +13,15 @@ function App() {
   return (
       <Router>
           <div className="App">
-              <Route exact path="/login">
+              <Route exact path="/auth/login">
                   <LoginPage/>
               </Route>
-              <Route exact path="/register">
-                  <LoginPage/>
+              <Route exact path="/auth/register">
+                  <RegisterPage/>
               </Route>
               <Route path="/dashboard">
                   <DashboardContent>
                       <Switch>
-                          <Route path="/dashboard/items">
-                              <MyItemsPage/>
-                          </Route>
                           <Route path="/dashboard/items">
                               <MyItemsPage/>
                           </Route>

@@ -1,22 +1,25 @@
 import React from "react";
+import classnames from "classnames";
 
 
-class ConfirmationModal extends React.Component {
-    render(){
-        return (
-            <div className="confirm-modal-container">
-                <div className="confirm-modal">
-                    <i className="fi-br-cloud-upload"/>
-                    <p className="action">Ukloni</p>
-                    <h1 className="item">Oculus Rift 2020 sa controlerima</h1>
-                    <div className="button-container">
-                        <button className="confirm">Ukloni</button>
-                        <button className="cancel">Odustani</button>
-                    </div>
+function ConfirmationModal (props) {
+    return (
+        <div className="confirm-modal-container">
+            <div className="confirm-modal">
+                <i className={props.icon}/>
+                <p className="action">{props.actionName}</p>
+                <h1 className="item">Oculus Rift 2020 sa controlerima</h1>
+                <p>{props.note}</p>
+                <div className="button-container">
+                    <button className={classnames("confirm", {
+                        "background-blue" : props.type === "positive",
+                        "background-red" : props.type === "negative"
+                    })} onClick={props.confirmAction}>{props.buttonText}</button>
+                    <button className="cancel" onClick={props.closeModal}>Odustani</button>
                 </div>
             </div>
-        )
-    }
+        </div>
+    )
 }
 
 export default ConfirmationModal;

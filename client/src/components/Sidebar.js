@@ -8,10 +8,10 @@ class Sidebar extends React.Component {
                 <div className="inner-container">
                     <div className="links-container">
                         {/* <LinkWithIcon text="Nadzorna ploča" icon="home"/> */}
-                        <LinkWithIcon text="Moje stvari" icon="box"/>
-                        <LinkWithIcon text="Moje objave" icon="document"/>
-                        <LinkWithIcon text="Unajmljeno" icon="box"/>
-                        <LinkWithIcon text="Poruke" icon="comment-alt"/>
+                        <LinkWithIcon text="Moje stvari" icon="box" location="/dashboard/items"/>
+                        <LinkWithIcon text="Moje objave" icon="document" location="/dashboard/objave"/>
+                        <LinkWithIcon text="Unajmljeno" icon="box" location="/dashboard/unajmljeno"/>
+                        <LinkWithIcon text="Poruke" icon="comment-alt" location="/dashboard/poruke"/>
                     </div>
                 </div>
             </div>
