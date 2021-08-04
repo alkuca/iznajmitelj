@@ -321,6 +321,9 @@ button:hover{
   color:#3C7BFF;
 }
 
+.active-link{
+  color:#3C7BFF;
+}
 
 .dashboard-container{
   background: #F6F6F6;
@@ -332,9 +335,9 @@ button:hover{
 
   .dashboard-content{
     background: white;
-    padding: 15px 0 0 15px;
-    width: calc(100% - 25px);
-    height: calc(100% - 25px);
+    padding: 15px 0 0 25px;
+    width: calc(100% - 35px);
+    min-height: calc(100vh - 91px);
     margin: 10px 0 0 10px;
   }
 }
@@ -418,28 +421,6 @@ button:hover{
 
 .red-font{
   color:red !important;
-}
-
-
-.title-container {
-  display: flex;
-  justify-content: space-between;
-  padding: 5px 50px 5px 0;
-  h1 {
-    margin:0;
-    font-size: 22px;
-    font-weight: 600;
-    @include center_vertical;
-  }
-  button {
-    border-radius: 3px;
-    padding: 10px 28px;
-    font-size: 15px;
-    font-weight: 600;
-    background: #3C7BFF;
-    color:white;
-    border:none;
-  }
 }
 
 .location-container {
@@ -655,32 +636,29 @@ button:hover{
 
 .button-container {
   margin: 10px 0 5px 0;
+  display: flex;
   .confirm {
     margin: 0 10px;
-    width:100px;
-    height: 36px;
+    width: 120px;
+    height: 37px;
     background: #3C7BFF;
     border: none;
     border-radius: 3px;
     color:white;
-    font-weight: 600;
+    font-weight: 500;
     transition: 0.1s;
     cursor: pointer;
   }
   .cancel {
     margin: 0 10px ;
-    width:100px;
-    height: 36px;
+    width:120px;
+    height: 37px;
     background: none;
-    border: 2px solid #959595;
+    border: 1px solid #959595;
     border-radius: 3px;
     color: #5e5e5e;
-    font-weight: 600;
+    font-weight: 500;
     cursor: pointer;
-    transition: 0.1s;
-  }
-  .confirm:hover, .cancel:hover{
-    opacity: 0.8;
     transition: 0.1s;
   }
 }
@@ -715,14 +693,15 @@ button:hover{
   animation-fill-mode: forwards;
   width: calc(100% - 250px);
   height: calc(100vh - 66px);
-  background: rgba(42, 42, 42, 0.5);
+  background: rgba(42, 42, 42, 0.4);
   @include center;
   .input-modal{
     background: rgba(255, 255, 255, 1);
     border-radius: 5px;
     @include center_vertical_column;
     padding: 40px 50px 50px 50px;
-    width:80%;
+    width:fit-content;
+    max-width: 700px;
   }
 }
 
@@ -795,10 +774,11 @@ button:hover{
   display: flex;
   .data-input-container{
     width: 50%;
+    min-width: 250px;
   }
   .image-input-container{
     width: 50%;
-    margin: 0 25px;
+    margin: 0 30px 0 90px;
     @include center_vertical_column;
     .main-image-container{
       @include center;
@@ -813,6 +793,8 @@ button:hover{
     }
   }
 }
+
+
 
 .modal-confirm-button {
   margin: 30px 0;
@@ -901,11 +883,173 @@ input[type="file"] {
   }
 }
 
-.my-items{
-  .filter-container{
-    padding: 5px 0 10px 0;
+.title-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 50px 5px 0;
+  height: 37px;
+  h1 {
+    margin:0;
+    font-size: 22px;
+    font-weight: 600;
+    @include center_vertical;
   }
-;
+  button {
+    border-radius: 3px;
+    padding: 10px 28px;
+    font-size: 15px;
+    font-weight: 600;
+    background: #3C7BFF;
+    color:white;
+    border:none;
+  }
 }
+
+.filter-container{
+  padding: 5px 0 10px 0;
+}
+
+.items-container{
+
+}
+
+.my-items-page{
+
+}
+
+.settings-page-container {
+
+}
+
+.profile-page-container {
+
+}
+
+.messages-page-container {
+  .messages-container{
+    width:50%;
+    min-width: 300px;
+  }
+}
+
+.message{
+  width:100%;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin: 5px 0 20px 0;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  cursor: pointer;
+  .user-container{
+    @include center_vertical;
+    i{
+      margin-top: 8px;
+      font-size: 25px;
+      padding: 0 20px;
+      color: #7b7b7b;
+    }
+    p{
+      font-size: 18px;
+      font-weight: 500;
+      color: #7b7b7b;
+    }
+  }
+}
+
+.not-read{
+  border: 1px solid #d7e5fe;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background: #f5f8ff;
+  .user-container{
+    i{
+      color: #6f9eff;
+    }
+    p{
+      color: #6f9eff;
+    }
+  }
+}
+
+.new-message-modal-container{
+  width: 100%;
+}
+
+
+.help-page-container {
+
+}
+
+.posts-page-container {
+
+}
+
+.rented-page-container {
+
+}
+
+.rented-out-page-container {
+
+}
+
+.message-page-container{
+  .full-line{
+    width:calc(100% - 50px);
+    height: 1px;
+    background: #c6c6c6;
+    margin: 20px 0 20px 0;
+  }
+  .message-content{
+    padding:20px;
+    width:fit-content;
+    h1{
+      font-size: 22px;
+    }
+    p{
+      max-width: 500px;
+      margin:25px 0 0 0;
+    }
+  }
+  button{
+    margin:20px 0 0 20px;
+    padding: 9px 24px;
+    border:none;
+    border-radius: 3px;
+    background: #3C7BFF;
+    color:white;
+    font-weight: 500;
+    font-size:16px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

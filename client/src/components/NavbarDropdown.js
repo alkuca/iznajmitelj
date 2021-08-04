@@ -12,13 +12,13 @@ function NavbarDropdown (props) {
         <div className={classnames("navbar-dropdown", {
             "t": dropdown
         })}>
-            <LinkWithIcon text="Profil" icon="user" location="/dashboard/profil"/>
-            <LinkWithIcon text="Poruke" icon="comment-alt" location="/dashboard/poruke"/>
-            <LinkWithIcon text="Postavke" icon="settings-sliders" location="/dashboard/postavke"/>
+            <LinkWithIcon text="Profil" icon="user" goTo="/dashboard/profil"/>
+            <LinkWithIcon text="Poruke" icon="comment-alt" goTo="/dashboard/poruke"/>
+            <LinkWithIcon text="Postavke" icon="settings-sliders" goTo="/dashboard/postavke"/>
             <div className="links-line"/>
-            <LinkWithIcon text="Pomoć" icon="info" location="/faq"/>
+            <LinkWithIcon text="Pomoć" icon="info" goTo="/dashboard/pomoc"/>
             <div onClick={logout}>
-                <LinkWithIcon text="Odjavi se" icon="power" location="/login" />
+                <LinkWithIcon text="Odjavi se" icon="power" goTo="/auth/login" />
             </div>
         </div>
     )

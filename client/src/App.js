@@ -1,13 +1,19 @@
 import './App.scss';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import Navbar from './components/Navbar'
-import Sidebar from "./components/Sidebar";
 import DashboardContent from "./components/DashboardContent";
 import LoginPage from "./components/LoginPage";
 import RegisterPage from "./components/RegisterPage";
-import MyItemsPage from "./components/MyItemsPage";
+import ItemsPage from "./components/ItemsPage";
 import SearchPage from "./components/SeacthPage";
 import ItemPage from "./components/ItemPage";
+import SettingsPage from "./components/SettingsPage";
+import RentedPage from "./components/RentedPage";
+import RentedOutPage from "./components/RentedOutPage";
+import HelpPage from "./components/HelpPage";
+import ProfilePage from "./components/ProfilePage";
+import MessagesPage from "./components/MessagesPage";
+import PostsPage from "./components/PostsPage";
+import MessagePage from "./components/MessagePage";
 
 function App() {
   return (
@@ -23,13 +29,37 @@ function App() {
                   <DashboardContent>
                       <Switch>
                           <Route path="/dashboard/items">
-                              <MyItemsPage/>
+                              <ItemsPage/>
                           </Route>
-                          <Route path="/dashboard/search">
+                          <Route path="/dashboard/trazi">
                               <SearchPage/>
                           </Route>
                           <Route path="/dashboard/item">
                               <ItemPage/>
+                          </Route>
+                          <Route path="/dashboard/postavke">
+                              <SettingsPage/>
+                          </Route>
+                          <Route path="/dashboard/unajmljeno">
+                              <RentedPage/>
+                          </Route>
+                          <Route path="/dashboard/iznajmljeno">
+                              <RentedOutPage/>
+                          </Route>
+                          <Route path="/dashboard/pomoc">
+                              <HelpPage/>
+                          </Route>
+                          <Route path="/dashboard/profil">
+                              <ProfilePage/>
+                          </Route>
+                          <Route path="/dashboard/poruke">
+                              <MessagesPage/>
+                          </Route>
+                          <Route path="/dashboard/poruka">
+                              <MessagePage/>
+                          </Route>
+                          <Route path="/dashboard/objave">
+                              <PostsPage/>
                           </Route>
                       </Switch>
                   </DashboardContent>

@@ -49,7 +49,7 @@ function ItemCard () {
                 <LocationWithIcon/>
                 <PriceWithTime/>
             </div>
-            <SettingsDropdown deleteConfirmation={handleDeleteClick} postConfirmation={handlePostClick}/>
+            <SettingsDropdown deleteConfirmation={handleDeleteClick} postConfirmation={handlePostClick} />
             {postConfirmation &&
                 <ConfirmationModal note={postNote} icon="fi-br-file-add color-blue" actionName="Objavi" buttonText="Objavi" type="positive" confirmAction={postItem} closeModal={closePostModal}/>
             }

@@ -4,21 +4,16 @@ import ItemCard from "./ItemCard";
 import SelectDropdown from "./SelectDropdown";
 import AddItem from "./AddItem";
 
-function MyItemsPage () {
+function ItemsPage () {
     const [addItemModal, toggleItemModal] = useState(false)
-    const [editItemModal, toggleEditItemModal] = useState(false)
 
     const handleAddModalClick = () => {
         toggleItemModal(!addItemModal)
     }
 
-    const handleEditModalClick = () => {
-        toggleEditItemModal(!editItemModal)
-    }
-
     return (
-        <div className="my-items">
-            <PageTitle renderButton={true} buttonText="Dodaj" title="Moje stvari" buttonAction={handleAddModalClick}/>
+        <div className="my-items-page">
+            <PageTitle renderButton={true} buttonText="Dodaj" title="Moje Stvari" buttonAction={handleAddModalClick}/>
             <div className="filter-container">
                 <SelectDropdown selectItems={["Sve","Popularno","Novo"]}/>
             </div>
@@ -30,5 +25,5 @@ function MyItemsPage () {
     )
 }
 
-export default MyItemsPage;
+export default ItemsPage;
 

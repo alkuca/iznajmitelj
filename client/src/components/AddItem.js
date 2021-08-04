@@ -22,8 +22,8 @@ function AddItem (props)  {
                 <div className="image-input-container">
                     <div className="main-image-container">
                         { mainImage ?
-                            <img src={mainImage}/> :
-                            <img src={emptyImage}/>}
+                            <img src={mainImage} alt="item"/> :
+                            <img src={emptyImage} alt="placeholder"/>}
                         <label className="custom-file-upload">
                             <input type="file" onChange={handleClick}/>
                             Odaberi sliku

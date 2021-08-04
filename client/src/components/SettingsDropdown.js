@@ -37,7 +37,7 @@ function SettingsDropdown (props) {
                     <i className="fi-br-document"/>
                     <p>Objavi</p>
                 </div>
-                <Link to="/">
+                <Link to="/dashboard/item">
                     <div className="dropdown-item">
                         <i className="fi-br-edit"/>
                         <p>Uredi</p>

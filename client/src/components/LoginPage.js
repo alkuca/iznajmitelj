@@ -1,5 +1,6 @@
 import React from 'react';
 import InputField from "./InputField";
+import {Link} from "react-router-dom";
 
 function LoginPage () {
 
@@ -15,7 +16,9 @@ function LoginPage () {
                     <InputField className="input-container auth-input" type="password" label="Lozinka" name="password"/>
                     <div className="auth-question">
                         <p>Nemate Račun?</p>
-                        <a>Izradi ga ovdje</a>
+                        <Link to="/auth/register">
+                            Izradi ga ovdje
+                        </Link>
                     </div>
                     <button>Prijavi se</button>
                 </div>

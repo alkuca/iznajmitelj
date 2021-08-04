@@ -1,5 +1,4 @@
 import React from "react";
-import MyItemsPage from "./MyItemsPage";
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 

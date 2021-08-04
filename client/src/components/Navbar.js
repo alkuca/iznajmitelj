@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect, Fragment} from "react";
+import React, {useState, useRef, useEffect} from "react";
 import avatar_icon from "../images/icons/avatar.svg"
 import NavbarDropdown from "./NavbarDropdown";
 import classnames from "classnames";

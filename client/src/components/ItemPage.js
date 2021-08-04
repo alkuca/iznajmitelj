@@ -1,10 +1,10 @@
-import React, {Fragment, useState} from "react";
+import React, {Fragment} from "react";
 import LocationWithIcon from "./LocationWithIcon";
 import item from "../images/drone.png";
 import PriceWithTime from "./PriceWithTime";
 
 function ItemPage() {
-    const [isAdmin, toggleIsAdmin] = useState(false)
+    const isAdmin = false;
 
     return (
         <div className="item-page-container">
