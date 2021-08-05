@@ -1,10 +1,27 @@
-import React, {Fragment} from "react";
+import React, {Fragment, useState} from "react";
 import LocationWithIcon from "./LocationWithIcon";
 import item from "../images/drone.png";
 import PriceWithTime from "./PriceWithTime";
+import RentProcess from "./RentProcess";
+import NewMessageModal from "./NewMessageModal";
 
 function ItemPage() {
     const isAdmin = false;
+    const [rentModal, toggleRentModal] = useState(false)
+    const [newMessageModal, toggleNewMessageModal] = useState(false)
+
+    const handleRentModalToggle = () => {
+        toggleRentModal(!rentModal)
+        console.log("asd")
+    }
+
+    const sendMessage = () => {
+        console.log("message send")
+    }
+
+    const handleNewMessageClick = () => {
+        toggleNewMessageModal(!newMessageModal)
+    }
 
     return (
         <div className="item-page-container">
@@ -31,7 +48,7 @@ function ItemPage() {
                     Nunc faucibus tempus quam sit amet auctor.
                     Mauris ac maximus nunc. Suspendisse sit amet velit metus. Vestibulum neque risus,
                 </p>
-                <div className="button-container">
+                <div className="button-container flex-start">
                     {isAdmin ?
                         (<Fragment>
                             <button>Uredi</button>
@@ -39,8 +56,8 @@ function ItemPage() {
                         </Fragment>)
                         :
                         (<Fragment>
-                            <button>Unajmi</button>
-                            <button>Poruka</button>
+                            <button onClick={handleRentModalToggle}>Unajmi</button>
+                            <button onClick={handleNewMessageClick}>Poruka</button>
                         </Fragment>)
                     }
                 </div>
@@ -60,6 +77,12 @@ function ItemPage() {
             <div className="contact-container">
                 contact
             </div>
+            {rentModal &&
+                <RentProcess handleRentModalToggle={handleRentModalToggle}/>
+            }
+            {newMessageModal &&
+                <NewMessageModal sendMessage={sendMessage} closeModal={handleNewMessageClick}/>
+            }
         </div>
     )
 }
