@@ -342,17 +342,49 @@ button:hover{
   }
 }
 
-
+.item-card-container:hover .image-overlay{
+  opacity: 0 !important;
+  transition: 0.3s;
+}
 
 .item-card-container {
   width: 260px;
+  cursor: pointer;
   border-radius: 8px;
   position: relative;
   @include drop_shadow_center;
   .image-container {
+    position: relative;
     img {
       width: 100%;
       border-radius: 8px 8px 0 0;
+    }
+    .image-overlay {
+      width: 100%;
+      height: 100%;
+      transition: 0.2s;
+      opacity: 1;
+      background-color: rgba(0, 0, 0, 0.6);
+      border-radius: 8px 8px 0 0;
+      position: absolute;
+      top: 0;
+      left: 0;
+      @include center;
+    }
+    p{
+      font-weight: 500;
+      margin: 5px;
+      font-size: 20px;
+      color: #d3e2ff;
+    }
+    p:nth-child(2){
+      font-size: 25px;
+      font-weight: 600;
+    }
+    i{
+      font-size: 80px;
+      color: #d3e2ff;
+      margin-top: 20px;
     }
   }
   .data-container {
@@ -385,6 +417,7 @@ button:hover{
       right: 0;
       top: 27px;
       z-index: 9;
+      width: max-content;
       background: white;
       border-radius: 3px;
       border: 1px solid #d4d4d4;
@@ -399,16 +432,16 @@ button:hover{
       .dropdown-item{
         cursor: pointer;
         @include center_vertical;
-        padding: 4px 9px;
+        padding: 4px 14px;
         opacity: 0.9;
         p{
-          margin: 0 6px 0 0;
+          margin: 0 8px 0 0;
           font-size: 16px;
           font-weight: 500;
         }
         i{
           display: flex;
-          padding: 10px 13px 10px 10px;
+          padding: 10px 15px 10px 10px;
           font-size: 18px;
         }
       }
@@ -642,7 +675,7 @@ button:hover{
 }
 
 .button-container {
-  margin: 10px 0 5px 0;
+  margin: 20px 0 5px 0;
   display: flex;
   justify-content: center;
   .confirm {
@@ -702,6 +735,7 @@ button:hover{
   width: calc(100% - 250px);
   height: calc(100vh - 66px);
   background: rgba(42, 42, 42, 0.4);
+  cursor: auto;
   @include center;
   .input-modal{
     background: rgba(255, 255, 255, 1);
@@ -711,6 +745,7 @@ button:hover{
     width:fit-content;
     max-width: 800px;
     min-width: 600px;
+    overflow-y: auto;
   }
 }
 
@@ -957,12 +992,12 @@ input[type="file"] {
       margin-top: 8px;
       font-size: 25px;
       padding: 0 20px;
-      color: #7b7b7b;
+      color: #565656;
     }
     p{
       font-size: 18px;
       font-weight: 500;
-      color: #7b7b7b;
+      color: #565656;
     }
   }
 }
@@ -973,10 +1008,10 @@ input[type="file"] {
   background: #f5f8ff;
   .user-container{
     i{
-      color: #6f9eff;
+      color: #578eff;
     }
     p{
-      color: #6f9eff;
+      color: #578eff;
     }
   }
 }
@@ -1195,26 +1230,44 @@ input[type="file"] {
       text-align: center;
       padding-left: 18px;
     }
-    .price-result{
-      margin-bottom: 15px;
-      display: flex;
-      p:nth-child(1){
-        margin-right: 5px;
-        font-weight: 500;
-      }
-      p:nth-child(2){
-        font-weight: 700;
-        color:#3c7bff;
-      }
+  }
+  .price-result{
+    margin-bottom: 5px;
+    display: flex;
+    p:nth-child(1){
+      margin-right: 5px;
+      font-weight: 500;
+    }
+    p:nth-child(2){
+      font-weight: 700;
+      color:#3c7bff;
+    }
+  }
+  .summary{
+    @include center_vertical_column;
+    h1{
+      color:#3c7bff;
+      font-size: 22px;
     }
   }
 }
 
 
+.paypal-buttons-container{
+  margin: 25px 0 0 0;
+}
 
-
-
-
+.generated-code{
+  p{
+    font-size: 45px;
+    color:#3c7bff;
+    font-weight: 600;
+    margin:8px 0;
+    border-radius: 8px;
+    background: #e7f3ff;
+    padding: 10px 20px;
+  }
+}
 
 
 

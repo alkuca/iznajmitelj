@@ -12,7 +12,6 @@ function ItemPage() {
 
     const handleRentModalToggle = () => {
         toggleRentModal(!rentModal)
-        console.log("asd")
     }
 
     const sendMessage = () => {
@@ -78,7 +77,7 @@ function ItemPage() {
                 contact
             </div>
             {rentModal &&
-                <RentProcess handleRentModalToggle={handleRentModalToggle}/>
+                <RentProcess handleModalToggle={handleRentModalToggle}/>
             }
             {newMessageModal &&
                 <NewMessageModal sendMessage={sendMessage} closeModal={handleNewMessageClick}/>

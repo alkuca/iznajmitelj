@@ -28,13 +28,13 @@ function App() {
               <Route path="/dashboard">
                   <DashboardContent>
                       <Switch>
-                          <Route path="/dashboard/items">
+                          <Route path="/dashboard/stvari">
                               <ItemsPage/>
                           </Route>
                           <Route path="/dashboard/trazi">
                               <SearchPage/>
                           </Route>
-                          <Route path="/dashboard/item">
+                          <Route path="/dashboard/stvar">
                               <ItemPage/>
                           </Route>
                           <Route path="/dashboard/postavke">

@@ -5,10 +5,14 @@ import DeliveryTypeCard from "./DeliveryTypeCard";
 import cashImage from "../images/cash.png";
 import paypalImage from "../images/paypalLogo.jpg"
 import PriceWithTime from "./PriceWithTime";
+import PayPal from "./PayPal";
 
 function RentProcess (props) {
 
     const [step, setStep] = useState(1)
+    const [rentType, setRentType] = useState("")
+
+
 
     const moveStep = () => {
       setStep(step + 1)
@@ -23,6 +27,7 @@ function RentProcess (props) {
                         <div>
                             <DeliveryTypeCard
                                 moveStep={moveStep}
+                                paymentImage={true}
                                 paymentTypeImage={paypalImage}
                                 title="Zatraži dostavu"
                                 description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget suscipit arcu, at pretium risus."
@@ -30,13 +35,14 @@ function RentProcess (props) {
                             />
                             <DeliveryTypeCard
                                 moveStep={moveStep}
+                                paymentImage={true}
                                 paymentTypeImage={cashImage}
                                 title="Preuzimanje sa adresse iznajmitelja"
                                 description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget suscipit arcu."
                                 icon="fi-rr-home"
                             />
                             <div className="button-container">
-                                <button onClick={props.handleRentModalToggle} className="cancel">Odustani</button>
+                                <button onClick={props.handleModalToggle} className="cancel">Odustani</button>
                             </div>
                         </div>
                     </div>
@@ -55,7 +61,7 @@ function RentProcess (props) {
                     </div>
                     <div className="button-container">
                         <button onClick={moveStep} className="confirm">Dalje</button>
-                        <button onClick={props.handleRentModalToggle} className="cancel">Odustani</button>
+                        <button onClick={props.handleModalToggle} className="cancel">Odustani</button>
                     </div>
                 </div>
                 }
@@ -72,13 +78,22 @@ function RentProcess (props) {
                 }
                 {step === 4 &&
                 <div>
-                    <PageTitle title="Sazetak:" renderButton={false}/>
-                    <div>
-
+                    <div className="summary">
+                        <h1>Oculus Rift 2020</h1>
+                        <div className="price-result">
+                            <p>Iznos: </p>
+                            <p>230 kn</p>
+                        </div>
+                        <div className="price-result">
+                            <p>Trajanje: </p>
+                            <p>14 dana</p>
+                        </div>
+                    </div>
+                    <div className="paypal-buttons-container">
+                        <PayPal/>
                     </div>
                     <div className="button-container">
-                        <button onClick={moveStep} className="confirm">Plaćanje</button>
-                        <button onClick={props.handleRentModalToggle} className="cancel">Odustani</button>
+                        <button onClick={props.handleModalToggle} className="cancel">Odustani</button>
                     </div>
                 </div>
                 }
