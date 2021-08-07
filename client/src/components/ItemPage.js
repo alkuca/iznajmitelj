@@ -1,9 +1,12 @@
 import React, {Fragment, useState} from "react";
 import LocationWithIcon from "./LocationWithIcon";
 import item from "../images/drone.png";
+import avatar_icon from "../images/icons/avatar.svg"
 import PriceWithTime from "./PriceWithTime";
 import RentProcess from "./RentProcess";
 import NewMessageModal from "./NewMessageModal";
+import MapInfo from "./MapInfo";
+import ContactInfo from "./ContactInfo";
 
 function ItemPage() {
     const isAdmin = false;
@@ -61,21 +64,22 @@ function ItemPage() {
                     }
                 </div>
             </div>
-            <div className="details-container">
-                <h1>Dodatan opis</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget suscipit arcu, at pretium
-                    risus.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget suscipit arcu, at pretium
-                    risus.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget suscipit arcu, at pretium
-                    risus.</p>
-            </div>
+            {/*
+                <div className="details-container">
+                    <h1>Dodatan opis</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget suscipit arcu, at pretium
+                        risus.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget suscipit arcu, at pretium
+                        risus.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget suscipit arcu, at pretium
+                        risus.</p>
+                </div>
+            */}
             <div className="map-container">
-                map
+                <h1>Lokacija</h1>
+                <MapInfo/>
             </div>
-            <div className="contact-container">
-                contact
-            </div>
+            <ContactInfo/>
             {rentModal &&
                 <RentProcess handleModalToggle={handleRentModalToggle}/>
             }

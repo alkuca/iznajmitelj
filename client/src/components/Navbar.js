@@ -1,7 +1,9 @@
 import React, {useState, useRef, useEffect} from "react";
 import avatar_icon from "../images/icons/avatar.svg"
+import logo from "../images/logo4.svg"
 import NavbarDropdown from "./NavbarDropdown";
 import classnames from "classnames";
+import {Link} from "react-router-dom";
 
 function Navbar () {
     const [dropdown, toggleDropdown] = useState(false)
@@ -28,7 +30,9 @@ function Navbar () {
     return (
         <div className="navbar-container">
             <div className="logo-container">
-                <p>Rent</p>
+                <Link to="/dashboard/stvari">
+                    <img src={logo} alt="Avatar"/>
+                </Link>
             </div>
             <div className="search-container">
                 <div className="inner-container">
