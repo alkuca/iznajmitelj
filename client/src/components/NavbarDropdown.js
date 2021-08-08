@@ -5,9 +5,6 @@ import classnames from "classnames";
 function NavbarDropdown (props) {
     const dropdown = props.dropdown
 
-    const logout = () => {
-        console.log("logout")
-    }
     return (
         <div className={classnames("navbar-dropdown", {
             "t": dropdown
@@ -17,7 +14,7 @@ function NavbarDropdown (props) {
             <LinkWithIcon text="Postavke" icon="settings-sliders" goTo="/dashboard/postavke"/>
             <div className="links-line"/>
             <LinkWithIcon text="Pomoć" icon="info" goTo="/dashboard/pomoc"/>
-            <div onClick={logout}>
+            <div onClick={props.logout}>
                 <LinkWithIcon text="Odjavi se" icon="power" goTo="/auth/login" />
             </div>
         </div>

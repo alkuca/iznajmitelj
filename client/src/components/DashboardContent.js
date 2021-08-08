@@ -6,7 +6,7 @@ import Sidebar from "./Sidebar";
 function DashboardContent (props) {
     return(
         <div>
-            <Navbar/>
+            <Navbar setAuth={props.setAuth}/>
             <Sidebar/>
             <div className="dashboard-container">
                 <div className="dashboard-content">

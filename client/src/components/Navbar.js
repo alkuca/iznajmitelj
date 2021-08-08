@@ -5,7 +5,7 @@ import NavbarDropdown from "./NavbarDropdown";
 import classnames from "classnames";
 import {Link} from "react-router-dom";
 
-function Navbar () {
+function Navbar ({setAuth}) {
     const [dropdown, toggleDropdown] = useState(false)
     const ref = useRef(null);
     const ref2 = useRef(null)
@@ -17,6 +17,15 @@ function Navbar () {
     const handleClickOutside = e => {
         if ((ref.current && !ref.current.contains(e.target)) && (ref2.current && !ref2.current.contains(e.target))) {
             toggleDropdown(false);
+        }
+    };
+
+    const logout = async => {
+        try {
+            localStorage.removeItem("token");
+            setAuth(false);
+        } catch (err) {
+            console.error(err.message);
         }
     };
 
@@ -51,7 +60,7 @@ function Navbar () {
                 </div>
                 { dropdown &&
                     <div ref={ref}>
-                        <NavbarDropdown dropdown={dropdown}/>
+                        <NavbarDropdown logout={logout} dropdown={dropdown}/>
                     </div>
                 }
             </div>
