@@ -1,8 +1,10 @@
 import React,{useState} from 'react';
 import InputField from "./InputField";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 
 function LoginPage ({setAuth}) {
+
+    const history = useHistory();
 
     const [formData, setFormData] = useState({
         email: "",
@@ -33,6 +35,7 @@ function LoginPage ({setAuth}) {
             if (parseRes.token) {
                 localStorage.setItem("token", parseRes.token);
                 setAuth(true);
+                history.push("/dashboard/stvari")
             } else {
                 setAuth(false);
             }
