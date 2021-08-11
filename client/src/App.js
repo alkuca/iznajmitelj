@@ -17,14 +17,7 @@ import MessagePage from "./components/MessagePage";
 import {useEffect, useState} from "react";
 import PrivateRoute from "./components/PrivateRoute";
 
-import {useSelector,useDispatch} from "react-redux";
-import {bindActionCreators} from "redux";
-import {itemActions} from "./state/index"
-
 function App() {
-
-    const itemState = useSelector((state) => state.item)
-    const { createItem, deleteItem } = bindActionCreators(itemActions, useDispatch())
 
 
     const [isAuthenticated, setIsAuthenticated] = useState(false);

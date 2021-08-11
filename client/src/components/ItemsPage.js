@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import PageTitle from "./PageTitle";
 import ItemCard from "./ItemCard";
 import SelectDropdown from "./SelectDropdown";
-import AddItem from "./AddItem";
+import CreateItemModal from "./CreateItemModal";
 
 function ItemsPage () {
     const [addItemModal, toggleItemModal] = useState(false)
@@ -20,7 +20,7 @@ function ItemsPage () {
             <div className="items-container">
                 <ItemCard/>
             </div>
-            {  addItemModal && <AddItem closeModal={handleAddModalClick}/> }
+            {  addItemModal && <CreateItemModal closeModal={handleAddModalClick}/> }
         </div>
     )
 }
