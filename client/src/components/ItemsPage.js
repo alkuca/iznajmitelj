@@ -3,6 +3,7 @@ import PageTitle from "./PageTitle";
 import ItemCard from "./ItemCard";
 import SelectDropdown from "./SelectDropdown";
 import CreateItemModal from "./CreateItemModal";
+import {useSelector} from "react-redux";
 
 function ItemsPage () {
     const [addItemModal, toggleItemModal] = useState(false)
@@ -11,6 +12,9 @@ function ItemsPage () {
         toggleItemModal(!addItemModal)
     }
 
+    const itemState = useSelector((state) => state.itemsState)
+    const currentUser = useSelector((state => state.userState.currentUser))
+
     return (
         <div className="my-items-page">
             <PageTitle renderButton={true} buttonText="Dodaj" title="Moje Stvari" buttonAction={handleAddModalClick}/>
@@ -18,7 +22,11 @@ function ItemsPage () {
                 <SelectDropdown selectItems={["Sve","Popularno","Novo"]}/>
             </div>
             <div className="items-container">
-                <ItemCard/>
+                { !itemState.loading &&
+                    itemState.items.map( item => {
+                        return <ItemCard key={item.item_id} item_id={item.item_id} name={item.item_name} price={item.item_price} state={item.item_state}/>
+                    })
+                }
             </div>
             {  addItemModal && <CreateItemModal closeModal={handleAddModalClick}/> }
         </div>

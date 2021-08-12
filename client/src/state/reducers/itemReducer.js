@@ -1,16 +1,24 @@
 const initialState = {
-    item:{}
+    item: null,
+    items: {},
+    loading: true
 };
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case "create":
+        case "CREATE":
             return {
                 item: action.payload
             }
-        case "delete":{
+        case "DELETE":{
             return{
                 item: action.payload
+            }
+        }
+        case "GET_USER_ITEMS":{
+            return {
+                items: action.payload,
+                loading: false
             }
         }
         default:

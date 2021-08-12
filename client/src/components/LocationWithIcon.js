@@ -1,15 +1,13 @@
 import React from "react";
 
+const LocationWithIcon = (props) => {
 
-class LocationWithIcon extends React.Component {
-    render(){
-        return (
-            <div className="location-container">
-                <i className="fi-br-marker"/>
-                <p>Slavonski brod</p>
-            </div>
-        )
-    }
+    return (
+        <div className="location-container">
+            <i className="fi-br-marker"/>
+            <p>{props.state}</p>
+        </div>
+    )
 }
 
 export default LocationWithIcon;

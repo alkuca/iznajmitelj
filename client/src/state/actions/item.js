@@ -15,7 +15,7 @@ export const createItem = item => async dispatch => {
         );
          if(response.ok){
              dispatch({
-                 type: "create",
+                 type: "CREATE",
                  payload: item
              })
          }
@@ -27,8 +27,33 @@ export const createItem = item => async dispatch => {
 export const deleteItem = (item) => {
     return (dispatch) => {
         dispatch({
-            type: "delete",
+            type: "DELETE",
             payload: item
         })
+    }
+}
+
+export const getUserItems = () => async dispatch => {
+    const token = localStorage.getItem("token");
+    try {
+        const res = await fetch(
+            "http://localhost:5000/items/getUserItems",
+            {
+                method: "GET",
+                headers: {
+                    "Content-type": "application/json",
+                    "token": token
+                }
+            }
+        );
+        const parseRes = await res.json()
+        if(res.ok){
+            dispatch({
+                type: "GET_USER_ITEMS",
+                payload: parseRes
+            })
+        }
+    } catch (err) {
+        console.error(err.message);
     }
 }

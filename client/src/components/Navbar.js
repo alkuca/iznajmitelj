@@ -4,6 +4,7 @@ import logo from "../images/logo4.svg"
 import NavbarDropdown from "./NavbarDropdown";
 import classnames from "classnames";
 import {Link} from "react-router-dom";
+import {useSelector} from "react-redux";
 
 function Navbar ({setAuth}) {
     const [dropdown, toggleDropdown] = useState(false)
@@ -20,7 +21,7 @@ function Navbar ({setAuth}) {
         }
     };
 
-    const logout = async => {
+    const logout = () => {
         try {
             localStorage.removeItem("token");
             setAuth(false);
@@ -29,12 +30,15 @@ function Navbar ({setAuth}) {
         }
     };
 
+    const userState = useSelector((state) => state.userState)
+
     useEffect(() => {
         document.addEventListener('click', handleClickOutside, true);
         return () => {
             document.removeEventListener('click', handleClickOutside,true );
-        };
+        }
     });
+
 
     return (
         <div className="navbar-container">
@@ -53,7 +57,7 @@ function Navbar ({setAuth}) {
                 <i className="fi-br-bell bell"/>
                 <img className="avatar" src={avatar_icon} alt="Avatar"/>
                 <div ref={ref2} className="name-container" onClick={handleToggleClick}>
-                    <p>Adam Smith</p>
+                    <p>{userState.currentUser.user_name}</p>
                     <i className={classnames("fi-br-angle-small-down", {
                         "hide": dropdown
                     })}/>

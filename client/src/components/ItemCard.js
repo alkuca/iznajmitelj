@@ -9,7 +9,7 @@ import SettingDropdownButton from "./SettingDropdownButton";
 import {withRouter} from 'react-router-dom';
 import ReturnProcess from "./ReturnProcess";
 
-function ItemCard() {
+function ItemCard(props) {
     const [postConfirmation, togglePostConfirmation] = useState(false)
     const [deleteConfirmation, toggleDeleteConfirmation] = useState(false)
     const [codeEnterModal, toggleCodeEnterModal] = useState(false)
@@ -79,10 +79,10 @@ function ItemCard() {
                 }
             </div>
             <div className="data-container">
-                <h1>Oculus Rift 2020 sa controlerima</h1>
+                <h1>{props.name}</h1>
                 <Fragment>
-                    <LocationWithIcon/>
-                    <PriceWithTime/>
+                    <LocationWithIcon state={props.state}/>
+                    <PriceWithTime price={props.price} timeFormat="24h"/>
                 </Fragment>
                 {(waitingCode && window.location.pathname === "/dashboard/unajmljeno") &&
                     <button onClick={handleCodeEnterClick} className="enter-code-button">Unesi kod</button>

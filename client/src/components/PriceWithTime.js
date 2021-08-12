@@ -1,15 +1,13 @@
 import React from "react";
 
 
-class PriceWithTime extends React.Component {
-    render(){
-        return (
-            <div className="price-container">
-                <h2>$20</h2>
-                <p>/24h</p>
-            </div>
-        )
-    }
+const PriceWithTime = (props) => {
+    return (
+        <div className="price-container">
+            <h2>{props.price} kn</h2>
+            <p>/{props.timeFormat}</p>
+        </div>
+    )
 }
 
 export default PriceWithTime;

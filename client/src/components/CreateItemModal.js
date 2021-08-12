@@ -9,14 +9,18 @@ import {itemActions} from "../state";
 
 function CreateItemModal (props)  {
     const [mainImage, setMainImage] = useState(null)
+
+
+    const currentUserState = useSelector((state) => state.userState.currentUser.user_state)
+
     const [formData, setFormData] = useState({
         name: "",
         price: "",
         description: "",
+        user_state: currentUserState
     });
 
 
-    const itemState = useSelector((state) => state.item)
     const { createItem, deleteItem } = bindActionCreators(itemActions, useDispatch())
 
     const handleClick = e => setMainImage(URL.createObjectURL(e.target.files[0]))
