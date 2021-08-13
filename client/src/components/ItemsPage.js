@@ -1,9 +1,11 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import PageTitle from "./PageTitle";
 import ItemCard from "./ItemCard";
 import SelectDropdown from "./SelectDropdown";
 import CreateItemModal from "./CreateItemModal";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {bindActionCreators} from "redux";
+import {itemActions, userActions} from "../state";
 
 function ItemsPage () {
     const [addItemModal, toggleItemModal] = useState(false)
@@ -13,7 +15,12 @@ function ItemsPage () {
     }
 
     const itemState = useSelector((state) => state.itemsState)
-    const currentUser = useSelector((state => state.userState.currentUser))
+
+    const { getUserItems } = bindActionCreators(itemActions, useDispatch())
+
+    useEffect( ()  => {
+        getUserItems();
+    }, []);
 
     return (
         <div className="my-items-page">
@@ -22,9 +29,9 @@ function ItemsPage () {
                 <SelectDropdown selectItems={["Sve","Popularno","Novo"]}/>
             </div>
             <div className="items-container">
-                { !itemState.loading &&
+                { (!itemState.loading ) &&
                     itemState.items.map( item => {
-                        return <ItemCard key={item.item_id} item_id={item.item_id} name={item.item_name} price={item.item_price} state={item.item_state}/>
+                        return <ItemCard item_posted={item.item_posted} key={item.item_id} item_id={item.item_id} name={item.item_name} price={item.item_price} state={item.item_state}/>
                     })
                 }
             </div>
@@ -34,4 +41,3 @@ function ItemsPage () {
 }
 
 export default ItemsPage;
-

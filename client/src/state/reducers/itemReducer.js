@@ -1,14 +1,17 @@
 const initialState = {
     item: null,
     items: {},
-    loading: true
+    loading: true,
+    itemPosted: false
 };
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case "CREATE":
             return {
-                item: action.payload
+                ...state,
+                item: action.payload,
+                loading: true,
             }
         case "DELETE":{
             return{
@@ -17,8 +20,19 @@ const reducer = (state = initialState, action) => {
         }
         case "GET_USER_ITEMS":{
             return {
+                ...state,
                 items: action.payload,
                 loading: false
+            }
+        }
+        case "POST_ITEM":{
+            return {
+                ...state
+            }
+        }
+        case "REMOVE_POST":{
+            return {
+                ...state
             }
         }
         default:

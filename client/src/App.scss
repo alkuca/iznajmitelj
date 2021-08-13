@@ -685,6 +685,7 @@ button:hover{
   animation-duration: 0.3s;
   animation-fill-mode: forwards;
   background: rgba(42, 42, 42, 0.5);
+  z-index: 100;
   @include center;
   .confirm-modal{
     background: rgba(255, 255, 255, 1);

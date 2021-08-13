@@ -57,3 +57,50 @@ export const getUserItems = () => async dispatch => {
         console.error(err.message);
     }
 }
+
+export const postItem = id => async dispatch => {
+    const token = localStorage.getItem("token");
+    try {
+        const res = await fetch(
+            `http://localhost:5000/items/postItem/${id}`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json",
+                    "token": token
+                }
+            }
+        );
+        if(res){
+            dispatch({
+                type: "POST_ITEM"
+            })
+        }
+    } catch (err) {
+        console.error(err.message);
+    }
+}
+
+export const deletePost = id => async dispatch => {
+    const token = localStorage.getItem("token");
+    try {
+        const res = await fetch(
+            `http://localhost:5000/items/removePost/${id}`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json",
+                    "token": token
+                }
+            }
+        );
+        const parseRes = await res.json()
+        if(parseRes){
+            dispatch({
+                type: "REMOVE_POST"
+            })
+        }
+    } catch (err) {
+        console.error(err.message);
+    }
+}

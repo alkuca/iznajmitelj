@@ -21,7 +21,7 @@ function CreateItemModal (props)  {
     });
 
 
-    const { createItem, deleteItem } = bindActionCreators(itemActions, useDispatch())
+    const { createItem, deleteItem, getUserItems } = bindActionCreators(itemActions, useDispatch())
 
     const handleClick = e => setMainImage(URL.createObjectURL(e.target.files[0]))
 
@@ -29,8 +29,9 @@ function CreateItemModal (props)  {
         ...formData, [e.target.name]: e.target.value
     });
 
-    const createItemAction = () => {
-        createItem(formData)
+    const createItemAction = async () => {
+        await createItem(formData)
+        getUserItems()
     }
 
     return (

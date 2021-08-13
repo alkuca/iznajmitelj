@@ -2,7 +2,7 @@ node_modules
 /dist
 .idea
 
-
+.env
 .env.local
 .env.*.local
 server/.env

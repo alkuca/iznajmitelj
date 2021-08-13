@@ -8,6 +8,9 @@ import ItemCodeEnter from "./ItemCodeEnter";
 import SettingDropdownButton from "./SettingDropdownButton";
 import {withRouter} from 'react-router-dom';
 import ReturnProcess from "./ReturnProcess";
+import {bindActionCreators} from "redux";
+import {itemActions} from "../state";
+import {useDispatch} from "react-redux";
 
 function ItemCard(props) {
     const [postConfirmation, togglePostConfirmation] = useState(false)
@@ -20,6 +23,8 @@ function ItemCard(props) {
 
     const deleteNote = "Jeste li sigurni da želite trajno izbrisat odabrani proizvod?"
     const postNote = "Klikom na Objavi proizvod postaje vidljiv ostalim korisnicima."
+
+    const { postItem, deletePost, getUserItems } = bindActionCreators(itemActions, useDispatch())
 
     const handlePostClick = () => {
         togglePostConfirmation(!postConfirmation)
@@ -39,16 +44,20 @@ function ItemCard(props) {
         console.log("delete click")
     }
 
-    const postItem = () => {
-        console.log("item posted")
+    const postItemAction = async () => {
+        await postItem(props.item_id);
+        await getUserItems()
+        handlePostClick();
+    }
+
+    const deletePostAction = async () => {
+        await deletePost(props.item_id);
+        await getUserItems()
+        handleDeleteClick();
     }
 
     const deleteItem = () => {
         console.log("item deleted")
-    }
-
-    const deletePost = () => {
-        console.log("post deleted")
     }
 
     const submitCode = () => {
@@ -107,7 +116,7 @@ function ItemCard(props) {
             }
             {postConfirmation &&
             <ConfirmationModal note={postNote} icon="fi-br-file-add color-blue" actionName="Objavi" buttonText="Objavi"
-                               type="positive" confirmAction={postItem} closeModal={handlePostClick}/>
+                               type="positive" confirmAction={postItemAction} closeModal={handlePostClick}/>
             }
             {(deleteConfirmation && window.location.pathname === "/dashboard/stvari") &&
             <ConfirmationModal note={deleteNote} icon="fi-br-trash color-red" actionName="Ukloni Stvar"
@@ -116,7 +125,7 @@ function ItemCard(props) {
             }
             {(deleteConfirmation && window.location.pathname === "/dashboard/objave") &&
             <ConfirmationModal note={deleteNote} icon="fi-br-trash color-red" actionName="Ukloni Objavu"
-                               buttonText="Ukloni" type="negative" confirmAction={deletePost}
+                               buttonText="Ukloni" type="negative" confirmAction={deletePostAction}
                                closeModal={handleDeleteClick}/>
             }
             {codeEnterModal &&

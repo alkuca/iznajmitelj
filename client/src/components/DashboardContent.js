@@ -11,12 +11,12 @@ function DashboardContent (props) {
 
     const itemState = useSelector((state) => state.item)
     const { getCurrentUser } = bindActionCreators(userActions, useDispatch())
-    const { getUserItems } = bindActionCreators(itemActions, useDispatch())
 
 
-    useEffect(() => {
-        getCurrentUser();
-        getUserItems();
+
+    useEffect(async ()  => {
+        await getCurrentUser();
+
     }, []);
 
 

@@ -44,4 +44,49 @@ router.get("/getUserItems", authorization, async (req, res) => {
     }
 });
 
+
+/*
+Sets item posted status to true
+PATCH REQUEST - /postItem
+ */
+router.post("/postItem/:id", authorization, async (req, res) => {
+    const user_id = req.user;
+    const id = req.params.id;
+
+    try {
+        const userItem = await pool.query("SELECT * FROM items WHERE item_owner=$1", [user_id.id])
+        if (userItem.rows.length === 0) {
+            return res.status(401).send("User is not the owner of that item");
+        }
+        await pool.query("UPDATE items SET item_posted=true WHERE item_id=$1",[id]);
+
+        res.json({success:"true"});
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Server error");
+    }
+});
+
+/*
+Sets item posted status to false
+PATCH REQUEST - /removePost
+ */
+router.post("/removePost/:id", authorization, async (req, res) => {
+    const user_id = req.user;
+    const id = req.params.id;
+
+    try {
+        const userItem = await pool.query("SELECT * FROM items WHERE item_owner=$1", [user_id.id])
+        if (userItem.rows.length === 0) {
+            return res.status(401).send("User is not the owner of that item");
+        }
+        await pool.query("UPDATE items SET item_posted=false WHERE item_id=$1",[id]);
+
+        res.json(req.params.id);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Server error");
+    }
+});
+
 module.exports = router;
