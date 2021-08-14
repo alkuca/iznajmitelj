@@ -1,3 +1,50 @@
+export const getAllItems = () => async dispatch => {
+    try {
+        const res = await fetch(
+            "http://localhost:5000/items/getAllItems",
+            {
+                method: "GET",
+                headers: {
+                    "Content-type": "application/json"
+                }
+            }
+        );
+        const parseRes = await res.json()
+        if(res.ok){
+            dispatch({
+                type: "GET_ALL_ITEMS",
+                payload: parseRes
+            })
+            return(parseRes)
+        }
+    } catch (err) {
+        console.error(err.message);
+    }
+}
+
+export const getSingeItem = item_id => async dispatch => {
+    try {
+        const res = await fetch(
+            `http://localhost:5000/items/getSingleItem/${item_id}`,
+            {
+                method: "GET",
+                headers: {
+                    "Content-type": "application/json"
+                }
+            }
+        );
+        const parseRes = await res.json()
+        if(res.ok){
+            dispatch({
+                type: "GET_SINGLE_ITEM",
+                payload: parseRes
+            })
+            return(parseRes)
+        }
+    } catch (err) {
+        console.error(err.message);
+    }
+}
 
 export const createItem = item => async dispatch => {
     const token = localStorage.getItem("token");

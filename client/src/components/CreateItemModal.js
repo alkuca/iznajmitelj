@@ -11,13 +11,18 @@ function CreateItemModal (props)  {
     const [mainImage, setMainImage] = useState(null)
 
 
-    const currentUserState = useSelector((state) => state.userState.currentUser.user_state)
+    const currentUser = useSelector((state) => state.userState.currentUser)
 
     const [formData, setFormData] = useState({
         name: "",
         price: "",
         description: "",
-        user_state: currentUserState
+        item_state: currentUser.user_state,
+        item_street: currentUser.user_street,
+        item_street_number: currentUser.user_street_number,
+        item_city: currentUser.user_city,
+        item_lat: currentUser.lat,
+        item_long: currentUser.long
     });
 
 
@@ -30,17 +35,21 @@ function CreateItemModal (props)  {
     });
 
     const createItemAction = async () => {
-        await createItem(formData)
-        getUserItems()
+        if(formData.name.length && formData.price.length){
+            await createItem(formData)
+            getUserItems()
+        }else{
+            alert("nedostaju podaci")
+        }
     }
 
     return (
         <InputModal>
             <div className="add-item-modal-container">
                 <div className="data-input-container">
-                    <InputField className="input-container" type="text" label="Naziv proizvoda" name="name" onChange={e => onFormChange(e)}/>
-                    <InputField className="input-container number-input" type="number" label="Cijena (kn/24h)" name="price" onChange={e => onFormChange(e)}/>
-                    <InputTextarea rows={4} className="textarea-container" label="Opis" name="description" onChange={e => onFormChange(e)}/>
+                    <InputField required={"required"} className="input-container" type="text" label="Naziv proizvoda" name="name" onChange={e => onFormChange(e)}/>
+                    <InputField required={"required"} className="input-container number-input" type="number" label="Cijena (kn/24h)" name="price" onChange={e => onFormChange(e)}/>
+                    <InputTextarea required={"required"} rows={4} className="textarea-container" label="Opis" name="description" onChange={e => onFormChange(e)}/>
                 </div>
                 <div className="image-input-container">
                     <div className="main-image-container">

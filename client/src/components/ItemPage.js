@@ -1,17 +1,24 @@
-import React, {Fragment, useState} from "react";
+import React, {Fragment, useState, useEffect} from "react";
 import LocationWithIcon from "./LocationWithIcon";
 import item from "../images/drone.png";
-import avatar_icon from "../images/icons/avatar.svg"
 import PriceWithTime from "./PriceWithTime";
 import RentProcess from "./RentProcess";
 import NewMessageModal from "./NewMessageModal";
 import MapInfo from "./MapInfo";
 import ContactInfo from "./ContactInfo";
+import {useDispatch, useSelector} from "react-redux";
+import {bindActionCreators} from "redux";
+import {itemActions} from "../state";
+import {withRouter} from "react-router-dom";
 
-function ItemPage() {
-    const isAdmin = false;
+const ItemPage = props => {
     const [rentModal, toggleRentModal] = useState(false)
     const [newMessageModal, toggleNewMessageModal] = useState(false)
+
+    const itemState = useSelector((state) => state.itemsState)
+    const userState = useSelector((state) => state.userState)
+
+    const {getSingeItem} = bindActionCreators(itemActions, useDispatch())
 
     const handleRentModalToggle = () => {
         toggleRentModal(!rentModal)
@@ -25,70 +32,83 @@ function ItemPage() {
         toggleNewMessageModal(!newMessageModal)
     }
 
+    useEffect(() => {
+        getSingeItem(props.match.params.item_id)
+    }, []);
+
+
+
+
     return (
-        <div className="item-page-container">
-            <div className="images-container">
-                <img src={item} alt="Drone"/>
-                <div className="thumbnail-container">
-                    <img src={item} alt="Drone thumbnail"/>
-                    <img src={item} alt="Drone thumbnail"/>
-                    <img src={item} alt="Drone thumbnail"/>
-                    <img src={item} alt="Drone thumbnail"/>
-                    <div className="upload-image-icon">
-                        <i className="fi-br-cloud-upload"/>
+        <div>
+            {itemState.currentItem[0] &&
+            <div className="item-page-container">
+                <div className="images-container">
+                    <img src={item} alt="Drone"/>
+                    {/*
+                    <div className="thumbnail-container">
+                        <img src={item} alt="Drone thumbnail"/>
+                        <img src={item} alt="Drone thumbnail"/>
+                        <img src={item} alt="Drone thumbnail"/>
+                        <img src={item} alt="Drone thumbnail"/>
+                        <div className="upload-image-icon">
+                            <i className="fi-br-cloud-upload"/>
+                        </div>
+                    </div>
+                    */}
+                </div>
+                <div className="data-container">
+                    <h1>{itemState.currentItem[0].item_name}</h1>
+                    <div className="location-price">
+                        <LocationWithIcon item={itemState.currentItem[0]} detailed={true}/>
+                        <PriceWithTime price={itemState.currentItem[0].item_price} timeFormat="24h"/>
+                    </div>
+                    <p className="item-description">{itemState.currentItem[0].item_description}</p>
+                    <div className="button-container flex-start">
+                        {itemState.currentItem[0].item_owner === userState.currentUser.user_id ?
+                            (<Fragment>
+                                <button>Uredi</button>
+                                <button className="color-red border-red">Ukloni</button>
+                            </Fragment>)
+                            :
+                            (<Fragment>
+                                <button onClick={handleRentModalToggle}>Unajmi</button>
+                                <button onClick={handleNewMessageClick}>Poruka</button>
+                            </Fragment>)
+                        }
                     </div>
                 </div>
-            </div>
-            <div className="data-container">
-                <h1>Oculus Rift 2020 sa controlerima</h1>
-                <div className="location-price">
-                    <LocationWithIcon/>
-                    <PriceWithTime/>
+                {/*
+                    <div className="details-container">
+                        <h1>Dodatan opis</h1>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget suscipit arcu, at pretium
+                            risus.</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget suscipit arcu, at pretium
+                            risus.</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget suscipit arcu, at pretium
+                            risus.</p>
+                    </div>
+                */}
+                <div className="map-container">
+                    <h1>Lokacija</h1>
+                    <MapInfo lat={itemState.currentItem[0].item_lat}
+                             long={itemState.currentItem[0].item_long}
+                             zoom={15}
+                             scrollWheelZoom={true}
+                    />
                 </div>
-                <p className="item-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget
-                    suscipit arcu, at pretium risus.
-                    Nunc faucibus tempus quam sit amet auctor.
-                    Mauris ac maximus nunc. Suspendisse sit amet velit metus. Vestibulum neque risus,
-                </p>
-                <div className="button-container flex-start">
-                    {isAdmin ?
-                        (<Fragment>
-                            <button>Uredi</button>
-                            <button className="color-red border-red">Ukloni</button>
-                        </Fragment>)
-                        :
-                        (<Fragment>
-                            <button onClick={handleRentModalToggle}>Unajmi</button>
-                            <button onClick={handleNewMessageClick}>Poruka</button>
-                        </Fragment>)
-                    }
-                </div>
-            </div>
-            {/*
-                <div className="details-container">
-                    <h1>Dodatan opis</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget suscipit arcu, at pretium
-                        risus.</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget suscipit arcu, at pretium
-                        risus.</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget suscipit arcu, at pretium
-                        risus.</p>
-                </div>
-            */}
-            <div className="map-container">
-                <h1>Lokacija</h1>
-                <MapInfo/>
-            </div>
-            <ContactInfo/>
-            {rentModal &&
+                <ContactInfo/>
+                {rentModal &&
                 <RentProcess handleModalToggle={handleRentModalToggle}/>
-            }
-            {newMessageModal &&
+                }
+                {newMessageModal &&
                 <NewMessageModal sendMessage={sendMessage} closeModal={handleNewMessageClick}/>
+                }
+            </div>
             }
         </div>
     )
 }
 
-export default ItemPage;
+export default withRouter(ItemPage);
 

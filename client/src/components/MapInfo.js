@@ -2,14 +2,14 @@ import React from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 
 
-const MapInfo = () => {
+const MapInfo = (props) => {
     return (
-        <MapContainer center={[46.20798295, 16.045020074065896]} zoom={15} scrollWheelZoom={false}>
+        <MapContainer center={[props.long, props.lat]} zoom={props.zoom} scrollWheelZoom={props.scrollWheel}>
             <TileLayer
                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            <Marker position={[46.211532, 16.0414396]}>
+            <Marker position={[props.long, props.lat]}>
                 <Popup>
                     A pretty CSS3 popup. <br /> Easily customizable.
                 </Popup>

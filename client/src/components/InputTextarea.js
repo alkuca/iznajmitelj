@@ -1,6 +1,6 @@
 import React from "react";
 
-const InputTextarea = ({ value, label, name, id, onChange, className, rows, cols }) => (
+const InputTextarea = ({ value, label, name, id, onChange, className, rows, cols, required }) => (
     <div className={className}>
         {label && <label htmlFor="input-textarea">{label}</label>}
         <textarea
@@ -10,6 +10,7 @@ const InputTextarea = ({ value, label, name, id, onChange, className, rows, cols
             onChange={onChange}
             rows={rows}
             cols={cols}
+            required={required}
         />
     </div>
 );

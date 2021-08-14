@@ -59,7 +59,7 @@ function ReturnProcess (props) {
                 }
                 {step === 3 &&
                 <div className="map-step">
-                    <LocationWithIcon/>
+                    <LocationWithIcon detailed={false}/>
                 </div>
                 }
             </div>

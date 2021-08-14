@@ -2,11 +2,27 @@ const initialState = {
     item: null,
     items: {},
     loading: true,
-    itemPosted: false
+    allItemsLoading: true,
+    itemPosted: false,
+    allItems: {},
+    currentItem: {}
 };
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
+        case "GET_ALL_ITEMS":{
+            return {
+                ...state,
+                allItems: action.payload,
+                allItemsLoading: false
+            }
+        }
+        case "GET_SINGLE_ITEM":{
+            return {
+                ...state,
+                currentItem: action.payload
+            }
+        }
         case "CREATE":
             return {
                 ...state,

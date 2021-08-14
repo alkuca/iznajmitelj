@@ -61,7 +61,7 @@ function App() {
                       <Switch>
                           <Route path="/dashboard/stvari" component={ItemsPage}/>
                           <Route path="/dashboard/trazi" component={SearchPage}/>
-                          <Route path="/dashboard/stvar" component={ItemPage}/>
+                          <Route path="/dashboard/stvar/:item_id" component={ItemPage}/>
                           <Route path="/dashboard/postavke" component={SettingsPage}/>
                           <Route path="/dashboard/unajmljeno" component={RentedPage}/>
                           <Route path="/dashboard/iznajmljeno" component={RentedOutPage}/>

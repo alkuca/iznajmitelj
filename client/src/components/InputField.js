@@ -1,6 +1,6 @@
 import React from "react";
 
-const InputField = ({ value, label, name, type, onChange, className }) => (
+const InputField = ({ value, label, name, type, onChange, className, required }) => (
     <div className={className}>
         <input
             type={type}
@@ -8,6 +8,7 @@ const InputField = ({ value, label, name, type, onChange, className }) => (
             name={name}
             placeholder={" "}
             onChange={onChange}
+            required={required}
         />
         {label && <label htmlFor="input-field">{label}</label>}
     </div>

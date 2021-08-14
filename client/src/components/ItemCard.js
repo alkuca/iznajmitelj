@@ -6,7 +6,7 @@ import SettingsDropdown from "./SettingsDropdown";
 import ConfirmationModal from "./ConfirmationModal";
 import ItemCodeEnter from "./ItemCodeEnter";
 import SettingDropdownButton from "./SettingDropdownButton";
-import {withRouter} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import ReturnProcess from "./ReturnProcess";
 import {bindActionCreators} from "redux";
 import {itemActions} from "../state";
@@ -64,42 +64,54 @@ function ItemCard(props) {
         console.log("code submited")
     }
 
+
     return (
         <div className="item-card-container">
-            <div className="image-container">
-                <img src={item} alt="Drone"/>
-                {window.location.pathname === "/dashboard/unajmljeno" &&
-                <div className="image-overlay">
-                    {waitingCode ?
-                        <i className="fi-rr-lock"/>
+            <Link to={`/dashboard/stvar/${props.item_id}`}>
+                <div className="image-container">
+                    <img src={item} alt="Drone"/>
+                    {window.location.pathname === "/dashboard/unajmljeno" &&
+                    <div className="image-overlay">
+                        {waitingCode ?
+                            <i className="fi-rr-lock"/>
+                            :
+                            <Fragment>
+                                <p>Preostalo vremena:</p>
+                                <p>20 sati</p>
+                            </Fragment>
+                        }
+                    </div>
+                    }
+                    {window.location.pathname === "/dashboard/iznajmljeno" &&
+                    <div className="image-overlay">
+                        {waitingCode ?
+                            <Fragment>
+                                <p>Povratak:</p>
+                                <p>20.03.2021</p>
+                            </Fragment>
                         :
-                        <Fragment>
-                            <p>Preostalo vremena:</p>
-                            <p>20 sati</p>
-                        </Fragment>
+                            <Fragment>
+                                <p>Cekanje na unos koda</p>
+                                <p>******</p>
+                            </Fragment>
+                        }
+                    </div>
                     }
                 </div>
-                }
-                {window.location.pathname === "/dashboard/iznajmljeno" &&
-                <div className="image-overlay">
-                    <p>Povratak:</p>
-                    <p>20.03.2021</p>
+            </Link>
+                <div className="data-container">
+                    <h1>{props.name}</h1>
+                    <Fragment>
+                        <LocationWithIcon state={props.state} detailed={false}/>
+                        <PriceWithTime price={props.price} timeFormat="24h"/>
+                    </Fragment>
+                    {(waitingCode && window.location.pathname === "/dashboard/unajmljeno") &&
+                        <button onClick={handleCodeEnterClick} className="enter-code-button">Unesi kod</button>
+                    }
+                    {(waitingReturn && window.location.pathname === "/dashboard/unajmljeno") &&
+                        <button onClick={handleReturnClick} className="enter-code-button">Završi</button>
+                    }
                 </div>
-                }
-            </div>
-            <div className="data-container">
-                <h1>{props.name}</h1>
-                <Fragment>
-                    <LocationWithIcon state={props.state}/>
-                    <PriceWithTime price={props.price} timeFormat="24h"/>
-                </Fragment>
-                {(waitingCode && window.location.pathname === "/dashboard/unajmljeno") &&
-                    <button onClick={handleCodeEnterClick} className="enter-code-button">Unesi kod</button>
-                }
-                {(waitingReturn && window.location.pathname === "/dashboard/unajmljeno") &&
-                    <button onClick={handleReturnClick} className="enter-code-button">Završi</button>
-                }
-            </div>
             {window.location.pathname === "/dashboard/stvari" &&
             <SettingsDropdown>
                 <SettingDropdownButton className="dropdown-item" buttonAction={handlePostClick} buttonText="Objavi"
