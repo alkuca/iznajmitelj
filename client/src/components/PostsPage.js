@@ -25,7 +25,15 @@ const PostsPage = () => {
             <div className="items-container">
                 { (!itemState.loading ) &&
                     itemState.items.filter(item => item.item_posted === true).map( postedItem => {
-                        return <ItemCard key={postedItem.item_id} item_id={postedItem.item_id} name={postedItem.item_name} price={postedItem.item_price} state={postedItem.item_state}/>
+                        return <ItemCard
+                            key={postedItem.item_id}
+                            item_id={postedItem.item_id}
+                            name={postedItem.item_name}
+                            price={postedItem.item_price}
+                            state={postedItem.item_state}
+                            showPricePerDay={true}
+                            showLocation={true}
+                        />
                     })
                 }
             </div>

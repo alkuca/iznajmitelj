@@ -1,6 +1,7 @@
 import React from "react";
 
 function DeliveryTypeCard (props) {
+
     return (
         <div onClick={props.moveStep} className="delivery-card">
             <i className={props.icon}/>

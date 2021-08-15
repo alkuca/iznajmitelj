@@ -68,7 +68,7 @@ function App() {
                           <Route path="/dashboard/pomoc" component={HelpPage}/>
                           <Route path="/dashboard/profil" component={ProfilePage}/>
                           <Route path="/dashboard/poruke" component={MessagesPage}/>
-                          <Route path="/dashboard/poruka" component={MessagePage}/>
+                          <Route path="/dashboard/poruka/:message_id" component={MessagePage}/>
                           <Route path="/dashboard/objave" component={PostsPage}/>
                       </Switch>
                   </DashboardContent>

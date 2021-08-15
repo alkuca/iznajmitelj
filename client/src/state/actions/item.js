@@ -151,3 +151,80 @@ export const deletePost = id => async dispatch => {
         console.error(err.message);
     }
 }
+
+export const rentItem = formData => async dispatch => {
+    const token = localStorage.getItem("token");
+    try {
+        const res = await fetch(
+            "http://localhost:5000/rentedItems/rentItem",
+            {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json",
+                    "token": token
+                },
+                body: JSON.stringify(formData)
+            }
+        );
+        const parseRes = await res.json()
+        if(parseRes){
+            dispatch({
+                type: "RENT_ITEM",
+                payload: parseRes
+            })
+        }
+    } catch (err) {
+        console.error(err.message);
+    }
+}
+
+
+export const getRentedItems = () => async dispatch => {
+    const token = localStorage.getItem("token");
+    try {
+        const res = await fetch(
+            "http://localhost:5000/rentedItems/getRentedItems",
+            {
+                method: "GET",
+                headers: {
+                    "Content-type": "application/json",
+                    "token": token
+                }
+            }
+        );
+        const parseRes = await res.json()
+        if(res.ok){
+            dispatch({
+                type: "GET_RENTED_ITEMS",
+                payload: parseRes
+            })
+        }
+    } catch (err) {
+        console.error(err.message);
+    }
+}
+
+export const getRentedOutItems = () => async dispatch => {
+    const token = localStorage.getItem("token");
+    try {
+        const res = await fetch(
+            "http://localhost:5000/rentedItems/getRentedOutItems",
+            {
+                method: "GET",
+                headers: {
+                    "Content-type": "application/json",
+                    "token": token
+                }
+            }
+        );
+        const parseRes = await res.json()
+        if(res.ok){
+            dispatch({
+                type: "GET_RENTED_OUT_ITEMS",
+                payload: parseRes
+            })
+        }
+    } catch (err) {
+        console.error(err.message);
+    }
+}

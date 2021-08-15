@@ -31,7 +31,16 @@ function ItemsPage () {
             <div className="items-container">
                 { (!itemState.loading ) &&
                     itemState.items.map( item => {
-                        return <ItemCard item_posted={item.item_posted} key={item.item_id} item_id={item.item_id} name={item.item_name} price={item.item_price} state={item.item_state}/>
+                        return <ItemCard
+                            item_posted={item.item_posted}
+                            key={item.item_id}
+                            item_id={item.item_id}
+                            name={item.item_name}
+                            price={item.item_price}
+                            state={item.item_state}
+                            showPricePerDay={true}
+                            showLocation={true}
+                        />
                     })
                 }
             </div>

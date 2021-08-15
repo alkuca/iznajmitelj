@@ -5,7 +5,12 @@ const initialState = {
     allItemsLoading: true,
     itemPosted: false,
     allItems: {},
-    currentItem: {}
+    currentItem: {},
+    rentedItem: {},
+    rentedItems: {},
+    rentedOutItems: {},
+    rentedItemsLoading:true,
+    rentedOutItemsLoading:true
 };
 
 const reducer = (state = initialState, action) => {
@@ -49,6 +54,26 @@ const reducer = (state = initialState, action) => {
         case "REMOVE_POST":{
             return {
                 ...state
+            }
+        }
+        case "RENT_ITEM":{
+            return {
+                ...state,
+                rentedItem: action.payload
+            }
+        }
+        case "GET_RENTED_ITEMS":{
+            return {
+                ...state,
+                rentedItemsLoading: false,
+                rentedItems: action.payload
+            }
+        }
+        case "GET_RENTED_OUT_ITEMS":{
+            return {
+                ...state,
+                rentedOutItemsLoading: false,
+                rentedOutItems: action.payload
             }
         }
         default:

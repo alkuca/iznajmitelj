@@ -12,7 +12,8 @@ import {bindActionCreators} from "redux";
 import {itemActions} from "../state";
 import {useDispatch} from "react-redux";
 
-function ItemCard(props) {
+const ItemCard = props => {
+
     const [postConfirmation, togglePostConfirmation] = useState(false)
     const [deleteConfirmation, toggleDeleteConfirmation] = useState(false)
     const [codeEnterModal, toggleCodeEnterModal] = useState(false)
@@ -46,13 +47,13 @@ function ItemCard(props) {
 
     const postItemAction = async () => {
         await postItem(props.item_id);
-        await getUserItems()
+        getUserItems()
         handlePostClick();
     }
 
     const deletePostAction = async () => {
         await deletePost(props.item_id);
-        await getUserItems()
+        getUserItems()
         handleDeleteClick();
     }
 
@@ -102,8 +103,15 @@ function ItemCard(props) {
                 <div className="data-container">
                     <h1>{props.name}</h1>
                     <Fragment>
-                        <LocationWithIcon state={props.state} detailed={false}/>
-                        <PriceWithTime price={props.price} timeFormat="24h"/>
+                        {props.showLocation &&
+                            <LocationWithIcon state={props.state} detailed={false}/>
+                        }
+                        {props.showPricePerDay &&
+                            <PriceWithTime price={props.price} timeFormat="24h"/>
+                        }
+                        {props.showTotalPrice &&
+                            <p>{props.totalPrice}</p>
+                        }
                     </Fragment>
                     {(waitingCode && window.location.pathname === "/dashboard/unajmljeno") &&
                         <button onClick={handleCodeEnterClick} className="enter-code-button">Unesi kod</button>
@@ -114,8 +122,13 @@ function ItemCard(props) {
                 </div>
             {window.location.pathname === "/dashboard/stvari" &&
             <SettingsDropdown>
-                <SettingDropdownButton className="dropdown-item" buttonAction={handlePostClick} buttonText="Objavi"
-                                       icon="document"/>
+                {!props.item_posted ?
+                    <SettingDropdownButton className="dropdown-item" buttonAction={handlePostClick} buttonText="Objavi"
+                                           icon="document"/>
+                    :
+                    <SettingDropdownButton className="dropdown-item button-disabled" buttonText="Objavi"
+                                           icon="document"/>
+                }
                 <SettingDropdownButton className="dropdown-item red-font" buttonAction={handleDeleteClick}
                                        buttonText="Ukloni" icon="bell red-font"/>
             </SettingsDropdown>

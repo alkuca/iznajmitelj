@@ -36,9 +36,6 @@ const ItemPage = props => {
         getSingeItem(props.match.params.item_id)
     }, []);
 
-
-
-
     return (
         <div>
             {itemState.currentItem[0] &&

@@ -1,6 +1,6 @@
 import React, {useEffect, useRef} from 'react';
 
-const PayPal = () => {
+const PayPal = (props) => {
 
     const paypal = useRef()
 
@@ -13,8 +13,8 @@ const PayPal = () => {
                         {
                             description: "desc",
                             amount: {
-                                currency_code: "USD",
-                                value: 230.00
+                                currency_code: "EUR",
+                                value: props.price
                             }
                         }
                     ]
