@@ -8,7 +8,7 @@ import MapInfo from "./MapInfo";
 import ContactInfo from "./ContactInfo";
 import {useDispatch, useSelector} from "react-redux";
 import {bindActionCreators} from "redux";
-import {itemActions} from "../state";
+import {itemActions, userActions} from "../state";
 import {withRouter} from "react-router-dom";
 
 const ItemPage = props => {
@@ -19,6 +19,7 @@ const ItemPage = props => {
     const userState = useSelector((state) => state.userState)
 
     const {getSingeItem} = bindActionCreators(itemActions, useDispatch())
+    const {getSingleUser} = bindActionCreators(userActions, useDispatch())
 
     const handleRentModalToggle = () => {
         toggleRentModal(!rentModal)
@@ -34,6 +35,7 @@ const ItemPage = props => {
 
     useEffect(() => {
         getSingeItem(props.match.params.item_id)
+            .then(r => getSingleUser(r[0].item_owner))
     }, []);
 
     return (
@@ -94,7 +96,16 @@ const ItemPage = props => {
                              scrollWheelZoom={true}
                     />
                 </div>
-                <ContactInfo/>
+                { userState.singleUser[0] &&
+                    <ContactInfo
+                        email={userState.singleUser[0].user_email}
+                        name={userState.singleUser[0].user_name}
+                        city={userState.singleUser[0].user_city}
+                        street={userState.singleUser[0].user_street}
+                        street_number={userState.singleUser[0].user_street_number}
+
+                    />
+                }
                 {rentModal &&
                 <RentProcess handleModalToggle={handleRentModalToggle}/>
                 }

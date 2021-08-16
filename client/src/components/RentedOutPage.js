@@ -30,6 +30,11 @@ const RentedOutPage = () => {
                             item_id={item.item_id}
                             name={item.item_name}
                             price={item.price_per_day}
+                            codeEntered={item.code_entered}
+                            code={item.confirmation_code}
+                            fullPrice={item.price}
+                            duration={item.duration}
+                            renterName={item.renter_name}
                             showPricePerDay={false}
                             showLocation={false}
                         />

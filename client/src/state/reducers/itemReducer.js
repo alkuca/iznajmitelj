@@ -76,6 +76,11 @@ const reducer = (state = initialState, action) => {
                 rentedOutItems: action.payload
             }
         }
+        case "VERIFY_RENTED_ITEM":{
+            return {
+                ...state
+            }
+        }
         default:
             return state
     }

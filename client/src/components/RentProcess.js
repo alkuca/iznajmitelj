@@ -12,7 +12,7 @@ import {itemActions} from "../state";
 
 function RentProcess (props) {
 
-    const userState = useSelector((state) => state.userState.currentUser)
+    const userState = useSelector((state) => state.userState)
     const itemState = useSelector((state) => state.itemsState)
 
     const {rentItem} = bindActionCreators(itemActions, useDispatch())
@@ -22,6 +22,8 @@ function RentProcess (props) {
         id: "",
         itemOwner: "",
         name: "",
+        renterName:userState.currentUser.user_name,
+        ownerName: userState.singleUser[0].user_name,
         rentType: 0,
         price: "",
         finalPrice: 0,
@@ -52,7 +54,6 @@ function RentProcess (props) {
 
     const rentItemAction = () => {
         rentItem(formData)
-        console.log(formData)
         props.handleModalToggle()
     }
 

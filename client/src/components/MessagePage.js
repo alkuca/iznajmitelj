@@ -1,5 +1,4 @@
 import React, {Fragment, useEffect, useState} from "react";
-import PageTitle from "./PageTitle";
 import NewMessageModal from "./NewMessageModal";
 import {useDispatch, useSelector} from "react-redux";
 import {bindActionCreators} from "redux";
@@ -15,10 +14,6 @@ function MessagePage (props) {
 
     const handleModalToggle = () => {
         toggleMessageModal(!messageModal)
-    }
-
-    const handleSendMessage = () => {
-        console.log("message send")
     }
 
     useEffect(() => {
@@ -39,14 +34,12 @@ function MessagePage (props) {
                 <span>19.03.2021 u 15:42</span>
                 <div className="full-line"/>
                 <div className="message-content">
-                    <h1>Pitanje vezano za trajanje baterija drona</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget
-                        suscipit arcu, at pretium risus. adipiscing elit
-                    </p>
+                    <h1>{messageState.currentMessage[0].message_title}</h1>
+                    <p>{messageState.currentMessage[0].message_text}</p>
                 </div>
                 <button onClick={handleModalToggle}>Odgovori</button>
                 {messageModal &&
-                <NewMessageModal closeModal={handleModalToggle} sendMessage={handleSendMessage}/>
+                <NewMessageModal receiver_id={messageState.currentMessage[0].sender_id} closeModal={handleModalToggle}/>
                 }
             </Fragment>
             }

@@ -362,18 +362,12 @@ button:hover{
   flex-wrap: wrap;
 }
 
-.item-card-container:hover .image-overlay{
-  opacity: 0 !important;
-  transition: 0.3s;
-}
-
 .item-card-container {
   margin: 0 35px 35px 0;
   flex-shrink: 0;
   width: 24%;
   max-width: 280px;
   min-width: 240px;
-  cursor: pointer;
   border-radius: 8px;
   position: relative;
   @include drop_shadow_center;
@@ -399,7 +393,8 @@ button:hover{
       font-weight: 500;
       margin: 5px;
       font-size: 20px;
-      color: #d3e2ff;
+      color: #c6d9ff;
+      text-align: center;
     }
     p:nth-child(2){
       font-size: 25px;
@@ -413,14 +408,18 @@ button:hover{
   }
   .data-container {
     @include center_vertical_column;
-    padding: 10px 20px;
+    padding: 15px 20px;
+    position: relative;
+    text-align: center;
     h1 {
       font-size: 20px;
-      text-align: center;
       margin:0;
       padding: 0 0 8px 0;
       border-bottom: 1px solid #e0e0e0;
       font-weight: 600;
+    }
+    p{
+      margin:6px 0;
     }
   }
   .settings-dropdown-container{
@@ -496,18 +495,25 @@ button:hover{
   }
 }
 
-.detailed-location-container{
-
+.card-status{
+  position: absolute;
+  top:-29px;
+  background: #3C7BFF;
+  padding: 2px 0;
+  width: 100%;
+  border-radius:5px 5px 0 0;
+  font-weight: 600;
+  color: white;
 }
 
 .price-container{
-  @include center_vertical;
+  display: flex;
   h2{
     margin: 0;
     color:#3C7BFF;
   }
   p{
-    margin: 3px 0 0 3px;
+    margin: 7px 0 0 4px !important;
     font-weight: 500;
     color: #828282;
   }
@@ -1185,10 +1191,42 @@ input[type="file"] {
   }
 }
 
+.same-row{
+  display: flex;
+  align-items: center;
+}
+
+.card-renter{
+  margin-top: 5px;
+  p{
+    margin: 0;
+  }
+  p:nth-child(1){
+    font-weight: 500;
+    color: #525252;
+    font-size: 15px;
+  }
+  p:nth-child(2){
+    font-weight: 600;
+    font-size: 20px;
+    color: #3C7BFF;
+    margin-left: 5px;
+  }
+}
+
 .delivery-card:hover{
   border: 2px solid #c6d7ff;
   box-shadow: none;
   background: #f7fbff;
+}
+
+.item-code{
+  color:#3c7bff;
+  font-size: 24px;
+  background: #e2efff;
+  font-weight: 700;
+  padding: 4px 15px;
+  border-radius: 4px;
 }
 
 .item-code-enter{
@@ -1205,7 +1243,7 @@ input[type="file"] {
     font-size: 26px;
   }
   .code-enter-wrapper{
-    margin-top:20px;
+    margin-top:10px;
     @include center_horizontal;
     border:1px solid #3c7bff;
     border-radius: 4px;
@@ -1226,6 +1264,7 @@ input[type="file"] {
         background: transparent;
         width: 172px;
         font-size: 41px;
+        color: #3c7bff;
       }
     }
     .code-input-container, input[type="text"] {
@@ -1241,6 +1280,18 @@ input[type="file"] {
       pointer-events: none;
     }
   }
+  .confirmed{
+    border:1px solid #0fd24b;
+    transition: 0.3s;
+    background: #d4ffe1;
+    animation: pop 0.4s;
+  }
+  .not-confirmed{
+    border:1px solid red;
+    background: #fff0f0;
+    transition: 0.3s;
+    animation: shake 0.4s;
+  }
   p{
     font-weight: 500;
     color: #202020;
@@ -1255,6 +1306,7 @@ input[type="file"] {
     .duration{
       margin-left:5px;
       font-weight: 700;
+      color: #3c7bff;
     }
   }
   .button-container{
@@ -1262,9 +1314,29 @@ input[type="file"] {
   }
 }
 
+@keyframes shake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -2px) rotate(-1deg); }
+  20% { transform: translate(-3px, 0px) rotate(1deg); }
+  30% { transform: translate(3px, 2px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(1deg); }
+  50% { transform: translate(-1px, 2px) rotate(-1deg); }
+  60% { transform: translate(-3px, 1px) rotate(0deg); }
+  70% { transform: translate(3px, 1px) rotate(-1deg); }
+  80% { transform: translate(-1px, -1px) rotate(1deg); }
+  90% { transform: translate(1px, 2px) rotate(0deg); }
+  100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+@keyframes pop {
+  0% { transform: scale(1) }
+  50% { transform: scale(1.1) }
+  100% { transform: scale(1) }
+}
+
 
 .enter-code-button{
-  margin-top: 12px;
+  margin: 12px 0 5px 0;
   background: white;
   border: 2px solid #3c7bff;
   border-radius: 3px;

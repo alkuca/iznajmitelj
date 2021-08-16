@@ -16,10 +16,14 @@ function ItemsPage () {
 
     const itemState = useSelector((state) => state.itemsState)
 
-    const { getUserItems } = bindActionCreators(itemActions, useDispatch())
+    const { getUserItems, getRentedOutItems } = bindActionCreators(itemActions, useDispatch())
 
     useEffect( ()  => {
         getUserItems();
+    }, []);
+
+    useEffect( ()  => {
+        getRentedOutItems();
     }, []);
 
     return (

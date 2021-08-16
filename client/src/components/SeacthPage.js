@@ -33,7 +33,7 @@ const SearchPage = () => {
                     <div className="icon-container">
                         <i className="fi-br-search"/>
                     </div>
-                    <input onChange={(e) => setSearch(e.target.value)} type="text" placeholder="Pretraži proizvode dostupne za unajmiti..."/>
+                    <input onChange={(e) => setSearch(e.target.value)} type="text" placeholder="Pretraži objave..."/>
                 </div>
                 <div className="filters-container">
                     <SelectDropdown selectItems={["Sve","Popularno","Novo"]}/>
@@ -43,7 +43,15 @@ const SearchPage = () => {
                 <div className="items-container">
                     {
                         filteredItems.map( item => {
-                            return <ItemCard key={item.item_id} item_id={item.item_id} name={item.item_name} price={item.item_price} state={item.item_state}/>
+                            return <ItemCard
+                                key={item.item_id}
+                                item_id={item.item_id}
+                                name={item.item_name}
+                                state={item.item_state}
+                                price={item.item_price}
+                                showPricePerDay={true}
+                                showLocation={true}
+                            />
                             })
                     }
                 </div>

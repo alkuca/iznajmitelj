@@ -28,9 +28,13 @@ const RentedPage = () => {
                         return <ItemCard
                             key={item.item_id}
                             item_id={item.item_id}
+                            rented_item_id={item.rented_item_id}
                             name={item.item_name}
+                            codeEntered={item.code_entered}
                             price={item.price_per_day}
-                            showPricePerDay={false}
+                            duration={item.duration}
+                            owner_name={item.owner_name}
+                            showPricePerDay={true}
                             showLocation={false}
                         />
                     })
@@ -41,4 +45,3 @@ const RentedPage = () => {
 }
 
 export default RentedPage;
-

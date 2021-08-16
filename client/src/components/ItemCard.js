@@ -1,4 +1,4 @@
-import React, {Fragment, useState} from "react";
+import React, {Fragment, useEffect, useState} from "react";
 import item from "../images/drone.png";
 import PriceWithTime from "./PriceWithTime";
 import LocationWithIcon from "./LocationWithIcon";
@@ -10,7 +10,7 @@ import {Link, withRouter} from 'react-router-dom';
 import ReturnProcess from "./ReturnProcess";
 import {bindActionCreators} from "redux";
 import {itemActions} from "../state";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
 const ItemCard = props => {
 
@@ -18,9 +18,13 @@ const ItemCard = props => {
     const [deleteConfirmation, toggleDeleteConfirmation] = useState(false)
     const [codeEnterModal, toggleCodeEnterModal] = useState(false)
     const [returnProcessModal, toggleReturnProcessModal] = useState(false)
+    const [rentedStatus, setRentedStatus] = useState(false)
 
-    const waitingCode = false;
-    const waitingReturn = true
+
+    const waitingCode = true;
+    const waitingReturn = false;
+
+    const itemState = useSelector((state) => state.itemsState)
 
     const deleteNote = "Jeste li sigurni da želite trajno izbrisat odabrani proizvod?"
     const postNote = "Klikom na Objavi proizvod postaje vidljiv ostalim korisnicima."
@@ -61,10 +65,15 @@ const ItemCard = props => {
         console.log("item deleted")
     }
 
-    const submitCode = () => {
-        console.log("code submited")
-    }
 
+    useEffect( ()  => {
+        const res = itemState.rentedOutItems.filter(item => item.item_name === "xxx")
+        if(res){
+            setRentedStatus(true)
+        }else{
+            setRentedStatus(false)
+        }
+    }, []);
 
     return (
         <div className="item-card-container">
@@ -73,34 +82,34 @@ const ItemCard = props => {
                     <img src={item} alt="Drone"/>
                     {window.location.pathname === "/dashboard/unajmljeno" &&
                     <div className="image-overlay">
-                        {waitingCode ?
-                            <i className="fi-rr-lock"/>
-                            :
+                        {props.codeEntered ?
                             <Fragment>
                                 <p>Preostalo vremena:</p>
                                 <p>20 sati</p>
                             </Fragment>
+                            :
+                            <i className="fi-rr-lock"/>
                         }
                     </div>
                     }
                     {window.location.pathname === "/dashboard/iznajmljeno" &&
                     <div className="image-overlay">
-                        {waitingCode ?
+                        {props.codeEntered ?
                             <Fragment>
-                                <p>Povratak:</p>
+                                <p>Završava:</p>
                                 <p>20.03.2021</p>
                             </Fragment>
                         :
-                            <Fragment>
-                                <p>Cekanje na unos koda</p>
-                                <p>******</p>
-                            </Fragment>
+                            <p>Cekanje na unos koda od unajmitelja</p>
                         }
                     </div>
                     }
                 </div>
             </Link>
                 <div className="data-container">
+                    {(rentedStatus && window.location.pathname === "/dashboard/stvari") &&
+                    <p className="card-status">IZNAJMLJENO</p>
+                    }
                     <h1>{props.name}</h1>
                     <Fragment>
                         {props.showLocation &&
@@ -112,25 +121,56 @@ const ItemCard = props => {
                         {props.showTotalPrice &&
                             <p>{props.totalPrice}</p>
                         }
+                        {(!props.codeEntered && props.code) &&
+                            <p className="item-code">{props.code}</p>
+                        }
+                        {(props.codeEntered && window.location.pathname === "/dashboard/iznajmljeno") &&
+                            <p className="item-code">Kod unesen</p>
+                        }
+                        {props.renterName &&
+                            <Fragment>
+                                <p>Unajmljeno na {props.duration} dana za {props.fullPrice} Kn</p>
+                                <div className="same-row card-renter">
+                                    <p>Unajmitelj:</p>
+                                    <p>{props.renterName}</p>
+                                </div>
+                            </Fragment>
+                        }
+                        {props.owner_name &&
+                        <Fragment>
+                            <div className="same-row card-renter">
+                                <p>Vlasnik:</p>
+                                <p>{props.owner_name}</p>
+                            </div>
+                        </Fragment>
+                        }
                     </Fragment>
-                    {(waitingCode && window.location.pathname === "/dashboard/unajmljeno") &&
+                    {(!props.codeEntered && window.location.pathname === "/dashboard/unajmljeno") &&
                         <button onClick={handleCodeEnterClick} className="enter-code-button">Unesi kod</button>
                     }
-                    {(waitingReturn && window.location.pathname === "/dashboard/unajmljeno") &&
-                        <button onClick={handleReturnClick} className="enter-code-button">Završi</button>
+                    {(props.codeEntered && window.location.pathname === "/dashboard/unajmljeno") &&
+                        <button onClick={handleReturnClick} className="enter-code-button">Vrati</button>
                     }
                 </div>
+
+            {/* card dropdown shows only on dashboard/stvari and dashboard/objave */}
+
             {window.location.pathname === "/dashboard/stvari" &&
             <SettingsDropdown>
-                {!props.item_posted ?
-                    <SettingDropdownButton className="dropdown-item" buttonAction={handlePostClick} buttonText="Objavi"
-                                           icon="document"/>
+                {props.item_posted || rentedStatus ?
+                    <Fragment>
+                        <SettingDropdownButton className="dropdown-item button-disabled" buttonText="Objavi"
+                                               icon="document"/>
+                        <SettingDropdownButton className="dropdown-item red-font button-disabled" buttonText="Ukloni" icon="bell red-font"/>
+                    </Fragment>
                     :
-                    <SettingDropdownButton className="dropdown-item button-disabled" buttonText="Objavi"
-                                           icon="document"/>
+                    <Fragment>
+                        <SettingDropdownButton className="dropdown-item" buttonAction={handlePostClick} buttonText="Objavi"
+                                               icon="document"/>
+                        <SettingDropdownButton className="dropdown-item red-font" buttonAction={handleDeleteClick}
+                                               buttonText="Ukloni" icon="bell red-font"/>
+                    </Fragment>
                 }
-                <SettingDropdownButton className="dropdown-item red-font" buttonAction={handleDeleteClick}
-                                       buttonText="Ukloni" icon="bell red-font"/>
             </SettingsDropdown>
             }
             {window.location.pathname === "/dashboard/objave" &&
@@ -139,6 +179,9 @@ const ItemCard = props => {
                                        buttonText="Ukloni Objavu" icon="eye-crossed red-font"/>
             </SettingsDropdown>
             }
+
+            {/* confirmation modals */}
+
             {postConfirmation &&
             <ConfirmationModal note={postNote} icon="fi-br-file-add color-blue" actionName="Objavi" buttonText="Objavi"
                                type="positive" confirmAction={postItemAction} closeModal={handlePostClick}/>
@@ -154,7 +197,12 @@ const ItemCard = props => {
                                closeModal={handleDeleteClick}/>
             }
             {codeEnterModal &&
-            <ItemCodeEnter confirmAction={submitCode} closeModal={handleCodeEnterClick}/>
+            <ItemCodeEnter
+                closeModal={handleCodeEnterClick}
+                item_name={props.name}
+                duration={props.duration}
+                rented_item_id={props.rented_item_id}
+            />
             }
             {returnProcessModal &&
             <ReturnProcess handleModalToggle={handleReturnClick}/>
