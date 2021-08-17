@@ -10,8 +10,8 @@ function Sidebar () {
                         {/* <LinkWithIcon text="Nadzorna ploča" icon="home"/> */}
                         <LinkWithIcon text="Moje stvari" icon="box" goTo="/dashboard/stvari"/>
                         <LinkWithIcon text="Moje objave" icon="document" goTo="/dashboard/objave"/>
-                        <LinkWithIcon text="Unajmljeno" icon="box" goTo="/dashboard/unajmljeno"/>
-                        <LinkWithIcon text="Iznajmljeno" icon="box" goTo="/dashboard/iznajmljeno"/>
+                        <LinkWithIcon text="Unajmljeno" icon="arrow-small-down" goTo="/dashboard/unajmljeno"/>
+                        <LinkWithIcon text="Iznajmljeno" icon="arrow-small-up" goTo="/dashboard/iznajmljeno"/>
                         <LinkWithIcon text="Poruke" icon="comment-alt" goTo="/dashboard/poruke"/>
                     </div>
                 </div>

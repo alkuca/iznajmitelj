@@ -191,15 +191,15 @@ const ItemCard = props => {
                 {props.item_posted ?
                     <Fragment>
                         <SettingDropdownButton className="dropdown-item button-disabled" buttonText="Objavi"
-                                               icon="document"/>
-                        <SettingDropdownButton className="dropdown-item red-font button-disabled" buttonText="Ukloni" icon="bell red-font"/>
+                                               icon="eye"/>
+                        <SettingDropdownButton className="dropdown-item red-font button-disabled" buttonText="Ukloni" icon="trash red-font"/>
                     </Fragment>
                     :
                     <Fragment>
                         <SettingDropdownButton className="dropdown-item" buttonAction={handlePostClick} buttonText="Objavi"
-                                               icon="document"/>
+                                               icon="eye"/>
                         <SettingDropdownButton className="dropdown-item red-font" buttonAction={handleDeleteClick}
-                                               buttonText="Ukloni" icon="bell red-font"/>
+                                               buttonText="Ukloni" icon="trash red-font"/>
                     </Fragment>
                 }
             </SettingsDropdown>
@@ -207,7 +207,7 @@ const ItemCard = props => {
             {window.location.pathname === "/dashboard/objave" &&
             <SettingsDropdown>
                 <SettingDropdownButton className="dropdown-item red-font" buttonAction={handleDeleteClick}
-                                       buttonText="Ukloni Objavu" icon="eye-crossed red-font"/>
+                                       buttonText="Ukloni objavu" icon="eye-crossed red-font"/>
             </SettingsDropdown>
             }
 
@@ -223,7 +223,7 @@ const ItemCard = props => {
                                closeModal={handleDeleteClick}/>
             }
             {(deleteConfirmation && window.location.pathname === "/dashboard/objave") &&
-            <ConfirmationModal note={deleteNote} icon="fi-br-trash color-red" actionName="Ukloni Objavu"
+            <ConfirmationModal note={deleteNote} icon="fi-br-trash color-red" actionName="Ukloni objavu"
                                buttonText="Ukloni" type="negative" confirmAction={deletePostAction}
                                closeModal={handleDeleteClick}/>
             }

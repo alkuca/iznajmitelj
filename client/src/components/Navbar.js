@@ -1,6 +1,6 @@
 import React, {useState, useRef, useEffect, Fragment} from "react";
 import avatar_icon from "../images/icons/avatar.svg"
-import logo from "../images/logo4.svg"
+import logo from "../images/LogoF.svg"
 import NavbarDropdown from "./NavbarDropdown";
 import classnames from "classnames";
 import {Link, useHistory, useLocation} from "react-router-dom";

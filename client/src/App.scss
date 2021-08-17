@@ -93,7 +93,10 @@ button:hover{
   display: flex;
   height:66px
 }
-
+.icon-large{
+  color:#3C7BFF;
+  font-size: 40px;
+}
 .logo-container {
   @include center_vertical;
   width: 250px;
@@ -101,8 +104,8 @@ button:hover{
   height: 66px;
   img {
     margin-left: 45px;
-    margin-top: 6px;
-    width: 110px;
+    margin-top: 14px;
+    width: 125px;
     cursor: pointer;
     transition: 0.2s;
   }
@@ -1166,6 +1169,9 @@ input[type="file"] {
     background: #c6c6c6;
     margin: 20px 0 20px 0;
   }
+  time{
+    font-weight: 600;
+  }
   .message-content{
     padding:15px 20px 20px 20px;
     width:fit-content;
@@ -1358,6 +1364,26 @@ input[type="file"] {
   0% { transform: scale(1) }
   50% { transform: scale(1.1) }
   100% { transform: scale(1) }
+}
+
+.loader-container{
+  display: flex;
+  position: absolute;
+  top: calc(50% - 60px);
+  left: 50%
+}
+
+.loader{
+  width: 40px;
+  animation-name: rotate;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes rotate{
+  from{ transform: rotate(-360deg); }
+  to{ transform: rotate(360deg); }
 }
 
 

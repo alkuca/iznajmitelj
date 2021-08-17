@@ -19,6 +19,7 @@ const NewMessageModal = props => {
         sender_name: userState.user_name,
         sender_id: userState.user_id,
         receiver_id: props.receiver_id,
+        receiver_name: props.receiver_name
     });
     const onFormChange = e => setFormData({
         ...formData, [e.target.name]: e.target.value
@@ -26,6 +27,7 @@ const NewMessageModal = props => {
 
     const sendMessageAction = () => {
         sendMessage(formData)
+        props.closeModal()
     }
 
     return (

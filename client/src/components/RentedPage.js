@@ -14,7 +14,7 @@ const RentedPage = () => {
 
     useEffect( ()  => {
         getRentedItems();
-    }, []);
+    }, [itemState]);
 
     return (
         <div className="rented-page-container">

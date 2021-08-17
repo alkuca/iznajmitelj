@@ -25,10 +25,6 @@ const ItemPage = props => {
         toggleRentModal(!rentModal)
     }
 
-    const sendMessage = () => {
-        console.log("message send")
-    }
-
     const handleNewMessageClick = () => {
         toggleNewMessageModal(!newMessageModal)
     }
@@ -71,10 +67,12 @@ const ItemPage = props => {
                         </Fragment>
                         }
                         <Fragment>
-                            {itemState.currentItem[0].item_posted &&
+                            {itemState.currentItem[0].item_posted && (itemState.currentItem[0].item_owner !== userState.currentUser.user_id) &&
                             <button onClick={handleRentModalToggle}>Unajmi</button>
                             }
+                            {itemState.currentItem[0].item_owner !== userState.currentUser.user_id &&
                             <button onClick={handleNewMessageClick}>Poruka</button>
+                            }
                         </Fragment>
                     </div>
                 </div>
@@ -111,7 +109,10 @@ const ItemPage = props => {
                 <RentProcess handleModalToggle={handleRentModalToggle}/>
                 }
                 {newMessageModal &&
-                <NewMessageModal sendMessage={sendMessage} closeModal={handleNewMessageClick}/>
+                <NewMessageModal
+                    receiver_name={userState.singleUser[0].user_name}
+                    receiver_id={userState.singleUser[0].user_id}
+                    closeModal={handleNewMessageClick}/>
                 }
             </div>
             }

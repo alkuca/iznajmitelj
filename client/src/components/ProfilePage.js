@@ -6,15 +6,21 @@ import {useDispatch, useSelector} from "react-redux";
 import {bindActionCreators} from "redux";
 import {userActions} from "../state";
 import MapInfo from "./MapInfo";
+import NewMessageModal from "./NewMessageModal";
 
 const ProfilePage = props => {
     const [editModal, toggleEditModal] = useState(false);
+    const [newMessageModal, toggleNewMessageModal] = useState(false)
 
     const {getSingleUser} = bindActionCreators(userActions, useDispatch())
     const userState = useSelector((state) => state.userState)
 
     const handleModalToggle = () => {
         toggleEditModal(!editModal)
+    }
+
+    const handleMessageModalToggle = () => {
+        toggleNewMessageModal(!newMessageModal)
     }
 
     useEffect(() => {
@@ -29,7 +35,7 @@ const ProfilePage = props => {
                 {userState.singleUser[0].user_id === userState.currentUser.user_id ?
                     <PageTitle renderButton={true} buttonText="Uredi" buttonAction={handleModalToggle} title="Moj Profil"/>
                     :
-                    <PageTitle renderButton={false} title={`Profil od ${userState.singleUser[0].user_name}`}/>
+                    <PageTitle renderButton={true} buttonText="Poruka" buttonAction={handleMessageModalToggle} title={`Profil od ${userState.singleUser[0].user_name}`}/>
                 }
                 <div className="contact-container">
                     <img src={avatar_icon} alt="avatar"/>
@@ -79,6 +85,12 @@ const ProfilePage = props => {
 
                 {editModal &&
                     <EditProfileModal handleModalToggle={handleModalToggle}/>
+                }
+                {newMessageModal &&
+                <NewMessageModal
+                    receiver_name={userState.singleUser[0].user_name}
+                    receiver_id={userState.singleUser[0].user_id}
+                    closeModal={handleMessageModalToggle}/>
                 }
             </Fragment>
             }

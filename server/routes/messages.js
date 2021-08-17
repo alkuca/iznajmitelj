@@ -43,12 +43,12 @@ POST REQUEST - /sendMessage
  */
 router.post("/sendMessage", authorization, async (req, res) => {
     const user_id = req.user.id;
-    const {receiver_id, message_title, message_text, sender_name} = req.body;
+    const {receiver_id, message_title, message_text, sender_name, receiver_name} = req.body;
 
     try {
         const newMessage = await pool.query(
-            "INSERT INTO messages (sender_id, receiver_id, message_title, message_text, sender_name) VALUES ($1,$2,$3,$4,$5) RETURNING  *", [
-                user_id, receiver_id, message_title, message_text, sender_name]
+            "INSERT INTO messages (sender_id, receiver_id, message_title, message_text, sender_name, receiver_name) VALUES ($1,$2,$3,$4,$5,$6) RETURNING  *", [
+                user_id, receiver_id, message_title, message_text, sender_name, receiver_name]
         );
 
         res.json(newMessage.rows);

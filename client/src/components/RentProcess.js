@@ -57,7 +57,6 @@ function RentProcess (props) {
 
     const rentItemAction = () => {
         rentItem(formData)
-        props.handleModalToggle()
         history.push("/dashboard/unajmljeno")
     }
 
@@ -125,6 +124,7 @@ function RentProcess (props) {
                 }
                 {step === 3 &&
                 <div className="code-info-container">
+                    <i className="fi-rr-exclamation icon-large"/>
                     <h1>Jedinstveni kod od iznajmitelja</h1>
                     <div className="code-info">
                         <p>Prilikom preuzimanja ili dostave proizvoda dobit ćes jedinstveni kod kojeg je potrebno unjet kako bi zapoceo proces iznajmljivanja</p>
