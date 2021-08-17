@@ -24,7 +24,7 @@ const RentedOutPage = () => {
             </div>
             <div className="items-container">
                 { (!itemState.rentedOutItemsLoading ) &&
-                    itemState.rentedOutItems.map( item => {
+                    itemState.rentedOutItems.filter(item => item.renting_status === true).map( item => {
                         return <ItemCard
                             key={item.item_id}
                             item_id={item.item_id}
@@ -37,6 +37,7 @@ const RentedOutPage = () => {
                             renterName={item.renter_name}
                             showPricePerDay={false}
                             showLocation={false}
+                            renting_status={item.renting_status}
                         />
                     })
                 }

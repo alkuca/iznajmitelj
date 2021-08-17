@@ -22,6 +22,30 @@ export const getAllItems = () => async dispatch => {
     }
 }
 
+export const getAllPosts = () => async dispatch => {
+    try {
+        const res = await fetch(
+            "http://localhost:5000/items/getAllPosts",
+            {
+                method: "GET",
+                headers: {
+                    "Content-type": "application/json"
+                }
+            }
+        );
+        const parseRes = await res.json()
+        if(res.ok){
+            dispatch({
+                type: "GET_ALL_POSTS",
+                payload: parseRes
+            })
+            return(parseRes)
+        }
+    } catch (err) {
+        console.error(err.message);
+    }
+}
+
 export const getSingeItem = item_id => async dispatch => {
     try {
         const res = await fetch(
@@ -122,6 +146,29 @@ export const postItem = id => async dispatch => {
             dispatch({
                 type: "POST_ITEM"
             })
+        }
+    } catch (err) {
+        console.error(err.message);
+    }
+}
+
+export const finishRentingByOwner = id => async dispatch => {
+    try {
+        const res = await fetch(
+            `http://localhost:5000/renteditems/finishRenting/${id}`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json"
+                }
+            }
+        );
+        const parseRes = await res.json()
+        if(res){
+            dispatch({
+                type: "FINISH_RENTING"
+            })
+            return parseRes
         }
     } catch (err) {
         console.error(err.message);

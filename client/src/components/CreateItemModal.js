@@ -7,9 +7,9 @@ import {useDispatch, useSelector} from "react-redux";
 import {bindActionCreators} from "redux";
 import {itemActions} from "../state";
 
-function CreateItemModal (props)  {
+const CreateItemModal = props => {
     const [mainImage, setMainImage] = useState(null)
-
+    const [step, setStep] = useState(1)
 
     const currentUser = useSelector((state) => state.userState.currentUser)
 
@@ -43,14 +43,24 @@ function CreateItemModal (props)  {
         }
     }
 
+    const moveStep = () => {
+        setStep(step + 1)
+    }
+
     return (
         <InputModal>
             <div className="add-item-modal-container">
+                {step === 1 &&
                 <div className="data-input-container">
-                    <InputField required={"required"} className="input-container" type="text" label="Naziv proizvoda" name="name" onChange={e => onFormChange(e)}/>
-                    <InputField required={"required"} className="input-container number-input" type="number" label="Cijena (kn/24h)" name="price" onChange={e => onFormChange(e)}/>
-                    <InputTextarea required={"required"} rows={4} className="textarea-container" label="Opis" name="description" onChange={e => onFormChange(e)}/>
+                    <InputField required={"required"} className="input-container" type="text" label="Naziv proizvoda"
+                                name="name" onChange={e => onFormChange(e)}/>
+                    <InputField required={"required"} className="input-container number-input" type="number"
+                                label="Cijena (kn/24h)" min={1} name="price" onChange={e => onFormChange(e)}/>
+                    <InputTextarea required={"required"} rows={4} className="textarea-container" label="Opis"
+                                   name="description" onChange={e => onFormChange(e)}/>
                 </div>
+                }
+                {step === 2 &&
                 <div className="image-input-container">
                     <div className="main-image-container">
                         { mainImage ?
@@ -62,9 +72,14 @@ function CreateItemModal (props)  {
                         </label>
                     </div>
                 </div>
+                }
             </div>
             <div className="button-container">
-                <button onClick={createItemAction} className="confirm">Dodaj</button>
+                {step !== 2 ?
+                    <button onClick={moveStep} className="confirm">Dalje</button>
+                    :
+                    <button onClick={createItemAction} className="confirm">Dodaj</button>
+                }
                 <button onClick={props.closeModal} className="cancel">Odustani</button>
             </div>
         </InputModal>

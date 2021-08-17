@@ -40,3 +40,30 @@ export const getSingleUser = user_id => async dispatch => {
         console.error(err.message);
     }
 }
+
+export const editProfile = formData => async dispatch => {
+    const token = localStorage.getItem("token");
+    try {
+        const res = await fetch(
+            "http://localhost:5000/profile/editProfile",
+            {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json",
+                    "token": token
+                },
+                body: JSON.stringify(formData)
+            }
+        );
+        const parseRes = await res.json()
+        if(res){
+            dispatch({
+                type: "EDIT_PROFILE",
+                payload: parseRes
+            })
+            return(parseRes)
+        }
+    } catch (err) {
+        console.error(err.message);
+    }
+}

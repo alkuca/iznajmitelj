@@ -39,7 +39,10 @@ function MessagePage (props) {
                 </div>
                 <button onClick={handleModalToggle}>Odgovori</button>
                 {messageModal &&
-                <NewMessageModal receiver_id={messageState.currentMessage[0].sender_id} closeModal={handleModalToggle}/>
+                <NewMessageModal
+                    receiver_id={messageState.currentMessage[0].sender_id}
+                    receiver_name={messageState.currentMessage[0].sender_name}
+                    closeModal={handleModalToggle}/>
                 }
             </Fragment>
             }

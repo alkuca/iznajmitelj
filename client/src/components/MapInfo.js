@@ -1,8 +1,10 @@
 import React from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import ChangeMapView from "./ChangeMapView"
 
 
-const MapInfo = (props) => {
+const MapInfo = props => {
+
     return (
         <MapContainer center={[props.long, props.lat]} zoom={props.zoom} scrollWheelZoom={props.scrollWheel}>
             <TileLayer
@@ -14,6 +16,7 @@ const MapInfo = (props) => {
                     A pretty CSS3 popup. <br /> Easily customizable.
                 </Popup>
             </Marker>
+            <ChangeMapView coords={[props.long, props.lat]} />
         </MapContainer>
     );
 };

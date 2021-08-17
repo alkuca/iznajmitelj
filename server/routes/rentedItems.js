@@ -74,7 +74,7 @@ router.post("/verifyCode", async (req, res) => {
         const verifyCode = await pool.query("SELECT confirmation_code FROM rented_items WHERE rented_item_id=$1", [rented_item_id]);
 
         if(verifyCode.rows[0].confirmation_code === code) {
-            await pool.query("UPDATE rented_items SET code_entered=true WHERE rented_item_id=$1",[rented_item_id]);
+            await pool.query("UPDATE rented_items SET code_entered=true, time_rent_started=NOW()  WHERE rented_item_id=$1",[rented_item_id]);
             res.json(true);
         }else {
             res.json(false);
@@ -85,6 +85,23 @@ router.post("/verifyCode", async (req, res) => {
     }
 });
 
+
+/*
+Sets item renting_status to true
+PATCH REQUEST - /finishRenting
+ */
+router.post("/finishRenting/:id", async (req, res) => {
+    const id = req.params.id;
+
+    try {
+        await pool.query("UPDATE rented_items SET renting_status=false WHERE item_id=$1",[id]);
+
+        res.json(true);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Server error");
+    }
+});
 
 
 module.exports = router;

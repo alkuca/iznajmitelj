@@ -8,7 +8,6 @@ import classnames from "classnames";
 const ItemCodeEnter = props => {
 
     const {verifyRentedItem,getRentedItems} = bindActionCreators(itemActions, useDispatch())
-
     const [code, setCode] = useState("");
     const [codeVerified, setCodeVerified] = useState(null)
 

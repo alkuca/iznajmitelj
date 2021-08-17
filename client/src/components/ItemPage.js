@@ -64,17 +64,18 @@ const ItemPage = props => {
                     </div>
                     <p className="item-description">{itemState.currentItem[0].item_description}</p>
                     <div className="button-container flex-start">
-                        {itemState.currentItem[0].item_owner === userState.currentUser.user_id ?
-                            (<Fragment>
-                                <button>Uredi</button>
-                                <button className="color-red border-red">Ukloni</button>
-                            </Fragment>)
-                            :
-                            (<Fragment>
-                                <button onClick={handleRentModalToggle}>Unajmi</button>
-                                <button onClick={handleNewMessageClick}>Poruka</button>
-                            </Fragment>)
+                        {itemState.currentItem[0].item_owner === userState.currentUser.user_id && !itemState.currentItem[0].item_posted &&
+                        <Fragment>
+                            <button>Uredi</button>
+                            <button className="color-red border-red">Ukloni</button>
+                        </Fragment>
                         }
+                        <Fragment>
+                            {itemState.currentItem[0].item_posted &&
+                            <button onClick={handleRentModalToggle}>Unajmi</button>
+                            }
+                            <button onClick={handleNewMessageClick}>Poruka</button>
+                        </Fragment>
                     </div>
                 </div>
                 {/*

@@ -11,6 +11,7 @@ import ReturnProcess from "./ReturnProcess";
 import {bindActionCreators} from "redux";
 import {itemActions} from "../state";
 import {useDispatch, useSelector} from "react-redux";
+import moment from "moment";
 
 const ItemCard = props => {
 
@@ -18,18 +19,14 @@ const ItemCard = props => {
     const [deleteConfirmation, toggleDeleteConfirmation] = useState(false)
     const [codeEnterModal, toggleCodeEnterModal] = useState(false)
     const [returnProcessModal, toggleReturnProcessModal] = useState(false)
-    const [rentedStatus, setRentedStatus] = useState(false)
-
-
-    const waitingCode = true;
-    const waitingReturn = false;
+    const [timePassed, setTimePassed] = useState(false)
 
     const itemState = useSelector((state) => state.itemsState)
 
     const deleteNote = "Jeste li sigurni da želite trajno izbrisat odabrani proizvod?"
     const postNote = "Klikom na Objavi proizvod postaje vidljiv ostalim korisnicima."
 
-    const { postItem, deletePost, getUserItems } = bindActionCreators(itemActions, useDispatch())
+    const { postItem, deletePost, getUserItems, finishRentingByOwner,getRentedOutItems } = bindActionCreators(itemActions, useDispatch())
 
     const handlePostClick = () => {
         togglePostConfirmation(!postConfirmation)
@@ -65,15 +62,27 @@ const ItemCard = props => {
         console.log("item deleted")
     }
 
+    const finishRentingByOwnerAction = () => {
+        finishRentingByOwner(props.item_id)
+            .then(r => {
+                if(r){
+                    getRentedOutItems()
+                }
+            })
+    }
 
-    useEffect( ()  => {
-        const res = itemState.rentedOutItems.filter(item => item.item_name === "xxx")
-        if(res){
-            setRentedStatus(true)
+    const start_date  = moment(props.time_rent_started);
+    const new_date = moment(start_date);
+    const date_rent_ends = new_date.add(props.duration, 'days');
+
+    useEffect(() => {
+        if(moment().isAfter(date_rent_ends)){
+            setTimePassed(true)
         }else{
-            setRentedStatus(false)
+            setTimePassed(false)
         }
     }, []);
+
 
     return (
         <div className="item-card-container">
@@ -84,8 +93,17 @@ const ItemCard = props => {
                     <div className="image-overlay">
                         {props.codeEntered ?
                             <Fragment>
-                                <p>Preostalo vremena:</p>
-                                <p>20 sati</p>
+                                {timePassed ?
+                                    <Fragment>
+                                        <p>NAJAM ZAVRŠIO</p>
+                                        <p>Vrati proizvod</p>
+                                    </Fragment>
+                                    :
+                                    <Fragment>
+                                        <p>Datum zavšetka najma:</p>
+                                        <time>{date_rent_ends.format("DD.MM.YYYY")}</time>
+                                    </Fragment>
+                                }
                             </Fragment>
                             :
                             <i className="fi-rr-lock"/>
@@ -96,10 +114,18 @@ const ItemCard = props => {
                     <div className="image-overlay">
                         {props.codeEntered ?
                             <Fragment>
-                                <p>Završava:</p>
-                                <p>20.03.2021</p>
+                                {timePassed ?
+                                    <Fragment>
+                                        <p>NAJAM ZAVRŠIO</p>
+                                    </Fragment>
+                                    :
+                                    <Fragment>
+                                        <p>Datum zavšetka najma:</p>
+                                        <time>{date_rent_ends.format("DD.MM.YYYY")}</time>
+                                    </Fragment>
+                                }
                             </Fragment>
-                        :
+                            :
                             <p>Cekanje na unos koda od unajmitelja</p>
                         }
                     </div>
@@ -107,9 +133,6 @@ const ItemCard = props => {
                 </div>
             </Link>
                 <div className="data-container">
-                    {(rentedStatus && window.location.pathname === "/dashboard/stvari") &&
-                    <p className="card-status">IZNAJMLJENO</p>
-                    }
                     <h1>{props.name}</h1>
                     <Fragment>
                         {props.showLocation &&
@@ -127,6 +150,9 @@ const ItemCard = props => {
                         {(props.codeEntered && window.location.pathname === "/dashboard/iznajmljeno") &&
                             <p className="item-code">Kod unesen</p>
                         }
+                        {(props.codeEntered && window.location.pathname === "/dashboard/iznajmljeno" && !props.renting_status) &&
+                        <p className="item-code">ZAVŠRENO</p>
+                        }
                         {props.renterName &&
                             <Fragment>
                                 <p>Unajmljeno na {props.duration} dana za {props.fullPrice} Kn</p>
@@ -134,13 +160,18 @@ const ItemCard = props => {
                                     <p>Unajmitelj:</p>
                                     <p>{props.renterName}</p>
                                 </div>
+                                {!timePassed &&
+                                    <button onClick={finishRentingByOwnerAction} className="enter-code-button">Zavrsi</button>
+                                }
                             </Fragment>
                         }
                         {props.owner_name &&
                         <Fragment>
                             <div className="same-row card-renter">
-                                <p>Vlasnik:</p>
-                                <p>{props.owner_name}</p>
+                                <p>VLASNIK:</p>
+                                <Link to={`/dashboard/profil/${props.owner_id}`}>
+                                    {props.owner_name}
+                                </Link>
                             </div>
                         </Fragment>
                         }
@@ -149,7 +180,7 @@ const ItemCard = props => {
                         <button onClick={handleCodeEnterClick} className="enter-code-button">Unesi kod</button>
                     }
                     {(props.codeEntered && window.location.pathname === "/dashboard/unajmljeno") &&
-                        <button onClick={handleReturnClick} className="enter-code-button">Vrati</button>
+                        <button onClick={handleReturnClick} className="enter-code-button">{timePassed ? "Vrati" : "Vrati Ranije" }</button>
                     }
                 </div>
 
@@ -157,7 +188,7 @@ const ItemCard = props => {
 
             {window.location.pathname === "/dashboard/stvari" &&
             <SettingsDropdown>
-                {props.item_posted || rentedStatus ?
+                {props.item_posted ?
                     <Fragment>
                         <SettingDropdownButton className="dropdown-item button-disabled" buttonText="Objavi"
                                                icon="document"/>

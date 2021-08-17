@@ -5,6 +5,7 @@ import InputTextarea from "./InputTextarea";
 import {useDispatch, useSelector} from "react-redux";
 import {bindActionCreators} from "redux";
 import {messageActions} from "../state";
+import {Link} from "react-router-dom";
 
 const NewMessageModal = props => {
 
@@ -24,14 +25,20 @@ const NewMessageModal = props => {
     });
 
     const sendMessageAction = () => {
-        console.log(formData)
+        sendMessage(formData)
     }
 
     return (
         <InputModal>
+            <div className="sender-title">
+                <p className="weight-500">Prima:</p>
+                <Link to="/dashboard/profile">
+                    <p>{props.receiver_name}</p>
+                </Link>
+            </div>
             <div className="new-message-modal-container">
-                <InputField className="input-container" type="text" label="Naslov" name="title" onChange={e => onFormChange(e)}/>
-                <InputTextarea id="opis" name="text" rows={4} className="textarea-container" label="Poruka" onChange={e => onFormChange(e)}/>
+                <InputField className="input-container" type="text" label="Naslov" name="message_title" onChange={e => onFormChange(e)}/>
+                <InputTextarea id="opis" name="message_text" rows={4} className="textarea-container" label="Poruka" onChange={e => onFormChange(e)}/>
             </div>
             <div className="button-container">
                 <button onClick={sendMessageAction} className="confirm">Pošalji</button>

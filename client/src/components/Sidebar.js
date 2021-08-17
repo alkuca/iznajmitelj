@@ -11,7 +11,7 @@ function Sidebar () {
                         <LinkWithIcon text="Moje stvari" icon="box" goTo="/dashboard/stvari"/>
                         <LinkWithIcon text="Moje objave" icon="document" goTo="/dashboard/objave"/>
                         <LinkWithIcon text="Unajmljeno" icon="box" goTo="/dashboard/unajmljeno"/>
-                        <LinkWithIcon text="iznajmljeno" icon="box" goTo="/dashboard/iznajmljeno"/>
+                        <LinkWithIcon text="Iznajmljeno" icon="box" goTo="/dashboard/iznajmljeno"/>
                         <LinkWithIcon text="Poruke" icon="comment-alt" goTo="/dashboard/poruke"/>
                     </div>
                 </div>

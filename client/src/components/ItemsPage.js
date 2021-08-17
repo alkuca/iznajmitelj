@@ -34,7 +34,7 @@ function ItemsPage () {
             </div>
             <div className="items-container">
                 { (!itemState.loading ) &&
-                    itemState.items.map( item => {
+                    itemState.items.filter(item => item.item_posted === false).map( item => {
                         return <ItemCard
                             item_posted={item.item_posted}
                             key={item.item_id}

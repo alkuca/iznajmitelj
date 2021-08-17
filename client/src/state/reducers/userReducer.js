@@ -15,6 +15,10 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 singleUser: action.payload
             }
+        case "EDIT_PROFILE":
+            return {
+                ...state
+            }
         default:
             return state
     }

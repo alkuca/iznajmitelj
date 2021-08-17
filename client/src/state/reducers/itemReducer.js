@@ -5,6 +5,7 @@ const initialState = {
     allItemsLoading: true,
     itemPosted: false,
     allItems: {},
+    allPosts: {},
     currentItem: {},
     rentedItem: {},
     rentedItems: {},
@@ -20,6 +21,12 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 allItems: action.payload,
                 allItemsLoading: false
+            }
+        }
+        case "GET_ALL_POSTS":{
+            return {
+                ...state,
+                allPosts: action.payload,
             }
         }
         case "GET_SINGLE_ITEM":{
@@ -77,6 +84,11 @@ const reducer = (state = initialState, action) => {
             }
         }
         case "VERIFY_RENTED_ITEM":{
+            return {
+                ...state
+            }
+        }
+        case "FINISH_RENTING":{
             return {
                 ...state
             }

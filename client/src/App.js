@@ -66,7 +66,7 @@ function App() {
                           <Route path="/dashboard/unajmljeno" component={RentedPage}/>
                           <Route path="/dashboard/iznajmljeno" component={RentedOutPage}/>
                           <Route path="/dashboard/pomoc" component={HelpPage}/>
-                          <Route path="/dashboard/profil" component={ProfilePage}/>
+                          <Route path="/dashboard/profil/:user_id" component={ProfilePage}/>
                           <Route path="/dashboard/poruke" component={MessagesPage}/>
                           <Route path="/dashboard/poruka/:message_id" component={MessagePage}/>
                           <Route path="/dashboard/objave" component={PostsPage}/>

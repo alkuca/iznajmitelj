@@ -1,12 +1,16 @@
-import React, {useState, useRef, useEffect} from "react";
+import React, {useState, useRef, useEffect, Fragment} from "react";
 import avatar_icon from "../images/icons/avatar.svg"
 import logo from "../images/logo4.svg"
 import NavbarDropdown from "./NavbarDropdown";
 import classnames from "classnames";
-import {Link} from "react-router-dom";
+import {Link, useHistory, useLocation} from "react-router-dom";
 import {useSelector} from "react-redux";
 
-function Navbar ({setAuth}) {
+const Navbar = ({setAuth}) => {
+    const [search, setSearch] = useState("")
+    const [searchVisibility, setSearchVisibility] = useState(true)
+    const location = useLocation();
+    const history = useHistory();
     const [dropdown, toggleDropdown] = useState(false)
     const ref = useRef(null);
     const ref2 = useRef(null)
@@ -30,6 +34,25 @@ function Navbar ({setAuth}) {
         }
     };
 
+    const handleSubmit = (e) => {
+        if (e.key === 'Enter') {
+            history.push({
+                pathname: '/dashboard/trazi',
+                search: search
+            });
+        }
+    }
+
+    useEffect(() => {
+        if(location.pathname === "/dashboard/trazi"){
+            setSearchVisibility(false)
+        }else{
+            setSearch("")
+            setSearchVisibility(true)
+        }
+    }, [location]);
+
+
     const userState = useSelector((state) => state.userState)
 
     useEffect(() => {
@@ -49,8 +72,18 @@ function Navbar ({setAuth}) {
             </div>
             <div className="search-container">
                 <div className="inner-container">
-                    <i className="fi-br-search"/>
-                    <input type="text" placeholder="Pretraži..."/>
+                    {searchVisibility &&
+                        <Fragment>
+                            <i className="fi-br-search"/>
+                            <input
+                                type="text"
+                                placeholder="Pretraži..."
+                                value={search}
+                                onChange={event => setSearch(event.target.value)}
+                                onKeyPress={event => handleSubmit(event)}
+                            />
+                        </Fragment>
+                    }
                 </div>
             </div>
             <div className="navbar-menu-container">

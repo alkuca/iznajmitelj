@@ -19,6 +19,21 @@ router.get("/getAllItems", async (req, res) => {
 });
 
 /*
+Get all posts
+GET REQUEST - /getAllPosts
+ */
+router.get("/getAllPosts", async (req, res) => {
+    try {
+        const posts = await pool.query("SELECT * FROM items WHERE item_posted = true");
+
+        res.json(posts.rows);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Server error");
+    }
+});
+
+/*
 Get single item
 GET REQUEST - /getSingleItem
  */

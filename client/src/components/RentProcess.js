@@ -9,11 +9,14 @@ import PayPal from "./PayPal";
 import {useDispatch, useSelector} from "react-redux";
 import {bindActionCreators} from "redux";
 import {itemActions} from "../state";
+import {useHistory} from "react-router-dom";
 
 function RentProcess (props) {
 
     const userState = useSelector((state) => state.userState)
     const itemState = useSelector((state) => state.itemsState)
+
+    const history = useHistory();
 
     const {rentItem} = bindActionCreators(itemActions, useDispatch())
 
@@ -55,6 +58,7 @@ function RentProcess (props) {
     const rentItemAction = () => {
         rentItem(formData)
         props.handleModalToggle()
+        history.push("/dashboard/unajmljeno")
     }
 
     useEffect(() => {
