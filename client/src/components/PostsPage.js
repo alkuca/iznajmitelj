@@ -19,9 +19,6 @@ const PostsPage = () => {
     return (
         <div className="posts-page-container">
             <PageTitle renderButton={false} title="Moje Objave"/>
-            <div className="filter-container">
-                <SelectDropdown selectItems={["Sve", "Popularno", "Novo"]}/>
-            </div>
             <div className="items-container">
                 { (!itemState.loading ) &&
                     itemState.items.filter(item => item.item_posted === true).map( postedItem => {

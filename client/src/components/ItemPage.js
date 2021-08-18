@@ -14,11 +14,12 @@ import {withRouter} from "react-router-dom";
 const ItemPage = props => {
     const [rentModal, toggleRentModal] = useState(false)
     const [newMessageModal, toggleNewMessageModal] = useState(false)
+    const [isBeingRented, setIsBeingRented] = useState(false)
 
     const itemState = useSelector((state) => state.itemsState)
     const userState = useSelector((state) => state.userState)
 
-    const {getSingeItem} = bindActionCreators(itemActions, useDispatch())
+    const {getSingeItem, getRentedOutItems} = bindActionCreators(itemActions, useDispatch())
     const {getSingleUser} = bindActionCreators(userActions, useDispatch())
 
     const handleRentModalToggle = () => {
@@ -33,6 +34,21 @@ const ItemPage = props => {
         getSingeItem(props.match.params.item_id)
             .then(r => getSingleUser(r[0].item_owner))
     }, []);
+
+    useEffect( async ()  => {
+        await getRentedOutItems();
+    }, []);
+
+    useEffect(async ()  => {
+        if(!itemState.rentedOutItemsLoading && itemState.currentItem[0].item_id){
+            const arr1 = itemState.rentedOutItems.filter(item => item.renting_status )
+            const filtered = arr1.some((item) => item.item_id === itemState.currentItem[0].item_id );
+            if(filtered){
+                setIsBeingRented(true)
+            }
+        }
+    }, [itemState.rentedOutItemsLoading]);
+
 
     return (
         <div>
@@ -55,16 +71,20 @@ const ItemPage = props => {
                 <div className="data-container">
                     <h1>{itemState.currentItem[0].item_name}</h1>
                     <div className="location-price">
-                        <LocationWithIcon item={itemState.currentItem[0]} detailed={true}/>
+                        <LocationWithIcon
+                            item_city={itemState.currentItem[0].item_city}
+                            item_street={itemState.currentItem[0].item_street}
+                            item_street_number={itemState.currentItem[0].item_street_number}
+                            detailed={true}/>
                         <PriceWithTime price={itemState.currentItem[0].item_price} timeFormat="24h"/>
                     </div>
                     <p className="item-description">{itemState.currentItem[0].item_description}</p>
                     <div className="button-container flex-start">
-                        {itemState.currentItem[0].item_owner === userState.currentUser.user_id && !itemState.currentItem[0].item_posted &&
-                        <Fragment>
-                            <button>Uredi</button>
-                            <button className="color-red border-red">Ukloni</button>
-                        </Fragment>
+                        {(itemState.currentItem[0].item_owner === userState.currentUser.user_id && !itemState.currentItem[0].item_posted && !isBeingRented) &&
+                            <Fragment>
+                                <button>Uredi</button>
+                                <button className="color-red border-red">Ukloni</button>
+                            </Fragment>
                         }
                         <Fragment>
                             {itemState.currentItem[0].item_posted && (itemState.currentItem[0].item_owner !== userState.currentUser.user_id) &&

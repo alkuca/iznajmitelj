@@ -19,9 +19,6 @@ const MessagesPage = () => {
     return (
         <div className="messages-page-container">
             <PageTitle renderButton={false} title="Poruke"/>
-            <div className="filter-container">
-                <SelectDropdown selectItems={["Sve","Popularno","Novo"]}/>
-            </div>
             <div className="messages-container">
                 { (!messageState.loading ) &&
                     messageState.messages.map( message => {

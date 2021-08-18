@@ -9,12 +9,22 @@ POST REQUEST - /rentItem
 router.post("/rentItem", authorization, async (req, res) => {
     const user_id = req.user.id;
     const {id, itemOwner, name, rentType, price, finalPrice, duration, paid, ownerName, renterName} = req.body;
+    const notificationType = 'renting'
+    const date = Date.now()
+    const timeElapsed = Date.now();
+    const today = new Date(timeElapsed);
+    today.toLocaleDateString()
 
     try {
 
         const newRentItem = await pool.query(
             "INSERT INTO rented_items (owner_id,renter_id,item_id,duration,price_per_day,price,delivery_type,item_name,paid,owner_name,renter_name) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11) RETURNING  *", [
                 itemOwner, user_id, id, duration, price, finalPrice, rentType, name, paid, ownerName, renterName]
+        );
+
+        await pool.query(
+            "INSERT INTO notifications (notification_owner_id,notification_maker_id,notification_maker_name,notification_type,related_item_id,related_item_name,delivery_type,time_created) VALUES ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING  *", [
+                itemOwner, user_id, renterName, notificationType, id, name, rentType,today]
         );
 
         await pool.query("UPDATE items SET item_posted=false WHERE item_id=$1",[id]);

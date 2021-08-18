@@ -80,16 +80,12 @@ function RentProcess (props) {
                             <DeliveryTypeCard
                                 data-mssg="Hello!"
                                 moveStep={setDelivery}
-                                paymentImage={true}
-                                paymentTypeImage={paypalImage}
-                                title="Dostava"
+                                title="Zatraži dostavu"
                                 description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget suscipit arcu, at pretium risus."
                                 icon="fi-rr-location-alt"
                             />
                             <DeliveryTypeCard
                                 moveStep={setOwn}
-                                paymentImage={true}
-                                paymentTypeImage={cashImage}
                                 title="Vlastito preuzimanje"
                                 description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget suscipit arcu."
                                 icon="fi-rr-home"
@@ -130,32 +126,7 @@ function RentProcess (props) {
                         <p>Prilikom preuzimanja ili dostave proizvoda dobit ćes jedinstveni kod kojeg je potrebno unjet kako bi zapoceo proces iznajmljivanja</p>
                     </div>
                     <div className="button-container">
-                        {formData.rentType === 0 ?
-                            <button onClick={moveStep} className="confirm">Plaćanje</button>
-                            :
-                            <button onClick={rentItemAction} className="confirm">Unajmi</button>
-                        }
-                        <button onClick={props.handleModalToggle} className="cancel">Odustani</button>
-                    </div>
-                </div>
-                }
-                {(step === 4 && formData.rentType === 0) &&
-                <div>
-                    <div className="summary">
-                        <h1>{itemState.currentItem[0].item_name}</h1>
-                        <div className="price-result">
-                            <p>Iznos: </p>
-                            <p>{formData.finalPrice} kn</p>
-                        </div>
-                        <div className="price-result">
-                            <p>Trajanje: </p>
-                            <p>{formData.duration} dana</p>
-                        </div>
-                    </div>
-                    <div className="paypal-buttons-container">
-                        <PayPal price={formData.finalPrice / 7.5}/>
-                    </div>
-                    <div className="button-container">
+                        <button onClick={rentItemAction} className="confirm">Unajmi</button>
                         <button onClick={props.handleModalToggle} className="cancel">Odustani</button>
                     </div>
                 </div>

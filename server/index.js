@@ -16,6 +16,7 @@ app.use("/items", require("./routes/items"));
 app.use("/rentedItems", require("./routes/rentedItems"));
 app.use("/messages", require("./routes/messages"));
 app.use("/profile", require("./routes/profile"));
+app.use("/notifications", require("./routes/notifications"));
 
 app.listen(5000, () => {
     console.log("Server is running on port 5000")

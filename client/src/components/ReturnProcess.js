@@ -1,25 +1,49 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import InputModal from "./InputModal";
 import PageTitle from "./PageTitle";
 import DeliveryTypeCard from "./DeliveryTypeCard";
 import cashImage from "../images/cash.png";
 import paypalImage from "../images/paypalLogo.jpg"
 import LocationWithIcon from "./LocationWithIcon";
+import {bindActionCreators} from "redux";
+import {itemActions, userActions} from "../state";
+import {useDispatch, useSelector} from "react-redux";
+import MapInfo from "./MapInfo";
+
 
 function ReturnProcess (props) {
 
     const [step, setStep] = useState(1)
 
+    const {getSingleUser} = bindActionCreators(userActions, useDispatch())
+    const userState = useSelector((state) => state.userState)
+
+    const { finishRentingByOwner, getRentedItems } = bindActionCreators(itemActions, useDispatch())
+
+    const finishRentingByOwnerAction = () => {
+        finishRentingByOwner(props.item_id)
+            .then(r => {
+                if(r){
+                    getRentedItems()
+                }
+            })
+    }
+
     const moveStep = () => {
         setStep(step + 1)
     }
+
+    useEffect(() => {
+        getSingleUser(props.owner_id)
+    }, [props.owner_id]);
+
     return (
         <InputModal>
-            <div className="renting-process">
+            <div className="return-process">
                 {step === 1 &&
                 <div>
                     <PageTitle title="Odaberi način povrata stvari:" renderButton={false}/>
-                    <div>
+                    <div className="delivery-cards">
                         <DeliveryTypeCard
                             moveStep={moveStep}
                             paymentImage={false}
@@ -43,23 +67,26 @@ function ReturnProcess (props) {
                 </div>
                 }
                 {step === 2 &&
-                <div className="code-info-container">
-                    <h1>Jedinstveni kod za iznajmitelja</h1>
-                    <div className="code-info">
-                        <p>Prilikom povrata proizvoda potrebno je iznajmitelju priložiti ovaj jedinstveni kod</p>
-                    </div>
-                    <div className="generated-code">
-                        <p>62896</p>
+                <div className="map-step-return">
+                    <div className="map-container">
+                        <div className="same-row">
+                            <h1>Adresa za povrat:</h1>
+                            <LocationWithIcon detailed={true}
+                                              item_city={userState.singleUser[0].user_city}
+                                              item_street={userState.singleUser[0].user_street}
+                                              item_street_number={userState.singleUser[0].user_street_number}
+                            />
+                        </div>
+                        <MapInfo lat={userState.singleUser[0].lat}
+                                 long={userState.singleUser[0].long}
+                                 zoom={12}
+                                 scrollWheelZoom={true}
+                        />
                     </div>
                     <div className="button-container">
-                        <button onClick={moveStep} className="confirm">Dalje</button>
+                        <button onClick={finishRentingByOwnerAction} className="confirm">Gotovo</button>
                         <button onClick={props.handleModalToggle} className="cancel">Odustani</button>
                     </div>
-                </div>
-                }
-                {step === 3 &&
-                <div className="map-step">
-                    <LocationWithIcon detailed={false}/>
                 </div>
                 }
             </div>

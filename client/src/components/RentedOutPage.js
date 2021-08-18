@@ -19,9 +19,6 @@ const RentedOutPage = () => {
     return (
         <div className="rented-out-page-container">
             <PageTitle renderButton={false} title="Iznajmljeno"/>
-            <div className="filter-container">
-                <SelectDropdown selectItems={["Sve","Popularno","Novo"]}/>
-            </div>
             <div className="items-container">
                 { (!itemState.rentedOutItemsLoading ) &&
                     itemState.rentedOutItems.filter(item => item.renting_status === true).map( item => {
@@ -35,8 +32,10 @@ const RentedOutPage = () => {
                             fullPrice={item.price}
                             duration={item.duration}
                             renterName={item.renter_name}
+                            renterId={item.renter_id}
                             showPricePerDay={false}
                             showLocation={false}
+                            time_rent_started={item.time_rent_started}
                             renting_status={item.renting_status}
                         />
                     })

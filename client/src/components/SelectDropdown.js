@@ -25,16 +25,16 @@ function SelectDropdown (props) {
     return (
         <div className="select-dropdown-container">
             <div className="dropdown-select" ref={ref2} onClick={handleToggleClick}>
-                <p className="select-label">Poredaj prema:</p>
+                <p className="select-label">{props.type}</p>
                 <div className="select-container">
                     <div className="select-title">
-                        <p>Sve</p>
+                        <p>{props.active}</p>
                         <i className="fi-br-angle-small-down"/>
                     </div>
                     {dropdown &&
                     <div ref={ref} className="select-dropdown">
                         {props.selectItems.map(selectItem =>{
-                            return <p key={selectItem}>{selectItem}</p>
+                            return <p onClick={event => props.onClick(event)} key={selectItem}>{selectItem}</p>
                         })}
                     </div>
                     }

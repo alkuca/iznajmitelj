@@ -37,7 +37,9 @@ const CreateItemModal = props => {
     const createItemAction = async () => {
         if(formData.name.length && formData.price.length){
             await createItem(formData)
-            getUserItems()
+            getUserItems();
+            props.closeModal();
+            console.log(formData)
         }else{
             alert("nedostaju podaci")
         }

@@ -16,6 +16,8 @@ import PostsPage from "./components/PostsPage";
 import MessagePage from "./components/MessagePage";
 import {useEffect, useState} from "react";
 import PrivateRoute from "./components/PrivateRoute";
+import StatisticsPage from "./components/StatisticsPage";
+import Loader from "./components/Loader";
 
 function App() {
 
@@ -70,12 +72,14 @@ function App() {
                           <Route path="/dashboard/poruke" component={MessagesPage}/>
                           <Route path="/dashboard/poruka/:message_id" component={MessagePage}/>
                           <Route path="/dashboard/objave" component={PostsPage}/>
+                          <Route path="/dashboard/statistika" component={StatisticsPage}/>
                       </Switch>
                   </DashboardContent>
               </PrivateRoute>
           </div>
               :
-              <p>loading</p>}
+              <Loader/>
+          }
       </Router>
   );
 }

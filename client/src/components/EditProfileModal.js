@@ -31,7 +31,7 @@ const EditProfileModal = props => {
                     addCoordinatesToForm(coordinates)
                         .then(fullForm =>
                             editProfile(fullForm)
-                                .then(r => getSingleUser(),
+                                .then(r => getSingleUser(props.id),
                                     props.handleModalToggle()
                                 )
                         ))

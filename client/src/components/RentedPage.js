@@ -19,9 +19,6 @@ const RentedPage = () => {
     return (
         <div className="rented-page-container">
             <PageTitle renderButton={false} title="Unajmljeno"/>
-            <div className="filter-container">
-                <SelectDropdown selectItems={["Sve","Popularno","Novo"]}/>
-            </div>
             <div className="items-container">
                 { (!itemState.rentedItemsLoading ) &&
                     itemState.rentedItems.filter(item => item.renting_status === true).map( item => {
@@ -37,7 +34,6 @@ const RentedPage = () => {
                             owner_id={item.owner_id}
                             time_rent_started={item.time_rent_started}
                             showPricePerDay={true}
-                            showLocation={false}
                         />
                     })
                 }

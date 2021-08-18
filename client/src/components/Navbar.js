@@ -4,7 +4,10 @@ import logo from "../images/LogoF.svg"
 import NavbarDropdown from "./NavbarDropdown";
 import classnames from "classnames";
 import {Link, useHistory, useLocation} from "react-router-dom";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import NotificationDropdown from "./NotificationDropdown";
+import {bindActionCreators} from "redux";
+import {notificationActions} from "../state";
 
 const Navbar = ({setAuth}) => {
     const [search, setSearch] = useState("")
@@ -14,9 +17,18 @@ const Navbar = ({setAuth}) => {
     const [dropdown, toggleDropdown] = useState(false)
     const ref = useRef(null);
     const ref2 = useRef(null)
+    const [notificationDropdown, toggleNotificationDropdown] = useState(false)
+
+    const notificationState = useSelector((state) => state.notificationState)
+
+    const {getUserNotifications} = bindActionCreators(notificationActions, useDispatch())
 
     const handleToggleClick = () => {
         toggleDropdown(!dropdown)
+    }
+
+    const handleNotificationToggleClick = () => {
+        toggleNotificationDropdown(!notificationDropdown)
     }
 
     const handleClickOutside = e => {
@@ -62,6 +74,10 @@ const Navbar = ({setAuth}) => {
         }
     });
 
+    useEffect(() => {
+        getUserNotifications()
+    }, []);
+
 
     return (
         <div className="navbar-container">
@@ -87,7 +103,15 @@ const Navbar = ({setAuth}) => {
                 </div>
             </div>
             <div className="navbar-menu-container">
-                <i className="fi-br-bell bell"/>
+                <i className="fi-br-bell bell" onClick={handleNotificationToggleClick}>
+                    {
+                        notificationState.notifications.length &&
+                        <div className="bell-has-content"/>
+                    }
+                </i>
+                {notificationDropdown &&
+                <NotificationDropdown notificationDropdown={notificationDropdown}/>
+                }
                 <img className="avatar" src={avatar_icon} alt="Avatar"/>
                 <div ref={ref2} className="name-container" onClick={handleToggleClick}>
                     <p>{userState.currentUser.user_name}</p>

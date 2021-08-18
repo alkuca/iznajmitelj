@@ -84,7 +84,7 @@ const ProfilePage = props => {
                 }
 
                 {editModal &&
-                    <EditProfileModal handleModalToggle={handleModalToggle}/>
+                    <EditProfileModal handleModalToggle={handleModalToggle} id={props.match.params.user_id}/>
                 }
                 {newMessageModal &&
                 <NewMessageModal

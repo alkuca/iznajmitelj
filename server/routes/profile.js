@@ -1,8 +1,5 @@
 const router =  require("express").Router()
 const pool = require("../db")
-const validInfo = require("../middleware/validInfo");
-const bcrypt = require("bcrypt");
-const jwtGenerator = require("../utils/jwtGenerator");
 const authorization = require("../middleware/authorization")
 
 router.get("/getSingleUser/:user_id", async (req, res) => {

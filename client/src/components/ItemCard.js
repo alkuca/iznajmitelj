@@ -158,9 +158,11 @@ const ItemCard = props => {
                                 <p>Unajmljeno na {props.duration} dana za {props.fullPrice} Kn</p>
                                 <div className="same-row card-renter">
                                     <p>Unajmitelj:</p>
-                                    <p>{props.renterName}</p>
+                                    <Link to={`/dashboard/profil/${props.renterId}`}>
+                                        {props.renterName}
+                                    </Link>
                                 </div>
-                                {!timePassed &&
+                                {timePassed &&
                                     <button onClick={finishRentingByOwnerAction} className="enter-code-button">Zavrsi</button>
                                 }
                             </Fragment>
@@ -236,7 +238,7 @@ const ItemCard = props => {
             />
             }
             {returnProcessModal &&
-            <ReturnProcess handleModalToggle={handleReturnClick}/>
+            <ReturnProcess handleModalToggle={handleReturnClick} owner_id={props.owner_id} item_id={props.item_id}/>
             }
         </div>
     )
