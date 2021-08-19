@@ -15,6 +15,7 @@ const Navbar = ({setAuth}) => {
     const location = useLocation();
     const history = useHistory();
     const [dropdown, toggleDropdown] = useState(false)
+    const [hasNotifications, setHasNotifications] = useState(false)
     const ref = useRef(null);
     const ref2 = useRef(null)
     const [notificationDropdown, toggleNotificationDropdown] = useState(false)
@@ -74,10 +75,18 @@ const Navbar = ({setAuth}) => {
         }
     });
 
-    useEffect(() => {
-        getUserNotifications()
+    useEffect( () => {
+        getUserNotifications().then(r => {
+            if(r){
+                let a = r.filter(n => !n.clear_notification)
+                if(a.length){
+                    setHasNotifications(true)
+                }else{
+                    setHasNotifications(false)
+                }
+            }
+        })
     }, []);
-
 
     return (
         <div className="navbar-container">
@@ -104,13 +113,12 @@ const Navbar = ({setAuth}) => {
             </div>
             <div className="navbar-menu-container">
                 <i className="fi-br-bell bell" onClick={handleNotificationToggleClick}>
-                    {
-                        notificationState.notifications.length &&
-                        <div className="bell-has-content"/>
+                    {hasNotifications &&
+                    <div className="bell-has-content"/>
                     }
                 </i>
                 {notificationDropdown &&
-                <NotificationDropdown notificationDropdown={notificationDropdown}/>
+                <NotificationDropdown notificationDropdown={notificationDropdown} hasNotifications={hasNotifications} handleNotificationToggleClick={handleNotificationToggleClick}/>
                 }
                 <img className="avatar" src={avatar_icon} alt="Avatar"/>
                 <div ref={ref2} className="name-container" onClick={handleToggleClick}>
@@ -121,7 +129,7 @@ const Navbar = ({setAuth}) => {
                 </div>
                 { dropdown &&
                     <div ref={ref}>
-                        <NavbarDropdown logout={logout} dropdown={dropdown}/>
+                        <NavbarDropdown logout={logout} dropdown={dropdown} />
                     </div>
                 }
             </div>

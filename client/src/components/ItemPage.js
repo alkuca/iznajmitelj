@@ -9,25 +9,42 @@ import ContactInfo from "./ContactInfo";
 import {useDispatch, useSelector} from "react-redux";
 import {bindActionCreators} from "redux";
 import {itemActions, userActions} from "../state";
-import {withRouter} from "react-router-dom";
+import {useHistory, withRouter} from "react-router-dom";
+import {deleteItem} from "../state/actions/item";
+import ConfirmationModal from "./ConfirmationModal";
 
 const ItemPage = props => {
     const [rentModal, toggleRentModal] = useState(false)
     const [newMessageModal, toggleNewMessageModal] = useState(false)
     const [isBeingRented, setIsBeingRented] = useState(false)
+    const [deleteConfirmation, toggleDeleteConfirmation] = useState(false)
 
     const itemState = useSelector((state) => state.itemsState)
     const userState = useSelector((state) => state.userState)
 
-    const {getSingeItem, getRentedOutItems} = bindActionCreators(itemActions, useDispatch())
+    const deleteNote = "Jeste li sigurni da želite trajno izbrisat odabrani proizvod?"
+
+    const {getSingeItem, getRentedOutItems ,deleteItem} = bindActionCreators(itemActions, useDispatch())
     const {getSingleUser} = bindActionCreators(userActions, useDispatch())
+
+    const history = useHistory();
 
     const handleRentModalToggle = () => {
         toggleRentModal(!rentModal)
     }
 
+    const handleDeleteClick = () => {
+        toggleDeleteConfirmation(!deleteConfirmation)
+        console.log("delete click")
+    }
+
     const handleNewMessageClick = () => {
         toggleNewMessageModal(!newMessageModal)
+    }
+
+    const deleteItemAction = () => {
+        deleteItem(itemState.currentItem[0].item_id)
+        history.push("/dashboard/stvari")
     }
 
     useEffect(() => {
@@ -39,15 +56,15 @@ const ItemPage = props => {
         await getRentedOutItems();
     }, []);
 
-    useEffect(async ()  => {
-        if(!itemState.rentedOutItemsLoading && itemState.currentItem[0].item_id){
+    useEffect( ()  => {
+        if(!itemState.rentedOutItemsLoading && !itemState.currentItemLoading){
             const arr1 = itemState.rentedOutItems.filter(item => item.renting_status )
             const filtered = arr1.some((item) => item.item_id === itemState.currentItem[0].item_id );
             if(filtered){
                 setIsBeingRented(true)
             }
         }
-    }, [itemState.rentedOutItemsLoading]);
+    }, [itemState.rentedOutItemsLoading,itemState.currentItemLoading]);
 
 
     return (
@@ -81,10 +98,7 @@ const ItemPage = props => {
                     <p className="item-description">{itemState.currentItem[0].item_description}</p>
                     <div className="button-container flex-start">
                         {(itemState.currentItem[0].item_owner === userState.currentUser.user_id && !itemState.currentItem[0].item_posted && !isBeingRented) &&
-                            <Fragment>
-                                <button>Uredi</button>
-                                <button className="color-red border-red">Ukloni</button>
-                            </Fragment>
+                        <button onClick={handleDeleteClick} className="color-red border-red">Ukloni</button>
                         }
                         <Fragment>
                             {itemState.currentItem[0].item_posted && (itemState.currentItem[0].item_owner !== userState.currentUser.user_id) &&
@@ -133,6 +147,16 @@ const ItemPage = props => {
                     receiver_name={userState.singleUser[0].user_name}
                     receiver_id={userState.singleUser[0].user_id}
                     closeModal={handleNewMessageClick}/>
+                }
+                {deleteConfirmation &&
+                <ConfirmationModal note={deleteNote}
+                                   icon="fi-br-trash color-red"
+                                   actionName="Ukloni"
+                                   buttonText="Ukloni"
+                                   type="negative"
+                                   relatedItem={itemState.currentItem[0].item_name + " ?"}
+                                   confirmAction={deleteItemAction}
+                                   closeModal={handleDeleteClick}/>
                 }
             </div>
             }

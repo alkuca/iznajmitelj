@@ -8,7 +8,7 @@ function ConfirmationModal (props) {
             <div className="confirm-modal">
                 <i className={props.icon}/>
                 <p className="action">{props.actionName}</p>
-                <h1 className="item">Oculus Rift 2020 sa controlerima</h1>
+                <h1 className="item">{props.relatedItem}</h1>
                 <p>{props.note}</p>
                 <div className="button-container">
                     <button className={classnames("confirm", {

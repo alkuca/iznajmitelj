@@ -14,7 +14,7 @@ const NavbarDropdown = props => {
         })}>
             <LinkWithIcon text="Profil" icon="user" goTo={`/dashboard/profil/${userState.user_id}`}/>
             <LinkWithIcon text="Poruke" icon="comment-alt" goTo="/dashboard/poruke"/>
-            <LinkWithIcon text="Postavke" icon="settings-sliders" goTo="/dashboard/postavke"/>
+            <LinkWithIcon text="Obavijesti" icon="bell" goTo="/dashboard/obavijesti"/>
             <div className="links-line"/>
             <LinkWithIcon text="Pomoć" icon="info" goTo="/dashboard/pomoc"/>
             <div onClick={props.logout}>

@@ -1,6 +1,6 @@
 const initialState = {
     loading: true,
-    notifications: {},
+    notifications: {}
 };
 
 const reducer = (state = initialState, action) => {
@@ -10,6 +10,11 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 loading: false,
                 notifications: action.payload,
+            }
+        }
+        case "CLEAR_USER_NOTIFICATIONS": {
+            return {
+                ...state,
             }
         }
         default:

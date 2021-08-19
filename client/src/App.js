@@ -18,6 +18,7 @@ import {useEffect, useState} from "react";
 import PrivateRoute from "./components/PrivateRoute";
 import StatisticsPage from "./components/StatisticsPage";
 import Loader from "./components/Loader";
+import NotificationsPage from "./components/NotificationsPage";
 
 function App() {
 
@@ -73,6 +74,7 @@ function App() {
                           <Route path="/dashboard/poruka/:message_id" component={MessagePage}/>
                           <Route path="/dashboard/objave" component={PostsPage}/>
                           <Route path="/dashboard/statistika" component={StatisticsPage}/>
+                          <Route path="/dashboard/obavijesti" component={NotificationsPage}/>
                       </Switch>
                   </DashboardContent>
               </PrivateRoute>

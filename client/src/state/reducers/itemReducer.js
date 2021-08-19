@@ -6,6 +6,7 @@ const initialState = {
     itemPosted: false,
     allItems: {},
     allPosts: {},
+    currentItemLoading:true,
     currentItem: {},
     rentedItem: {},
     rentedItems: {},
@@ -20,7 +21,8 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 allItems: action.payload,
-                allItemsLoading: false
+                allItemsLoading: false,
+                currentItemLoading:true,
             }
         }
         case "GET_ALL_POSTS":{
@@ -32,7 +34,8 @@ const reducer = (state = initialState, action) => {
         case "GET_SINGLE_ITEM":{
             return {
                 ...state,
-                currentItem: action.payload
+                currentItem: action.payload,
+                currentItemLoading:false
             }
         }
         case "CREATE":
@@ -43,7 +46,7 @@ const reducer = (state = initialState, action) => {
             }
         case "DELETE":{
             return{
-                item: action.payload
+                ...state,
             }
         }
         case "GET_USER_ITEMS":{

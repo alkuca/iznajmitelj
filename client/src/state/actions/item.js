@@ -95,12 +95,27 @@ export const createItem = item => async dispatch => {
     }
 }
 
-export const deleteItem = (item) => {
-    return (dispatch) => {
-        dispatch({
-            type: "DELETE",
-            payload: item
-        })
+export const deleteItem = item_id => async dispatch => {
+    const token = localStorage.getItem("token");
+    try {
+        const response = await fetch(
+            `http://localhost:5000/items/deleteItem/${item_id}`,
+            {
+                method: "DELETE",
+                headers: {
+                    "Content-type": "application/json",
+                    "token": token
+                }
+            }
+        );
+        if(response.ok){
+            dispatch({
+                type: "DELETE",
+                payload: response
+            })
+        }
+    } catch (err) {
+        console.error(err.message);
     }
 }
 
@@ -161,6 +176,32 @@ export const finishRentingByOwner = id => async dispatch => {
                 headers: {
                     "Content-type": "application/json"
                 }
+            }
+        );
+        const parseRes = await res.json()
+        if(res){
+            dispatch({
+                type: "FINISH_RENTING"
+            })
+            return parseRes
+        }
+    } catch (err) {
+        console.error(err.message);
+    }
+}
+
+export const finishRentingByRenter = (id, data) => async dispatch => {
+    const token = localStorage.getItem("token");
+    try {
+        const res = await fetch(
+            `http://localhost:5000/renteditems/finishRentingByRenter/${id}`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json",
+                    "token": token
+                },
+                body: JSON.stringify(data)
             }
         );
         const parseRes = await res.json()

@@ -10,7 +10,7 @@ router.post("/rentItem", authorization, async (req, res) => {
     const user_id = req.user.id;
     const {id, itemOwner, name, rentType, price, finalPrice, duration, paid, ownerName, renterName} = req.body;
     const notificationType = 'renting'
-    const date = Date.now()
+
     const timeElapsed = Date.now();
     const today = new Date(timeElapsed);
     today.toLocaleDateString()
@@ -112,6 +112,38 @@ router.post("/finishRenting/:id", async (req, res) => {
         res.status(500).send("Server error");
     }
 });
+
+/*
+Sets item renting_status to true && return type
+PATCH REQUEST - /finishRenting
+ */
+router.post("/finishRentingByRenter/:id", authorization, async (req, res) => {
+    const id = req.params.id;
+    const {returnType} = req.body;
+    const user_id = req.user.id;
+
+    const notificationType = "renting_finished"
+    const timeElapsed = Date.now();
+    const today = new Date(timeElapsed);
+    today.toLocaleDateString()
+
+    try {
+        await pool.query("UPDATE rented_items SET renting_status=false , return_type=$2 WHERE rented_item_id=$1 AND renter_id=$3",[id,returnType,user_id]);
+
+        const r = await pool.query("SELECT * FROM rented_items WHERE rented_item_id=$1", [id]);
+
+        await pool.query(
+            "INSERT INTO notifications (notification_owner_id,notification_maker_id,notification_maker_name,notification_type,related_item_id,related_item_name,return_type,time_created) VALUES ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING  *", [
+                r.rows[0].owner_id, user_id, r.rows[0].renter_name , notificationType, id, r.rows[0].item_name, r.rows[0].return_type,today]
+        );
+
+        res.json(true);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Server error");
+    }
+});
+
 
 
 module.exports = router;

@@ -31,6 +31,9 @@ const StatisticsPage = props => {
                             key={item.rented_item_id}
                             item_id={item.item_id}
                             item_name={item.item_name}
+                            price={item.price}
+                            item_date={item.time_rent_started}
+                            renter_name={item.owner_name}
                         />
                     })
                     }

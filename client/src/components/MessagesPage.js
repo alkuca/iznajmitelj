@@ -21,13 +21,14 @@ const MessagesPage = () => {
             <PageTitle renderButton={false} title="Poruke"/>
             <div className="messages-container">
                 { (!messageState.loading ) &&
-                    messageState.messages.map( message => {
+                    messageState.messages.slice(0).reverse().map( message => {
                         return <Message
                             key={message.message_id}
                             message_id={message.message_id}
                             title={message.message_title}
                             text={message.message_text}
                             sender={message.sender_name}
+                            sender_id={message.sender_id}
                             read={message.message_is_read}
                         />
                     })

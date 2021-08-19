@@ -26,7 +26,7 @@ const ItemCard = props => {
     const deleteNote = "Jeste li sigurni da želite trajno izbrisat odabrani proizvod?"
     const postNote = "Klikom na Objavi proizvod postaje vidljiv ostalim korisnicima."
 
-    const { postItem, deletePost, getUserItems, finishRentingByOwner,getRentedOutItems } = bindActionCreators(itemActions, useDispatch())
+    const { postItem, deletePost, getUserItems, finishRentingByOwner,getRentedOutItems,deleteItem } = bindActionCreators(itemActions, useDispatch())
 
     const handlePostClick = () => {
         togglePostConfirmation(!postConfirmation)
@@ -46,6 +46,11 @@ const ItemCard = props => {
         console.log("delete click")
     }
 
+    const deleteItemAction = async () => {
+        await deleteItem(props.item_id)
+        getUserItems();
+    }
+
     const postItemAction = async () => {
         await postItem(props.item_id);
         getUserItems()
@@ -56,10 +61,6 @@ const ItemCard = props => {
         await deletePost(props.item_id);
         getUserItems()
         handleDeleteClick();
-    }
-
-    const deleteItem = () => {
-        console.log("item deleted")
     }
 
     const finishRentingByOwnerAction = () => {
@@ -220,9 +221,15 @@ const ItemCard = props => {
                                type="positive" confirmAction={postItemAction} closeModal={handlePostClick}/>
             }
             {(deleteConfirmation && window.location.pathname === "/dashboard/stvari") &&
-            <ConfirmationModal note={deleteNote} icon="fi-br-trash color-red" actionName="Ukloni Stvar"
-                               buttonText="Ukloni" type="negative" confirmAction={deleteItem}
-                               closeModal={handleDeleteClick}/>
+            <ConfirmationModal note={deleteNote}
+                               icon="fi-br-trash color-red"
+                               actionName="Ukloni"
+                               buttonText="Ukloni"
+                               type="negative"
+                               relatedItem={props.name + " ?"}
+                               confirmAction={deleteItemAction}
+                               closeModal={handleDeleteClick}
+            />
             }
             {(deleteConfirmation && window.location.pathname === "/dashboard/objave") &&
             <ConfirmationModal note={deleteNote} icon="fi-br-trash color-red" actionName="Ukloni objavu"
@@ -238,7 +245,11 @@ const ItemCard = props => {
             />
             }
             {returnProcessModal &&
-            <ReturnProcess handleModalToggle={handleReturnClick} owner_id={props.owner_id} item_id={props.item_id}/>
+            <ReturnProcess
+                handleModalToggle={handleReturnClick}
+                rented_item_id={props.rented_item_id}
+                owner_id={props.owner_id}
+                item_id={props.item_id}/>
             }
         </div>
     )

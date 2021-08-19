@@ -2,8 +2,6 @@ import React, {useEffect, useState} from "react";
 import InputModal from "./InputModal";
 import PageTitle from "./PageTitle";
 import DeliveryTypeCard from "./DeliveryTypeCard";
-import cashImage from "../images/cash.png";
-import paypalImage from "../images/paypalLogo.jpg"
 import LocationWithIcon from "./LocationWithIcon";
 import {bindActionCreators} from "redux";
 import {itemActions, userActions} from "../state";
@@ -14,14 +12,17 @@ import MapInfo from "./MapInfo";
 function ReturnProcess (props) {
 
     const [step, setStep] = useState(1)
+    const [formData, setFormData] = useState({
+        returnType: 0,
+    });
 
     const {getSingleUser} = bindActionCreators(userActions, useDispatch())
     const userState = useSelector((state) => state.userState)
 
-    const { finishRentingByOwner, getRentedItems } = bindActionCreators(itemActions, useDispatch())
+    const { getRentedItems,finishRentingByRenter } = bindActionCreators(itemActions, useDispatch())
 
-    const finishRentingByOwnerAction = () => {
-        finishRentingByOwner(props.item_id)
+    const finishRentingByRenterAction = () => {
+        finishRentingByRenter(props.rented_item_id, formData)
             .then(r => {
                 if(r){
                     getRentedItems()
@@ -31,6 +32,16 @@ function ReturnProcess (props) {
 
     const moveStep = () => {
         setStep(step + 1)
+    }
+
+    const setDelivery = () => {
+        setFormData({ ...formData, returnType: 0 });
+        moveStep()
+    }
+
+    const setOwn = () => {
+        setFormData({ ...formData, returnType: 1 });
+        moveStep()
     }
 
     useEffect(() => {
@@ -45,17 +56,13 @@ function ReturnProcess (props) {
                     <PageTitle title="Odaberi način povrata stvari:" renderButton={false}/>
                     <div className="delivery-cards">
                         <DeliveryTypeCard
-                            moveStep={moveStep}
-                            paymentImage={false}
-                            paymentTypeImage={paypalImage}
+                            moveStep={setDelivery}
                             title="Poslat ću dostavom"
                             description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget suscipit arcu, at pretium risus."
                             icon="fi-rr-location-alt"
                         />
                         <DeliveryTypeCard
-                            moveStep={moveStep}
-                            paymentImage={false}
-                            paymentTypeImage={cashImage}
+                            moveStep={setOwn}
                             title="Vlastito ću dostavit"
                             description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget suscipit arcu."
                             icon="fi-rr-home"
@@ -84,7 +91,7 @@ function ReturnProcess (props) {
                         />
                     </div>
                     <div className="button-container">
-                        <button onClick={finishRentingByOwnerAction} className="confirm">Gotovo</button>
+                        <button onClick={finishRentingByRenterAction} className="confirm">Gotovo</button>
                         <button onClick={props.handleModalToggle} className="cancel">Odustani</button>
                     </div>
                 </div>

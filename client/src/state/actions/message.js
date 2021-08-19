@@ -52,13 +52,15 @@ export const sendMessage = formData => async dispatch => {
 
 
 export const getSingleMessage = message_id => async dispatch => {
+    const token = localStorage.getItem("token");
     try {
         const res = await fetch(
             `http://localhost:5000/messages/getSingleMessage/${message_id}`,
             {
                 method: "GET",
                 headers: {
-                    "Content-type": "application/json"
+                    "Content-type": "application/json",
+                    "token": token
                 }
             }
         );
