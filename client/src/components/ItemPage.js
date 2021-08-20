@@ -72,7 +72,7 @@ const ItemPage = props => {
             {itemState.currentItem[0] &&
             <div className="item-page-container">
                 <div className="images-container">
-                    <img src={item} alt="Drone"/>
+                    <img src={itemState.currentItem[0].item_image} alt="item"/>
                     {/*
                     <div className="thumbnail-container">
                         <img src={item} alt="Drone thumbnail"/>

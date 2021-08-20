@@ -1,5 +1,5 @@
 import React, {useState, useRef, useEffect, Fragment} from "react";
-import avatar_icon from "../images/icons/avatar.svg"
+import avatar_icon from "../images/profileDefault.svg"
 import logo from "../images/LogoF.svg"
 import NavbarDropdown from "./NavbarDropdown";
 import classnames from "classnames";
@@ -120,7 +120,7 @@ const Navbar = ({setAuth}) => {
                 {notificationDropdown &&
                 <NotificationDropdown notificationDropdown={notificationDropdown} hasNotifications={hasNotifications} handleNotificationToggleClick={handleNotificationToggleClick}/>
                 }
-                <img className="avatar" src={avatar_icon} alt="Avatar"/>
+                <img className="avatar" src={userState.currentUser.user_image ? userState.currentUser.user_image : avatar_icon} alt="Avatar"/>
                 <div ref={ref2} className="name-container" onClick={handleToggleClick}>
                     <p>{userState.currentUser.user_name}</p>
                     <i className={classnames("fi-br-angle-small-down", {

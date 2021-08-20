@@ -1,18 +1,23 @@
 import React, {Fragment, useEffect, useState} from "react";
 import PageTitle from "./PageTitle";
-import avatar_icon from "../images/icons/avatar.svg";
+import avatar_icon from "../images/profileDefaultLarge.svg";
 import EditProfileModal from "./EditProfileModal";
 import {useDispatch, useSelector} from "react-redux";
 import {bindActionCreators} from "redux";
-import {userActions} from "../state";
+import {itemActions, userActions} from "../state";
 import MapInfo from "./MapInfo";
 import NewMessageModal from "./NewMessageModal";
+import Loader from "./Loader";
 
 const ProfilePage = props => {
     const [editModal, toggleEditModal] = useState(false);
     const [newMessageModal, toggleNewMessageModal] = useState(false)
+    const [imageUploading, setImageUploading] = useState(false)
 
-    const {getSingleUser} = bindActionCreators(userActions, useDispatch())
+    const [selectedFile, setSelectedFile] = useState()
+
+    const { uploadItemImage } = bindActionCreators(itemActions, useDispatch())
+    const {getSingleUser, changeAvatar, getCurrentUser} = bindActionCreators(userActions, useDispatch())
     const userState = useSelector((state) => state.userState)
 
     const handleModalToggle = () => {
@@ -23,9 +28,38 @@ const ProfilePage = props => {
         toggleNewMessageModal(!newMessageModal)
     }
 
+
+    const handleClick = e => {
+        setSelectedFile(e.target.files[0])
+    }
+
+
     useEffect(() => {
         getSingleUser(props.match.params.user_id)
     }, []);
+
+    useEffect(() => {
+        if(selectedFile){
+            setImageUploading(true)
+            const reader = new FileReader();
+            reader.readAsDataURL(selectedFile);
+            reader.onloadend = () => {
+                uploadItemImage(reader.result).then( r => {
+                    if(r.url){
+                        changeAvatar(r.url).then(r => {
+                                if(r){
+                                    getSingleUser(props.match.params.user_id);
+                                    getCurrentUser();
+                                    setImageUploading(false)
+                                }
+                        })
+                    }else{
+                        alert("pokusaj ponovno")
+                    }
+                })
+            }
+        }
+    }, [selectedFile]);
 
 
     return (
@@ -38,7 +72,24 @@ const ProfilePage = props => {
                     <PageTitle renderButton={true} buttonText="Poruka" buttonAction={handleMessageModalToggle} title={`Profil od ${userState.singleUser[0].user_name}`}/>
                 }
                 <div className="contact-container">
-                    <img src={avatar_icon} alt="avatar"/>
+                    <div className="change-profile-container">
+                        {imageUploading && <Loader className="loader-container"/>}
+                        <label>
+                            <input type="file" name="image" onChange={handleClick}/>
+                            {!imageUploading &&
+                            <img className="profile-image"
+                                 src={userState.singleUser[0].user_image ? userState.singleUser[0].user_image : avatar_icon} alt="avatar"/>
+                            }
+                            <div className="upload-hover">
+                                {!imageUploading &&
+                                <div>
+                                    <i className="fi-rr-cloud-upload"/>
+                                    <p>Promjeni</p>
+                                </div>
+                                }
+                            </div>
+                        </label>
+                    </div>
                     <div className="full-line"/>
                     <div className="info">
                         <div>

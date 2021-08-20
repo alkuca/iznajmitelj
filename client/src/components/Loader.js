@@ -1,9 +1,9 @@
 import React from "react";
 import loader from "../images/Loader.svg";
 
-const Loader = () => {
+const Loader = props => {
     return (
-        <div className="loader-container">
+        <div className={props.className}>
             <img className="loader" src={loader} alt="loader"/>
         </div>
     )

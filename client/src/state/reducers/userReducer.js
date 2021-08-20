@@ -19,6 +19,10 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state
             }
+        case "CHANGE_AVATAR":
+            return {
+                ...state
+            }
         default:
             return state
     }

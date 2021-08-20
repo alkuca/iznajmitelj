@@ -55,6 +55,7 @@ function ItemsPage () {
                                 name={item.item_name}
                                 price={item.item_price}
                                 state={item.item_state}
+                                item_image={item.item_image}
                                 showPricePerDay={true}
                                 showLocation={true}
                             />

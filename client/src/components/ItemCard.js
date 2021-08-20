@@ -1,5 +1,5 @@
 import React, {Fragment, useEffect, useState} from "react";
-import item from "../images/drone.png";
+import item from "../images/LogoF.svg";
 import PriceWithTime from "./PriceWithTime";
 import LocationWithIcon from "./LocationWithIcon";
 import SettingsDropdown from "./SettingsDropdown";
@@ -89,7 +89,7 @@ const ItemCard = props => {
         <div className="item-card-container">
             <Link to={`/dashboard/stvar/${props.item_id}`}>
                 <div className="image-container">
-                    <img src={item} alt="Drone"/>
+                    <img src={props.item_image ? props.item_image : item} alt="Drone"/>
                     {window.location.pathname === "/dashboard/unajmljeno" &&
                     <div className="image-overlay">
                         {props.codeEntered ?

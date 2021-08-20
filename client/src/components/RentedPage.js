@@ -34,6 +34,7 @@ const RentedPage = () => {
                             owner_id={item.owner_id}
                             time_rent_started={item.time_rent_started}
                             showPricePerDay={true}
+                            item_image={item.item_image}
                         />
                     })
                 }

@@ -30,6 +30,7 @@ const PostsPage = () => {
                             state={postedItem.item_state}
                             showPricePerDay={true}
                             showLocation={true}
+                            item_image={postedItem.item_image}
                         />
                     })
                 }

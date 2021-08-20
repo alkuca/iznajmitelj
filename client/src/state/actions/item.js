@@ -89,7 +89,33 @@ export const createItem = item => async dispatch => {
                  type: "CREATE",
                  payload: item
              })
+             return true
          }
+    } catch (err) {
+        console.error(err.message);
+    }
+}
+
+export const uploadItemImage = base64EncodedImage => async dispatch => {
+    try {
+        const res = await fetch(
+            "http://localhost:5000/items/uploadItemImage",
+            {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json"
+                },
+                body: JSON.stringify({ data: base64EncodedImage }),
+            }
+        );
+        const parseRes = await res.json()
+        if(parseRes){
+            dispatch({
+                type: "ITEM_IMAGE_UPLOADED",
+                payload: parseRes
+            })
+            return parseRes
+        }
     } catch (err) {
         console.error(err.message);
     }

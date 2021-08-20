@@ -77,6 +77,7 @@ const SearchPage = () => {
                                 name={item.item_name}
                                 state={item.item_state}
                                 price={item.item_price}
+                                item_image={item.item_image}
                                 showPricePerDay={true}
                                 showLocation={true}
                             />

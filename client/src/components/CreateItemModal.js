@@ -8,7 +8,8 @@ import {bindActionCreators} from "redux";
 import {itemActions} from "../state";
 
 const CreateItemModal = props => {
-    const [mainImage, setMainImage] = useState(null)
+    const [previewImage, setPreviewImage] = useState(null)
+    const [selectedFile, setSelectedFile] = useState()
     const [step, setStep] = useState(1)
 
     const currentUser = useSelector((state) => state.userState.currentUser)
@@ -22,24 +23,53 @@ const CreateItemModal = props => {
         item_street_number: currentUser.user_street_number,
         item_city: currentUser.user_city,
         item_lat: currentUser.lat,
-        item_long: currentUser.long
+        item_long: currentUser.long,
+        item_image: ""
     });
 
 
-    const { createItem, deleteItem, getUserItems } = bindActionCreators(itemActions, useDispatch())
+    const { createItem, getUserItems,uploadItemImage } = bindActionCreators(itemActions, useDispatch())
 
-    const handleClick = e => setMainImage(URL.createObjectURL(e.target.files[0]))
+    const handleClick = e => {
+        setPreviewImage(URL.createObjectURL(e.target.files[0]))
+        setSelectedFile(e.target.files[0])
+    }
 
-    const onFormChange = e => setFormData({
-        ...formData, [e.target.name]: e.target.value
+    const onFormChange = e =>
+        setFormData({...formData, [e.target.name]: e.target.value
     });
+
+    const addImageToForm = async item_image => {
+        const fullForm = {
+            ...formData
+        }
+        if(item_image){
+            fullForm.item_image = item_image;
+        }
+        return fullForm
+    }
 
     const createItemAction = async () => {
+        const reader = new FileReader();
+        reader.readAsDataURL(selectedFile);
         if(formData.name.length && formData.price.length){
-            await createItem(formData)
-            getUserItems();
-            props.closeModal();
-            console.log(formData)
+            reader.onloadend = async () => {
+                await uploadItemImage(reader.result).then( r => {
+                    if(r.url){
+                        addImageToForm(r.url).then(r => {
+                            createItem(r).then(r => {
+                                    if(r){
+                                        getUserItems()
+                                        props.closeModal()
+                                    }
+                                }
+                            )
+                        })
+                    }else{
+                        alert("pokusaj ponovno")
+                    }
+                })
+            };
         }else{
             alert("nedostaju podaci")
         }
@@ -65,11 +95,11 @@ const CreateItemModal = props => {
                 {step === 2 &&
                 <div className="image-input-container">
                     <div className="main-image-container">
-                        { mainImage ?
-                            <img src={mainImage} alt="item"/> :
+                        { previewImage ?
+                            <img src={previewImage} alt="item"/> :
                             <img src={emptyImage} alt="placeholder"/>}
                         <label className="custom-file-upload">
-                            <input type="file" onChange={handleClick}/>
+                            <input type="file" name="image"  onChange={handleClick}/>
                             Odaberi sliku
                         </label>
                     </div>

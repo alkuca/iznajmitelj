@@ -67,3 +67,30 @@ export const editProfile = formData => async dispatch => {
         console.error(err.message);
     }
 }
+
+export const changeAvatar = data => async dispatch => {
+    const token = localStorage.getItem("token");
+    try {
+        const res = await fetch(
+            "http://localhost:5000/profile/changeAvatar",
+            {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json",
+                    "token": token
+                },
+                body: JSON.stringify({ data: data })
+            }
+        );
+        const parseRes = await res.json()
+        if(res){
+            dispatch({
+                type: "CHANGE_AVATAR",
+                payload: parseRes
+            })
+            return true
+        }
+    } catch (err) {
+        console.error(err.message);
+    }
+}

@@ -1,6 +1,7 @@
 const router =  require("express").Router()
 const pool = require("../db")
 const authorization = require("../middleware/authorization")
+const {cloudinary} = require("../utils/cloudinary");
 
 router.get("/getSingleUser/:user_id", async (req, res) => {
     const user_id = req.params.user_id;
@@ -31,6 +32,23 @@ router.post("/editProfile", authorization, async (req, res) => {
     } catch (err){
         console.log(err.message);
         res.status(500).send("Server error")
+    }
+});
+
+router.post("/changeAvatar", authorization, async (req, res) => {
+    const user_id = req.user.id;
+    const user_image = req.body.data;
+
+    try {
+        await pool.query("UPDATE users SET user_image=$2 WHERE user_id = $1", [
+            user_id,user_image
+        ]);
+
+        res.json(user_image)
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Server error");
     }
 });
 

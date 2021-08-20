@@ -2,6 +2,7 @@ const initialState = {
     item: null,
     items: {},
     loading: true,
+    image:{},
     allItemsLoading: true,
     itemPosted: false,
     allItems: {},
@@ -41,8 +42,12 @@ const reducer = (state = initialState, action) => {
         case "CREATE":
             return {
                 ...state,
-                item: action.payload,
-                loading: true,
+                item: action.payload
+            }
+        case "ITEM_IMAGE_UPLOADED":
+            return {
+                ...state,
+                image: action.payload
             }
         case "DELETE":{
             return{
