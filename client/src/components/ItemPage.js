@@ -47,7 +47,7 @@ const ItemPage = props => {
     useEffect(() => {
         getSingeItem(props.match.params.item_id)
             .then(r => getSingleUser(r[0].item_owner))
-    });
+    },[]);
 
     useEffect(()  => {
         getRentedOutItems();

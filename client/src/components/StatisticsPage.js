@@ -6,7 +6,7 @@ import {itemActions} from "../state";
 import HistoryCard from "./HistoryCard";
 
 
-const StatisticsPage = props => {
+const StatisticsPage = () => {
 
     const itemState = useSelector((state) => state.itemsState)
     const userState = useSelector((state) => state.userState)
@@ -22,7 +22,9 @@ const StatisticsPage = props => {
         <div className="statistics-page-container">
             <PageTitle renderButton={false} title="Povijest"/>
             <div className="history-container">
+                {(!itemState.rentedItemsLoading) && itemState.rentedItems.length > 0 &&
                 <h4>Unajmljeno:</h4>
+                }
                 <div className="history-items-container rented">
                     { (!itemState.rentedItemsLoading ) &&
                     itemState.rentedItems.filter(item => item.renting_status === false && item.renter_id === userState.currentUser.user_id).map( item => {
@@ -39,7 +41,9 @@ const StatisticsPage = props => {
                 </div>
             </div>
             <div className="history-container">
+                {(!itemState.rentedItemsLoading) && itemState.rentedItems.length > 0 &&
                 <h4>Iznajmljeno:</h4>
+                }
                 <div className="history-items-container rented-out">
                     { (!itemState.rentedOutItemsLoading ) &&
                     itemState.rentedOutItems.filter(item => item.renting_status === false && item.owner_id === userState.currentUser.user_id).map( item => {

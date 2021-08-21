@@ -52,13 +52,11 @@ function App() {
 
   return (
       <Router>
+          {!loading ?
           <div className="App">
               <Route path="/" render={() => (
-                  isAuthenticated ? (
-                      <Redirect to="/dashboard/stvari"/>
-                  ) : (
+                  !isAuthenticated &&
                       <Redirect to="/auth/login"/>
-                  )
               )}/>
               <Route exact path="/auth/register"
                   render={props => <RegisterPage {...props} setAuth={setAuth} />}
@@ -86,6 +84,9 @@ function App() {
                   </DashboardContent>
               </PrivateRoute>
           </div>
+              :
+              <Loader/>
+          }
       </Router>
   );
 }

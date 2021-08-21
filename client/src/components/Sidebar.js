@@ -1,10 +1,23 @@
 import React from "react";
 import LinkWithIcon from "./LinkWithIcon";
 import {withRouter} from 'react-router-dom';
+import classnames from "classnames";
+import {useDispatch, useSelector} from "react-redux";
+import {bindActionCreators} from "redux";
+import {uiActions} from "../state";
 
-function Sidebar () {
+const Sidebar = () => {
+    const uiState = useSelector((state) => state.uiState)
+    const {toggleSidebar} = bindActionCreators(uiActions, useDispatch())
+
+    const handleSidebarToggle = () => {
+        toggleSidebar()
+    }
+
         return (
-            <div className="sidebar-container">
+            <div className={classnames("sidebar-container", {
+                "sidebar-mobile close-sidebar-icon t3": uiState.sidebarToggle
+            })}>
                 <div className="inner-container">
                     <div className="links-container">
                         <LinkWithIcon text="Moje stvari" icon="box" goTo="/dashboard/stvari"/>
@@ -15,6 +28,7 @@ function Sidebar () {
                         <LinkWithIcon text="Poruke" icon="comment-alt" goTo="/dashboard/poruke"/>
                     </div>
                 </div>
+                <i className="fi-br-cross-small close-sidebar-icon" onClick={handleSidebarToggle}/>
             </div>
         )
 }

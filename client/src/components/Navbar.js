@@ -7,7 +7,7 @@ import {Link, useHistory, useLocation} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import NotificationDropdown from "./NotificationDropdown";
 import {bindActionCreators} from "redux";
-import {notificationActions} from "../state";
+import {notificationActions,uiActions} from "../state";
 
 const Navbar = ({setAuth}) => {
     const [search, setSearch] = useState("")
@@ -21,6 +21,7 @@ const Navbar = ({setAuth}) => {
     const [notificationDropdown, toggleNotificationDropdown] = useState(false)
 
     const {getUserNotifications} = bindActionCreators(notificationActions, useDispatch())
+    const {toggleSidebar} = bindActionCreators(uiActions, useDispatch())
 
     const handleToggleClick = () => {
         toggleDropdown(!dropdown)
@@ -73,6 +74,10 @@ const Navbar = ({setAuth}) => {
         }
     });
 
+    const handleSidebarToggle = () => {
+        toggleSidebar()
+    }
+
     useEffect( () => {
         getUserNotifications().then(r => {
             if(r){
@@ -108,6 +113,7 @@ const Navbar = ({setAuth}) => {
                         </Fragment>
                     }
                 </div>
+                <i className="fi-br-menu-burger burger-icon" onClick={handleSidebarToggle}/>
             </div>
             <div className="navbar-menu-container">
                 <i className="fi-br-bell bell" onClick={handleNotificationToggleClick}>
