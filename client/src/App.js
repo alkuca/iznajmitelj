@@ -1,5 +1,5 @@
 import './App.scss';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import {BrowserRouter as Router, Redirect, Route, Switch} from 'react-router-dom';
 import DashboardContent from "./components/DashboardContent";
 import LoginPage from "./components/LoginPage";
 import RegisterPage from "./components/RegisterPage";
@@ -21,10 +21,9 @@ import Loader from "./components/Loader";
 import NotificationsPage from "./components/NotificationsPage";
 
 function App() {
-
-
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [loading, setLoading] = useState(true);
+
     const checkAuthenticated = async () => {
         try {
             const res = await fetch("http://localhost:5000/auth/verify", {
@@ -33,7 +32,10 @@ function App() {
             });
 
             const parseRes = await res.json();
-            parseRes === true ? setIsAuthenticated(true) : setIsAuthenticated(false);
+            parseRes === true ?
+                setIsAuthenticated(true)
+                :
+                setIsAuthenticated(false);
             setLoading(false)
         } catch (err) {
             console.error(err.message);
@@ -48,11 +50,16 @@ function App() {
         setIsAuthenticated(boolean);
     };
 
-
   return (
       <Router>
-          {!loading ?
           <div className="App">
+              <Route path="/" render={() => (
+                  isAuthenticated ? (
+                      <Redirect to="/dashboard/stvari"/>
+                  ) : (
+                      <Redirect to="/auth/login"/>
+                  )
+              )}/>
               <Route exact path="/auth/register"
                   render={props => <RegisterPage {...props} setAuth={setAuth} />}
               />
@@ -79,9 +86,6 @@ function App() {
                   </DashboardContent>
               </PrivateRoute>
           </div>
-              :
-              <Loader/>
-          }
       </Router>
   );
 }

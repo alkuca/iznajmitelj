@@ -1,6 +1,5 @@
 import React, {useEffect} from "react";
 import PageTitle from "./PageTitle";
-import SelectDropdown from "./SelectDropdown";
 import ItemCard from "./ItemCard";
 import {useDispatch, useSelector} from "react-redux";
 import {bindActionCreators} from "redux";
@@ -9,7 +8,6 @@ import {itemActions} from "../state";
 const RentedPage = () => {
 
     const itemState = useSelector((state) => state.itemsState)
-
     const { getRentedItems } = bindActionCreators(itemActions, useDispatch())
 
     useEffect( ()  => {

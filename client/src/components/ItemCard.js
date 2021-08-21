@@ -10,7 +10,7 @@ import {Link, withRouter} from 'react-router-dom';
 import ReturnProcess from "./ReturnProcess";
 import {bindActionCreators} from "redux";
 import {itemActions} from "../state";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import moment from "moment";
 
 const ItemCard = props => {
@@ -20,8 +20,6 @@ const ItemCard = props => {
     const [codeEnterModal, toggleCodeEnterModal] = useState(false)
     const [returnProcessModal, toggleReturnProcessModal] = useState(false)
     const [timePassed, setTimePassed] = useState(false)
-
-    const itemState = useSelector((state) => state.itemsState)
 
     const deleteNote = "Jeste li sigurni da želite trajno izbrisat odabrani proizvod?"
     const postNote = "Klikom na Objavi proizvod postaje vidljiv ostalim korisnicima."
@@ -43,7 +41,6 @@ const ItemCard = props => {
 
     const handleDeleteClick = () => {
         toggleDeleteConfirmation(!deleteConfirmation)
-        console.log("delete click")
     }
 
     const deleteItemAction = async () => {
@@ -89,7 +86,7 @@ const ItemCard = props => {
         <div className="item-card-container">
             <Link to={`/dashboard/stvar/${props.item_id}`}>
                 <div className="image-container">
-                    <img src={props.item_image ? props.item_image : item} alt="Drone"/>
+                    <img src={props.item_image ? props.item_image : item} alt="item"/>
                     {window.location.pathname === "/dashboard/unajmljeno" &&
                     <div className="image-overlay">
                         {props.codeEntered ?

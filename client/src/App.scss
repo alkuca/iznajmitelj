@@ -1,6 +1,4 @@
 
-/* #####################################  START OF MIXINS  ###################################### */
-
 @mixin flex {
   display: flex;
 }
@@ -85,8 +83,6 @@ button:hover{
 .weight-500{
   font-weight: 500;
 }
-
-/* #####################################  START OF NAVBAR  ###################################### */
 
 .navbar-container {
   width: 100%;
@@ -465,9 +461,6 @@ button:hover{
   }
 }
 
-
-/* #####################################  START OF SIDEBAR  ###################################### */
-
 .sidebar-container {
   width: 250px;
   height: calc(100vh - 66px);
@@ -830,8 +823,11 @@ button:hover{
     padding: 23px 0 10px 0;
     @include center_vertical;
     img{
-      width: 300px;
+      width: 260px;
       margin: 10px 50px 30px 20px;
+      max-height: 100%;
+      border-radius: 50%;
+      min-height: 260px;
     }
     .info{
       div{
@@ -843,7 +839,10 @@ button:hover{
     }
   }
 }
-
+.no-hover{
+  opacity: 1 !important;
+  cursor: initial ;
+}
 
 .change-profile-container{
   margin-bottom: 30px;
@@ -891,6 +890,14 @@ button:hover{
     }
   }
 }
+
+.icon-button{
+  width: 50px !important;
+  padding-top: 5px;
+  i{
+    font-size: 20px;
+  }
+}
 .change-profile-container{
   width: 260px;
   height: 260px;
@@ -911,7 +918,7 @@ button:hover{
 .search-page-container{
   padding: 0 30px 0 10px ;
   .item-search-container{
-    padding: 10px 5px 10px 0;
+    padding: 5px 1px 5px 0;
     display: flex;
     background: #3C7BFF;
     border-radius: 50px;
@@ -920,10 +927,10 @@ button:hover{
     @include center_vertical;
     .icon-container{
       background: white;
-      width: 50px;
+      width: 48px;
       height: 40px;
       border-radius: 50px;
-      margin-left: 10px;
+      margin-left: 5px;
       @include center;
       i{
         color:#3C7BFF;
@@ -933,7 +940,7 @@ button:hover{
     }
     input{
       border: none;
-      margin: 0 5px 0 9px;
+      margin: 0 5px 0 5px;
       padding: 10px 0 10px 15px;
       border-radius: 20px;
       outline: none;
@@ -1785,7 +1792,17 @@ input[type="file"] {
 }
 
 
+/* */
+@media screen and (max-width: 1050px) {
+  .interested-img{
+    width: 100%;
+  }
+}
 
 
 
+
+
+
+/* #####################################  MEDIA QUERIES  ###################################### */
 

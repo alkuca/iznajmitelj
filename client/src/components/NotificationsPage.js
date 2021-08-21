@@ -7,7 +7,7 @@ import NotificationItem from "./NotificationItem";
 
 
 
-const NotificationsPage = props => {
+const NotificationsPage = () => {
 
     const notificationState = useSelector((state) => state.notificationState)
 

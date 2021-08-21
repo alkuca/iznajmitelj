@@ -1,7 +1,6 @@
 import React from 'react';
 import Moment from "react-moment";
 
-
 const HistoryCard = props => {
     return (
         <div className="history-card">

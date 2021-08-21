@@ -1,6 +1,5 @@
 import React, {Fragment, useState, useEffect} from "react";
 import LocationWithIcon from "./LocationWithIcon";
-import item from "../images/drone.png";
 import PriceWithTime from "./PriceWithTime";
 import RentProcess from "./RentProcess";
 import NewMessageModal from "./NewMessageModal";
@@ -10,7 +9,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {bindActionCreators} from "redux";
 import {itemActions, userActions} from "../state";
 import {useHistory, withRouter} from "react-router-dom";
-import {deleteItem} from "../state/actions/item";
 import ConfirmationModal from "./ConfirmationModal";
 
 const ItemPage = props => {
@@ -35,7 +33,6 @@ const ItemPage = props => {
 
     const handleDeleteClick = () => {
         toggleDeleteConfirmation(!deleteConfirmation)
-        console.log("delete click")
     }
 
     const handleNewMessageClick = () => {
@@ -50,10 +47,10 @@ const ItemPage = props => {
     useEffect(() => {
         getSingeItem(props.match.params.item_id)
             .then(r => getSingleUser(r[0].item_owner))
-    }, []);
+    });
 
-    useEffect( async ()  => {
-        await getRentedOutItems();
+    useEffect(()  => {
+        getRentedOutItems();
     }, []);
 
     useEffect( ()  => {
@@ -105,22 +102,11 @@ const ItemPage = props => {
                             <button onClick={handleRentModalToggle}>Unajmi</button>
                             }
                             {itemState.currentItem[0].item_owner !== userState.currentUser.user_id &&
-                            <button onClick={handleNewMessageClick}>Poruka</button>
+                            <button className="icon-button" onClick={handleNewMessageClick}><i className="fi-br-comment-alt"/></button>
                             }
                         </Fragment>
                     </div>
                 </div>
-                {/*
-                    <div className="details-container">
-                        <h1>Dodatan opis</h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget suscipit arcu, at pretium
-                            risus.</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget suscipit arcu, at pretium
-                            risus.</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget suscipit arcu, at pretium
-                            risus.</p>
-                    </div>
-                */}
                 <div className="map-container">
                     <h1>Lokacija</h1>
                     <MapInfo lat={itemState.currentItem[0].item_lat}
@@ -133,9 +119,11 @@ const ItemPage = props => {
                     <ContactInfo
                         email={userState.singleUser[0].user_email}
                         name={userState.singleUser[0].user_name}
+                        user_id={userState.singleUser[0].user_id}
                         city={userState.singleUser[0].user_city}
                         street={userState.singleUser[0].user_street}
                         street_number={userState.singleUser[0].user_street_number}
+                        user_image={userState.singleUser[0].user_image}
 
                     />
                 }

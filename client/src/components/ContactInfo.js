@@ -1,11 +1,11 @@
 import React, {Fragment} from 'react';
-import avatar_icon from "../images/icons/avatar.svg";
+import {Link} from "react-router-dom";
 
 const ContactInfo = props => {
     return (
         <Fragment>
             <div className="contact-container">
-                <img src={avatar_icon} alt="avatar"/>
+                <img src={props.user_image} alt="avatar"/>
                 <div className="info">
                     <div>
                         <p>Email: </p>
@@ -14,7 +14,9 @@ const ContactInfo = props => {
                     <div className="full-line"/>
                     <div>
                         <p>Ime i prezime: </p>
-                        <p className="weight-500">{props.name}</p>
+                        <Link to={`/dashboard/profil/${props.user_id}`}>
+                            <p className="weight-500">{props.name}</p>
+                        </Link>
                     </div>
                     <div>
                         <p>Adresa: </p>

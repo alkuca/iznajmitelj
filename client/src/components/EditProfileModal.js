@@ -1,10 +1,9 @@
 import React, {useState} from "react";
 import InputModal from "./InputModal";
 import InputField from "./InputField";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {bindActionCreators} from "redux";
 import {userActions} from "../state";
-import {getCurrentUser} from "../state/actions/user";
 
 const EditProfileModal = props => {
 

@@ -8,7 +8,7 @@ POST REQUEST - /rentItem
  */
 router.post("/rentItem", authorization, async (req, res) => {
     const user_id = req.user.id;
-    const {id, itemOwner, name, rentType, price, finalPrice, duration, paid, ownerName, renterName} = req.body;
+    const {id, itemOwner, name, rentType, price, finalPrice, duration, paid, ownerName, renterName,item_image} = req.body;
     const notificationType = 'renting'
 
     const timeElapsed = Date.now();
@@ -18,8 +18,8 @@ router.post("/rentItem", authorization, async (req, res) => {
     try {
 
         const newRentItem = await pool.query(
-            "INSERT INTO rented_items (owner_id,renter_id,item_id,duration,price_per_day,price,delivery_type,item_name,paid,owner_name,renter_name) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11) RETURNING  *", [
-                itemOwner, user_id, id, duration, price, finalPrice, rentType, name, paid, ownerName, renterName]
+            "INSERT INTO rented_items (owner_id,renter_id,item_id,duration,price_per_day,price,delivery_type,item_name,paid,owner_name,renter_name,item_image) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12) RETURNING  *", [
+                itemOwner, user_id, id, duration, price, finalPrice, rentType, name, paid, ownerName, renterName, item_image]
         );
 
         await pool.query(

@@ -28,11 +28,9 @@ const ProfilePage = props => {
         toggleNewMessageModal(!newMessageModal)
     }
 
-
     const handleClick = e => {
         setSelectedFile(e.target.files[0])
     }
-
 
     useEffect(() => {
         getSingleUser(props.match.params.user_id)
@@ -74,11 +72,13 @@ const ProfilePage = props => {
                 <div className="contact-container">
                     <div className="change-profile-container">
                         {imageUploading && <Loader className="loader-container"/>}
+                        {(!imageUploading && userState.singleUser[0].user_id === userState.currentUser.user_id) ?
                         <label>
                             <input type="file" name="image" onChange={handleClick}/>
                             {!imageUploading &&
                             <img className="profile-image"
-                                 src={userState.singleUser[0].user_image ? userState.singleUser[0].user_image : avatar_icon} alt="avatar"/>
+                                 src={userState.singleUser[0].user_image ? userState.singleUser[0].user_image : avatar_icon}
+                                 alt="avatar"/>
                             }
                             <div className="upload-hover">
                                 {!imageUploading &&
@@ -89,6 +89,11 @@ const ProfilePage = props => {
                                 }
                             </div>
                         </label>
+                            :
+                            <img className="profile-image no-hover"
+                                 src={userState.singleUser[0].user_image ? userState.singleUser[0].user_image : avatar_icon}
+                                 alt="avatar"/>
+                        }
                     </div>
                     <div className="full-line"/>
                     <div className="info">

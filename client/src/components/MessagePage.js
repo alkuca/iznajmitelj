@@ -22,7 +22,6 @@ function MessagePage (props) {
         getSingleMessage(props.match.params.message_id)
     }, []);
 
-
     return (
         <div className="message-page-container">
             {!messageState.currentMessageLoading &&
@@ -31,7 +30,7 @@ function MessagePage (props) {
                     {messageState.currentMessage[0].sender_id === userState.currentUser.user_id ?
                         <Fragment>
                             <p className="weight-500">Prima:</p>
-                            <Link to={`/dashboard/profil/${messageState.currentMessage[0].receiver_name}`}>
+                            <Link to={`/dashboard/profil/${messageState.currentMessage[0].receiver_id}`}>
                                 <p>{messageState.currentMessage[0].receiver_name}</p>
                             </Link>
                         </Fragment>

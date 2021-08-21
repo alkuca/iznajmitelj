@@ -20,8 +20,6 @@ const Navbar = ({setAuth}) => {
     const ref2 = useRef(null)
     const [notificationDropdown, toggleNotificationDropdown] = useState(false)
 
-    const notificationState = useSelector((state) => state.notificationState)
-
     const {getUserNotifications} = bindActionCreators(notificationActions, useDispatch())
 
     const handleToggleClick = () => {

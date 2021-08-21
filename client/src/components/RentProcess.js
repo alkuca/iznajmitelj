@@ -2,10 +2,7 @@ import React, {useEffect, useState} from "react";
 import InputModal from "./InputModal";
 import PageTitle from "./PageTitle";
 import DeliveryTypeCard from "./DeliveryTypeCard";
-import cashImage from "../images/cash.png";
-import paypalImage from "../images/paypalLogo.jpg"
 import PriceWithTime from "./PriceWithTime";
-import PayPal from "./PayPal";
 import {useDispatch, useSelector} from "react-redux";
 import {bindActionCreators} from "redux";
 import {itemActions} from "../state";
@@ -68,7 +65,7 @@ function RentProcess (props) {
             name: itemState.currentItem[0].item_name,
             price: itemState.currentItem[0].item_price
         });
-    }, []);
+    }, [itemState.currentItem]);
 
     return (
         <InputModal>

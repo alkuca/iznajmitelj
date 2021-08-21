@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import PageTitle from "./PageTitle";
 import ItemCard from "./ItemCard";
-import SelectDropdown from "./SelectDropdown";
 import CreateItemModal from "./CreateItemModal";
 import {useDispatch, useSelector} from "react-redux";
 import {bindActionCreators} from "redux";
@@ -17,7 +16,6 @@ function ItemsPage () {
     }
 
     const itemState = useSelector((state) => state.itemsState)
-
     const { getUserItems, getRentedOutItems } = bindActionCreators(itemActions, useDispatch())
 
     useEffect( ()  => {

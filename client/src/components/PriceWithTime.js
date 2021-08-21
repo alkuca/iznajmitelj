@@ -1,7 +1,6 @@
 import React from "react";
 
-
-const PriceWithTime = (props) => {
+const PriceWithTime = props => {
     return (
         <div className="price-container">
             <h2>{props.price} kn</h2>

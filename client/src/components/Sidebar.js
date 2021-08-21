@@ -7,7 +7,6 @@ function Sidebar () {
             <div className="sidebar-container">
                 <div className="inner-container">
                     <div className="links-container">
-                        {/* <LinkWithIcon text="Nadzorna ploča" icon="home"/> */}
                         <LinkWithIcon text="Moje stvari" icon="box" goTo="/dashboard/stvari"/>
                         <LinkWithIcon text="Moje objave" icon="document" goTo="/dashboard/objave"/>
                         <LinkWithIcon text="Unajmljeno" icon="arrow-small-down" goTo="/dashboard/unajmljeno"/>

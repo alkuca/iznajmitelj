@@ -1,6 +1,6 @@
 import React from 'react';
 
-function PageTitle (props) {
+const PageTitle = props => {
 
     return (
         <div className="title-container">

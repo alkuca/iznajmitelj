@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react';
 import PageTitle from "./PageTitle";
-import SelectDropdown from "./SelectDropdown";
 import {useDispatch, useSelector} from "react-redux";
 import {bindActionCreators} from "redux";
 import {itemActions} from "../state";
