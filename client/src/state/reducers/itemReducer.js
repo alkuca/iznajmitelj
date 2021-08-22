@@ -74,7 +74,8 @@ const reducer = (state = initialState, action) => {
         case "RENT_ITEM":{
             return {
                 ...state,
-                rentedItem: action.payload
+                rentedItem: action.payload,
+                rentedItemsLoading:true,
             }
         }
         case "GET_RENTED_ITEMS":{

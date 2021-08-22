@@ -123,7 +123,7 @@ button:hover{
     }
     input {
       height: 30px;
-      width: 150px;
+      width: 300px;
       border:none;
       outline: none;
       font-size: 18px;
@@ -131,7 +131,8 @@ button:hover{
       margin-left: 5px;
     }
     input::placeholder {
-      font-size: 18px;
+      font-size: 19px;
+      color: #3d3d3d;
     }
     input:focus{
       border-bottom: 1px solid #838383;
@@ -167,10 +168,10 @@ button:hover{
    }
   .avatar {
     padding:0 15px;
-    width: 42px;
-    height: 42px;
+    width: 38px;
+    height: 38px;
     border-radius: 50%;
-    margin-top: 12px;
+    margin-top: 14px;
   }
   .name-container {
     display: flex;
@@ -183,8 +184,9 @@ button:hover{
     p {
       @include center_vertical;
       font-weight: bold;
-      font-size: 17px;
+      font-size: 16px;
       white-space: nowrap;
+      overflow: hidden;
     }
   }
   .navbar-dropdown{
@@ -242,6 +244,25 @@ button:hover{
 
 .is-cleared{
   background: white !important;
+}
+
+.rent-now-button{
+  margin: 36px 0 16px 0;
+  width: calc(100% - 45px);
+  height: 42px;
+  background: #3c7bff;
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+  border-radius: 4px;
+  @include center_vertical;
+  justify-content: center;
+  border: none;
+  transition: 0.3s;
+}
+.rent-now-icon{
+  margin-left: 5px;
+  margin-top: 4px;
 }
 
 .notification-container{
@@ -316,14 +337,13 @@ button:hover{
   justify-content: flex-end;
   padding: 15px 0 15px 0;
   opacity: 0;
-  position: absolute;
-  bottom: 5px;
-  right: 5px;
+  background: #f6f9ff;
+  border-bottom: 1px solid #c8daff;
   button{
     margin:0 15px 0 5px;
     border:none;
     background: none;
-    font-weight: 500;
+    font-weight: 600;
     font-size: 15px;
   }
   button:nth-child(1){
@@ -349,6 +369,8 @@ button:hover{
   top: 52px;
   right: 225px;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 }
 .no-notifications{
   position: absolute;
@@ -538,21 +560,48 @@ button:hover{
   flex-wrap: wrap;
 }
 
+.is-renting-glow{
+  animation-name:glow;
+  animation-duration: 1s;
+  animation-delay: 0.3s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes glow {
+  from{
+    box-shadow: 0 0 7px rgba(0, 0, 0, 0.12);
+    border: 1px solid transparent;
+  }
+  to{
+    box-shadow: 0 0 19px rgba(111, 158, 255, 0.4);
+    border: 1px solid #3c7bff5e;
+  }
+}
+.item-card-container:hover{
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.17);
+}
+
 .item-card-container {
   margin: 0 35px 35px 0;
+  transition: 0.2s;
   flex-shrink: 0;
   width: 24%;
+  border: 1px solid transparent;
   max-width: 280px;
   min-width: 240px;
   border-radius: 8px;
   position: relative;
   @include drop_shadow_center;
   .image-container {
-    padding:10px 15px;
     position: relative;
-    img {
-      width: 100%;
-      border-radius: 8px 8px 0 0;
+    .card-image-container{
+      padding: 20px 15px;
+      height: 147px;
+      @include center;
+      img {
+        width: 100%;
+        border-radius: 8px;
+      }
     }
     .image-overlay {
       width: 100%;
@@ -707,7 +756,7 @@ button:hover{
   .map-container{
     width: 100%;
     .leaflet-container{
-      width:100%;
+      width:800px;
       height: 500px;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
       z-index: 0;
@@ -738,6 +787,8 @@ button:hover{
     flex: 1 1 300px;
     img {
       width: 100%;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      border-radius: 8px;
     }
     .thumbnail-container {
       width: 100%;
@@ -1228,6 +1279,7 @@ input[type="file"] {
     position: absolute;
     top:30px;
     left: 50px;
+    width: 110px;
   }
   .auth-container{
     @include center_vertical_column;
@@ -1264,7 +1316,7 @@ input[type="file"] {
           margin: 0;
         }
         a{
-          color: #505050;
+          color: #3C7BFF;
           font-size: 13px;
           font-weight: 600;
           margin-left:5px;
@@ -1351,7 +1403,7 @@ input[type="file"] {
   width:100%;
   border-radius: 4px;
   border: 1px solid #e0e0e0;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
   margin: 5px 0 20px 0;
   display: flex;
   justify-content: space-between;
@@ -1483,6 +1535,11 @@ input[type="file"] {
 .same-row{
   display: flex;
   align-items: center;
+  p{
+    font-weight: 600;
+    color: #3C7BFF;
+    font-size: 17px;
+  }
 }
 
 .card-renter{
@@ -1663,17 +1720,27 @@ input[type="file"] {
     }
   }
 }
-
+.understand-container{
+  @include center_horizontal;
+  margin: 25px 15px 5px 0;
+  input{
+    margin-right: 10px;
+  }
+}
 .renting-process{
   .code-info-container{
     @include center_vertical_column;
     h1{
       font-size: 18px;
+      color: #3c7bff;
+      margin-top: 18px;
     }
     .code-info{
       p{
         max-width: 500px;
+        font-size: 17px;
         text-align: center;
+        margin-top: 5px;
       }
     }
   }
@@ -1877,6 +1944,14 @@ input[type="file"] {
 }
 
 @media screen and (max-width: 1000px) {
+  .map-step-return{
+    .map-container{
+      .leaflet-container{
+        width:100%;
+        height: 500px;
+      }
+    }
+  }
   .search-container {
     padding: 0 20px 0 260px;
     width: fit-content;
@@ -1890,6 +1965,22 @@ input[type="file"] {
 }
 
 @media screen and (max-width: 795px) {
+  .auth-page{
+    height: auto;
+    .auth-page-logo{
+      position: initial !important;
+      margin-top: 15px;
+      margin-bottom: 20px;
+    }
+    .auth-container{
+      .input-form{
+        button{
+          margin: 20px 0 35px -20px;
+        }
+      }
+    }
+
+  }
   .delivery-card{
     max-width: 400px;
     padding: 30px 10px 30px 10px;
@@ -1901,6 +1992,12 @@ input[type="file"] {
     cursor: pointer;
     border-radius: 3px;
     transition: 0.1s;
+  }
+  .rent-now-button{
+    display: none;
+  }
+  .rent-now-icon{
+    display: none;
   }
   .statistics-page-container{
     width: calc(100% - 15px);
@@ -2060,10 +2157,6 @@ input[type="file"] {
       }
     }
   }
-  .navbar-menu-container {
-    padding: 0 20px 0 0;
-    margin-left: auto;
-  }
   .title-container{
     padding: 5px 10px 5px 0;
     h1{
@@ -2142,6 +2235,13 @@ input[type="file"] {
   .item-card-container {
     width: calc(50% - 20px);
   }
+  .navbar-menu-container{
+    .name-container{
+      p{
+        max-width: 15ch;
+      }
+    }
+  }
   .contact-container{
     @include center_vertical_column;
     .info{
@@ -2177,6 +2277,16 @@ input[type="file"] {
       .bell-has-content{
         right: 12px;
         bottom: 22px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .navbar-menu-container{
+    .name-container{
+      p{
+        width:0 !important;
       }
     }
   }

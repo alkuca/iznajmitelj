@@ -1,5 +1,5 @@
 import './App.scss';
-import {BrowserRouter as Router, Redirect, Route, Switch} from 'react-router-dom';
+import {Route, Switch, withRouter} from 'react-router-dom';
 import DashboardContent from "./components/DashboardContent";
 import LoginPage from "./components/LoginPage";
 import RegisterPage from "./components/RegisterPage";
@@ -20,30 +20,31 @@ import StatisticsPage from "./components/StatisticsPage";
 import Loader from "./components/Loader";
 import NotificationsPage from "./components/NotificationsPage";
 
+
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [loading, setLoading] = useState(true);
 
     const checkAuthenticated = async () => {
         try {
-            const res = await fetch("http://localhost:5000/auth/verify", {
+            return await fetch("http://localhost:5000/auth/verify", {
                 method: "POST",
                 headers: { token: localStorage.token }
             });
-
-            const parseRes = await res.json();
-            parseRes === true ?
-                setIsAuthenticated(true)
-                :
-                setIsAuthenticated(false);
-            setLoading(false)
         } catch (err) {
             console.error(err.message);
         }
     };
 
     useEffect(() => {
-        checkAuthenticated()
+        checkAuthenticated().then(r => {
+            if(r.ok){
+                setIsAuthenticated(true)
+            }else{
+                setIsAuthenticated(false);
+            }
+            setLoading(false)
+        })
     }, []);
 
     const setAuth = boolean => {
@@ -51,23 +52,20 @@ function App() {
     };
 
   return (
-      <Router>
+      <div>
           {!loading ?
           <div className="App">
-              <Route path="/" render={() => (
-                  !isAuthenticated &&
-                      <Redirect to="/auth/login"/>
-              )}/>
-              <Route exact path="/auth/register"
+
+              <Route path="/auth/register"
                   render={props => <RegisterPage {...props} setAuth={setAuth} />}
               />
-              <Route exact path="/auth/login"
+              <Route path="/auth/login"
                   render={props => <LoginPage {...props} setAuth={setAuth} />}
               />
-              <PrivateRoute isAuthenticated={isAuthenticated} path="/dashboard">
+              <PrivateRoute isAuthenticated={isAuthenticated} path="/">
                   <DashboardContent setAuth={setAuth} >
                       <Switch>
-                          <Route path="/dashboard/stvari" component={ItemsPage}/>
+                          <Route exact path="/dashboard/stvari" component={ItemsPage}/>
                           <Route path="/dashboard/trazi" component={SearchPage}/>
                           <Route path="/dashboard/stvar/:item_id" component={ItemPage}/>
                           <Route path="/dashboard/postavke" component={SettingsPage}/>
@@ -87,8 +85,8 @@ function App() {
               :
               <Loader/>
           }
-      </Router>
+      </div>
   );
 }
 
-export default App;
+export default withRouter(App);

@@ -1,6 +1,6 @@
 import React from "react";
 import LinkWithIcon from "./LinkWithIcon";
-import {withRouter} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import classnames from "classnames";
 import {useDispatch, useSelector} from "react-redux";
 import {bindActionCreators} from "redux";
@@ -20,6 +20,13 @@ const Sidebar = () => {
             })}>
                 <div className="inner-container">
                     <div className="links-container">
+                        <Link to="/dashboard/trazi">
+                            <button className={classnames("rent-now-button", {
+                                "button-disabled": window.location.pathname === "/dashboard/trazi"
+                            })}>Unajmi odmah
+                                <i className="fi-br-angle-double-small-right rent-now-icon"/>
+                            </button>
+                        </Link>
                         <LinkWithIcon text="Moje stvari" icon="box" goTo="/dashboard/stvari"/>
                         <LinkWithIcon text="Moje objave" icon="document" goTo="/dashboard/objave"/>
                         <LinkWithIcon text="Unajmljeno" icon="arrow-small-down" goTo="/dashboard/unajmljeno"/>

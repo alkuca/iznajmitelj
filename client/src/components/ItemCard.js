@@ -12,6 +12,7 @@ import {bindActionCreators} from "redux";
 import {itemActions} from "../state";
 import {useDispatch} from "react-redux";
 import moment from "moment";
+import classnames from "classnames";
 
 const ItemCard = props => {
 
@@ -22,7 +23,7 @@ const ItemCard = props => {
     const [timePassed, setTimePassed] = useState(false)
 
     const deleteNote = "Jeste li sigurni da želite trajno izbrisat odabrani proizvod?"
-    const postNote = "Klikom na Objavi proizvod postaje vidljiv ostalim korisnicima."
+    const postNote = "Klikom na objavi proizvod postaje vidljiv ostalim korisnicima."
 
     const { postItem, deletePost, getUserItems, finishRentingByOwner,getRentedOutItems,deleteItem } = bindActionCreators(itemActions, useDispatch())
 
@@ -83,10 +84,14 @@ const ItemCard = props => {
 
 
     return (
-        <div className="item-card-container">
+        <div className={classnames("item-card-container", {
+            "is-renting-glow": window.location.pathname === "/dashboard/unajmljeno" && props.codeEntered && !timePassed
+        })}>
             <Link to={`/dashboard/stvar/${props.item_id}`}>
                 <div className="image-container">
-                    <img src={props.item_image ? props.item_image : item} alt="item"/>
+                    <div className="card-image-container">
+                        <img src={props.item_image ? props.item_image : item} alt="item"/>
+                    </div>
                     {window.location.pathname === "/dashboard/unajmljeno" &&
                     <div className="image-overlay">
                         {props.codeEntered ?
@@ -246,6 +251,7 @@ const ItemCard = props => {
                 handleModalToggle={handleReturnClick}
                 rented_item_id={props.rented_item_id}
                 owner_id={props.owner_id}
+                owner_name={props.owner_name}
                 item_id={props.item_id}/>
             }
         </div>

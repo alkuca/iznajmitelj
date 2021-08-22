@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import InputField from "./InputField";
 import {Link, useHistory} from "react-router-dom";
+import logo from "../images/LogoF.svg";
 
 function RegisterPage ({setAuth}) {
 
@@ -85,18 +86,18 @@ function RegisterPage ({setAuth}) {
     return (
         <div className="auth-page">
             <div className="auth-page-logo">
-                <p>Rent</p>
+                <img src={logo} alt="logo"/>
             </div>
             <div className="auth-container">
                 <h1>Izrada Računa</h1>
                 <div className="input-form">
-                    <InputField className="input-container auth-input" type="text" label="Email" name="email" onChange={e => onFormChange(e)}/>
-                    <InputField className="input-container auth-input" type="text" label="Ime i prezime" name="name" onChange={e => onFormChange(e)}/>
-                    <InputField className="input-container auth-input" type="password" label="Lozinka" name="password" onChange={e => onFormChange(e)}/>
-                    <InputField className="input-container auth-input" type="text" label="Ulica" name="street" onChange={e => onFormChange(e)}/>
-                    <InputField className="input-container auth-input" type="text" label="Broj" name="street_number" onChange={e => onFormChange(e)}/>
-                    <InputField className="input-container auth-input" type="text" label="Grad" name="city" onChange={e => onFormChange(e)}/>
-                    <InputField className="input-container auth-input" type="text" label="Županija" name="state" onChange={e => onFormChange(e)}/>
+                    <InputField className="input-container auth-input" type="text" label="Email*" name="email" onChange={e => onFormChange(e)}/>
+                    <InputField className="input-container auth-input" type="text" label="Ime i prezime*" name="name" onChange={e => onFormChange(e)}/>
+                    <InputField className="input-container auth-input" type="password" label="Lozinka*" name="password" onChange={e => onFormChange(e)}/>
+                    <InputField className="input-container auth-input" type="text" label="Ulica*" name="street" onChange={e => onFormChange(e)}/>
+                    <InputField className="input-container auth-input" type="text" label="Broj*" name="street_number" onChange={e => onFormChange(e)}/>
+                    <InputField className="input-container auth-input" type="text" label="Grad*" name="city" onChange={e => onFormChange(e)}/>
+                    <InputField className="input-container auth-input" type="text" label="Županija*" name="state" onChange={e => onFormChange(e)}/>
                     <div className="auth-question">
                         <p>Već imate Račun?</p>
                         <Link to="/auth/login">

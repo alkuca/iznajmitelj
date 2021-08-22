@@ -7,6 +7,7 @@ import {bindActionCreators} from "redux";
 import {itemActions, userActions} from "../state";
 import {useDispatch, useSelector} from "react-redux";
 import MapInfo from "./MapInfo";
+import {Link} from "react-router-dom";
 
 
 function ReturnProcess (props) {
@@ -83,6 +84,12 @@ function ReturnProcess (props) {
                                               item_street={userState.singleUser[0].user_street}
                                               item_street_number={userState.singleUser[0].user_street_number}
                             />
+                        </div>
+                        <div className="same-row">
+                            <h1>Vlasnik:</h1>
+                            <Link to={`/dashboard/profil/${props.owner_id}`}>
+                                <p>{props.owner_name}</p>
+                            </Link>
                         </div>
                         <MapInfo lat={userState.singleUser[0].lat}
                                  long={userState.singleUser[0].long}

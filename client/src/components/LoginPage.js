@@ -1,6 +1,7 @@
 import React,{useState} from 'react';
 import InputField from "./InputField";
-import {Link, useHistory} from "react-router-dom";
+import {Link, useHistory, withRouter} from "react-router-dom";
+import logo from "../images/LogoF.svg";
 
 function LoginPage ({setAuth}) {
 
@@ -47,7 +48,7 @@ function LoginPage ({setAuth}) {
     return (
         <div className="auth-page">
             <div className="auth-page-logo">
-                <p>Rent</p>
+                <img src={logo} alt="logo"/>
             </div>
             <div className="auth-container">
                 <h1>Prijava</h1>
@@ -67,5 +68,5 @@ function LoginPage ({setAuth}) {
     )
 }
 
-export default LoginPage;
+export default withRouter(LoginPage);
 

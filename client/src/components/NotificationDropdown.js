@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import classnames from "classnames";
 import NotificationItem from "./NotificationItem";
 import {useDispatch, useSelector} from "react-redux";
@@ -15,6 +15,7 @@ const NotificationDropdown = props => {
     const clearUserNotificationsAction = () => {
         clearUserNotifications().then( r => {
             if(r){
+                props.clearNotificationsA()
                 getUserNotifications()
             }
         })
@@ -25,6 +26,10 @@ const NotificationDropdown = props => {
         <div className={classnames("notification-dropdown", {
             "t2": props.notificationDropdown
         })}>
+            <div className="notification-buttons">
+                <Link to="/dashboard/obavijesti"><button className="clear-notifications">Prikazi sve</button></Link>
+                <button onClick={clearUserNotificationsAction} className="clear-notifications">Izbrisi</button>
+            </div>
             { (!notificationState.loading ) &&
             notificationState.notifications.filter(n => !n.clear_notification).map( notification => {
                 return <NotificationItem
@@ -44,10 +49,6 @@ const NotificationDropdown = props => {
             {!props.hasNotifications &&
             <p className="no-notifications">Trenutno nema obavijesti</p>
             }
-            <div className="notification-buttons">
-                <Link to="/dashboard/obavijesti"><button className="clear-notifications">Prikazi sve</button></Link>
-                <button onClick={clearUserNotificationsAction} className="clear-notifications">Izbrisi</button>
-            </div>
         </div>
     )
 }

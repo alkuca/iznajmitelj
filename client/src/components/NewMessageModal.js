@@ -6,6 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {bindActionCreators} from "redux";
 import {messageActions} from "../state";
 import {Link} from "react-router-dom";
+import classnames from "classnames";
 
 const NewMessageModal = props => {
 
@@ -43,7 +44,11 @@ const NewMessageModal = props => {
                 <InputTextarea id="opis" name="message_text" rows={4} className="textarea-container" label="Poruka" onChange={e => onFormChange(e)}/>
             </div>
             <div className="button-container">
-                <button onClick={sendMessageAction} className="confirm">Pošalji</button>
+                <button onClick={sendMessageAction} className={classnames("confirm", {
+                    "button-disabled": !formData.message_title
+                })}>
+                    Pošalji
+                </button>
                 <button onClick={props.closeModal} className="cancel">Odustani</button>
             </div>
         </InputModal>

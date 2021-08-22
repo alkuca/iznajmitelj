@@ -15,7 +15,7 @@ const Navbar = ({setAuth}) => {
     const location = useLocation();
     const history = useHistory();
     const [dropdown, toggleDropdown] = useState(false)
-    const [hasNotifications, setHasNotifications] = useState(false)
+    const [hasNotifications, setHasNotifications] = useState(null)
     const ref = useRef(null);
     const ref2 = useRef(null)
     const [notificationDropdown, toggleNotificationDropdown] = useState(false)
@@ -78,6 +78,10 @@ const Navbar = ({setAuth}) => {
         toggleSidebar()
     }
 
+    const clearNotificationsA = () => {
+      setHasNotifications(false)
+    }
+
     useEffect( () => {
         getUserNotifications().then(r => {
             if(r){
@@ -95,7 +99,7 @@ const Navbar = ({setAuth}) => {
         <div className="navbar-container">
             <div className="logo-container">
                 <Link to="/dashboard/stvari">
-                    <img src={logo} alt="Avatar"/>
+                    <img src={logo} alt="logo"/>
                 </Link>
             </div>
             <div className="search-container">
@@ -122,7 +126,10 @@ const Navbar = ({setAuth}) => {
                     }
                 </i>
                 {notificationDropdown &&
-                <NotificationDropdown notificationDropdown={notificationDropdown} hasNotifications={hasNotifications} handleNotificationToggleClick={handleNotificationToggleClick}/>
+                <NotificationDropdown notificationDropdown={notificationDropdown}
+                                      hasNotifications={hasNotifications}
+                                      clearNotificationsA={clearNotificationsA}
+                                      handleNotificationToggleClick={handleNotificationToggleClick}/>
                 }
                 <img className="avatar" src={userState.currentUser.user_image ? userState.currentUser.user_image : avatar_icon} alt="Avatar"/>
                 <div ref={ref2} className="name-container" onClick={handleToggleClick}>

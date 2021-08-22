@@ -7,6 +7,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {bindActionCreators} from "redux";
 import {itemActions} from "../state";
 import {useHistory} from "react-router-dom";
+import classnames from "classnames";
 
 function RentProcess (props) {
 
@@ -16,6 +17,9 @@ function RentProcess (props) {
     const history = useHistory();
 
     const {rentItem} = bindActionCreators(itemActions, useDispatch())
+
+    const [understand, toggleUnderstand] = useState(false)
+
 
     const [step, setStep] = useState(1)
     const [formData, setFormData] = useState({
@@ -31,6 +35,9 @@ function RentProcess (props) {
         paid: false
     });
 
+    const handleCheckmarkClick = () => {
+        toggleUnderstand(!understand)
+    }
 
     const moveStep = () => {
       setStep(step + 1)
@@ -78,13 +85,13 @@ function RentProcess (props) {
                                 data-mssg="Hello!"
                                 moveStep={setDelivery}
                                 title="Zatraži dostavu"
-                                description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget suscipit arcu, at pretium risus."
+                                description="Vlasnik će poslat proizvod na tvoju adresu. Za dodatne dogovore ili upite pošaljite poruku"
                                 icon="fi-rr-location-alt"
                             />
                             <DeliveryTypeCard
                                 moveStep={setOwn}
                                 title="Vlastito preuzimanje"
-                                description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget suscipit arcu."
+                                description="Proizvod će vas ćekat na navedenoj adresi. Za dodatne dogovore ili upite pošaljite poruku"
                                 icon="fi-rr-home"
                             />
                             <div className="button-container">
@@ -95,7 +102,7 @@ function RentProcess (props) {
                 }
                 {step === 2 &&
                 <div className="duration-step">
-                    <h1>Odaberi kolicinu dana iznajmljivnja</h1>
+                    <h1>Odaberi trajanje najma u danima</h1>
                     <div className="price-info">
                         <p>Cijena:</p>
                         <PriceWithTime price={itemState.currentItem[0].item_price} timeFormat="24h"/>
@@ -120,10 +127,23 @@ function RentProcess (props) {
                     <i className="fi-rr-exclamation icon-large"/>
                     <h1>Jedinstveni kod od iznajmitelja</h1>
                     <div className="code-info">
-                        <p>Prilikom preuzimanja ili dostave proizvoda dobit ćes jedinstveni kod kojeg je potrebno unjet kako bi zapoceo proces iznajmljivanja</p>
+                        <p>Prilikom preuzimanja ili dostave proizvoda dobit ćes jedinstvenu šifru koju je potrebno unijet kako bi zapoćeo najam</p>
+                    </div>
+                    <div className="full-line"/>
+                    <h1>Plaćanje</h1>
+                    <div className="code-info">
+                        <p>Plaćanje se odvija prema vlastitom dogovoru sa najmodavcem.</p>
+                    </div>
+                    <div className="understand-container">
+                        <input className="understand" type="checkbox" onChange={handleCheckmarkClick}/>
+                        <label>Razumijem</label>
                     </div>
                     <div className="button-container">
-                        <button onClick={rentItemAction} className="confirm">Unajmi</button>
+                        <button onClick={rentItemAction} className={classnames("confirm", {
+                            "button-disabled": !understand
+                        })}>
+                            Unajmi
+                        </button>
                         <button onClick={props.handleModalToggle} className="cancel">Odustani</button>
                     </div>
                 </div>

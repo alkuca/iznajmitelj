@@ -1,5 +1,5 @@
 import React from 'react';
-import {Redirect, Route} from "react-router-dom";
+import {Redirect, Route, withRouter} from "react-router-dom";
 
 const PrivateRoute = ({isAuthenticated,children, ...rest}) => {
 
@@ -12,4 +12,4 @@ const PrivateRoute = ({isAuthenticated,children, ...rest}) => {
     );
 };
 
-export default PrivateRoute;
+export default withRouter(PrivateRoute);
