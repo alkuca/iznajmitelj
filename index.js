@@ -14,7 +14,7 @@ app.use(express.json()); // req.body
 app.use(cors());
 
 if (process.env.NODE_ENV === "production") {
-    //server static content
+    //serve static content
     //npm run build
     app.use(express.static(path.join(__dirname, "client/build")));
 }
