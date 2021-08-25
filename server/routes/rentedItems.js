@@ -29,7 +29,7 @@ router.post("/rentItem", authorization, async (req, res) => {
 
         await pool.query("UPDATE items SET item_posted=false WHERE item_id=$1",[id]);
 
-        res.json(newRentItem);
+        res.json(newRentItem.rows);
     } catch (err) {
         console.error(err.message);
         res.status(500).send("Server error");

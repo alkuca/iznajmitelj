@@ -94,3 +94,9 @@ export const changeAvatar = data => async dispatch => {
         console.error(err.message);
     }
 }
+
+export const clearSingleUser = () => dispatch => {
+    dispatch({
+        type: "CLEAR_SINGLE_USER"
+    })
+}

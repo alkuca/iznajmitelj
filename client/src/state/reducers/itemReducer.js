@@ -74,7 +74,7 @@ const reducer = (state = initialState, action) => {
         case "RENT_ITEM":{
             return {
                 ...state,
-                rentedItem: action.payload,
+                rentedItem: [...state.rentedItem, action.payload[0]],
                 rentedItemsLoading:true,
             }
         }
@@ -89,7 +89,7 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 rentedOutItemsLoading: false,
-                rentedOutItems: action.payload
+                rentedOutItems: action.payload,
             }
         }
         case "VERIFY_RENTED_ITEM":{
@@ -100,6 +100,13 @@ const reducer = (state = initialState, action) => {
         case "FINISH_RENTING":{
             return {
                 ...state
+            }
+        }
+        case "CLEAR_CURRENT_ITEM":{
+            return {
+                ...state,
+                currentItemLoading: true,
+                currentItem: {}
             }
         }
         default:

@@ -23,6 +23,11 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state
             }
+        case "CLEAR_SINGLE_USER":
+            return {
+                ...state,
+                singleUser: {}
+            }
         default:
             return state
     }

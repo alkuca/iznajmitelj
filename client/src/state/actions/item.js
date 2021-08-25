@@ -366,3 +366,10 @@ export const verifyRentedItem = formData => async dispatch => {
         console.error(err.message);
     }
 }
+
+export const clearCurrentItem = () => dispatch => {
+    dispatch({
+        type: "CLEAR_CURRENT_ITEM"
+    })
+}
+
