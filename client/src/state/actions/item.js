@@ -1,7 +1,7 @@
 export const getAllItems = () => async dispatch => {
     try {
         const res = await fetch(
-            "http://localhost:5000/items/getAllItems",
+            "/items/getAllItems",
             {
                 method: "GET",
                 headers: {
@@ -25,7 +25,7 @@ export const getAllItems = () => async dispatch => {
 export const getAllPosts = () => async dispatch => {
     try {
         const res = await fetch(
-            "http://localhost:5000/items/getAllPosts",
+            "/items/getAllPosts",
             {
                 method: "GET",
                 headers: {
@@ -49,7 +49,7 @@ export const getAllPosts = () => async dispatch => {
 export const getSingeItem = item_id => async dispatch => {
     try {
         const res = await fetch(
-            `http://localhost:5000/items/getSingleItem/${item_id}`,
+            `/items/getSingleItem/${item_id}`,
             {
                 method: "GET",
                 headers: {
@@ -74,7 +74,7 @@ export const createItem = item => async dispatch => {
     const token = localStorage.getItem("token");
     try {
          const response = await fetch(
-            "http://localhost:5000/items/createItem",
+            "/items/createItem",
             {
                 method: "POST",
                 headers: {
@@ -99,7 +99,7 @@ export const createItem = item => async dispatch => {
 export const uploadItemImage = base64EncodedImage => async dispatch => {
     try {
         const res = await fetch(
-            "http://localhost:5000/items/uploadItemImage",
+            "/items/uploadItemImage",
             {
                 method: "POST",
                 headers: {
@@ -125,7 +125,7 @@ export const deleteItem = item_id => async dispatch => {
     const token = localStorage.getItem("token");
     try {
         const response = await fetch(
-            `http://localhost:5000/items/deleteItem/${item_id}`,
+            `/deleteItem/${item_id}`,
             {
                 method: "DELETE",
                 headers: {
@@ -149,7 +149,7 @@ export const getUserItems = () => async dispatch => {
     const token = localStorage.getItem("token");
     try {
         const res = await fetch(
-            "http://localhost:5000/items/getUserItems",
+            "/items/getUserItems",
             {
                 method: "GET",
                 headers: {
@@ -174,7 +174,7 @@ export const postItem = id => async dispatch => {
     const token = localStorage.getItem("token");
     try {
         const res = await fetch(
-            `http://localhost:5000/items/postItem/${id}`,
+            `/items/postItem/${id}`,
             {
                 method: "POST",
                 headers: {
@@ -196,7 +196,7 @@ export const postItem = id => async dispatch => {
 export const finishRentingByOwner = id => async dispatch => {
     try {
         const res = await fetch(
-            `http://localhost:5000/renteditems/finishRenting/${id}`,
+            `/renteditems/finishRenting/${id}`,
             {
                 method: "POST",
                 headers: {
@@ -220,7 +220,7 @@ export const finishRentingByRenter = (id, data) => async dispatch => {
     const token = localStorage.getItem("token");
     try {
         const res = await fetch(
-            `http://localhost:5000/renteditems/finishRentingByRenter/${id}`,
+            `/renteditems/finishRentingByRenter/${id}`,
             {
                 method: "POST",
                 headers: {
@@ -246,7 +246,7 @@ export const deletePost = id => async dispatch => {
     const token = localStorage.getItem("token");
     try {
         const res = await fetch(
-            `http://localhost:5000/items/removePost/${id}`,
+            `/items/removePost/${id}`,
             {
                 method: "POST",
                 headers: {
@@ -270,7 +270,7 @@ export const rentItem = formData => async dispatch => {
     const token = localStorage.getItem("token");
     try {
         const res = await fetch(
-            "http://localhost:5000/rentedItems/rentItem",
+            "/rentedItems/rentItem",
             {
                 method: "POST",
                 headers: {
@@ -297,7 +297,7 @@ export const getRentedItems = () => async dispatch => {
     const token = localStorage.getItem("token");
     try {
         const res = await fetch(
-            "http://localhost:5000/rentedItems/getRentedItems",
+            "/rentedItems/getRentedItems",
             {
                 method: "GET",
                 headers: {
@@ -322,7 +322,7 @@ export const getRentedOutItems = () => async dispatch => {
     const token = localStorage.getItem("token");
     try {
         const res = await fetch(
-            "http://localhost:5000/rentedItems/getRentedOutItems",
+            "/rentedItems/getRentedOutItems",
             {
                 method: "GET",
                 headers: {
@@ -346,7 +346,7 @@ export const getRentedOutItems = () => async dispatch => {
 export const verifyRentedItem = formData => async dispatch => {
     try {
         const res = await fetch(
-            "http://localhost:5000/rentedItems/verifyCode",
+            "/rentedItems/verifyCode",
             {
                 method: "POST",
                 headers: {

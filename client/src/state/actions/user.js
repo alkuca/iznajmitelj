@@ -1,6 +1,6 @@
 export const getCurrentUser = () => async dispatch => {
     try {
-        const res = await fetch("http://localhost:5000/dashboard", {
+        const res = await fetch("/dashboard", {
             method: "POST",
             headers: { token: localStorage.token }
         });
@@ -20,7 +20,7 @@ export const getCurrentUser = () => async dispatch => {
 export const getSingleUser = user_id => async dispatch => {
     try {
         const res = await fetch(
-            `http://localhost:5000/profile/getSingleUser/${user_id}`,
+            `/profile/getSingleUser/${user_id}`,
             {
                 method: "GET",
                 headers: {
@@ -45,7 +45,7 @@ export const editProfile = formData => async dispatch => {
     const token = localStorage.getItem("token");
     try {
         const res = await fetch(
-            "http://localhost:5000/profile/editProfile",
+            "/profile/editProfile",
             {
                 method: "POST",
                 headers: {
@@ -72,7 +72,7 @@ export const changeAvatar = data => async dispatch => {
     const token = localStorage.getItem("token");
     try {
         const res = await fetch(
-            "http://localhost:5000/profile/changeAvatar",
+            "/profile/changeAvatar",
             {
                 method: "POST",
                 headers: {

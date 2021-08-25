@@ -2,7 +2,7 @@ export const getUserNotifications = () => async dispatch => {
     const token = localStorage.getItem("token");
     try {
         const res = await fetch(
-            "http://localhost:5000/notifications/getUserNotifications",
+            "/notifications/getUserNotifications",
             {
                 method: "GET",
                 headers: {
@@ -28,7 +28,7 @@ export const clearUserNotifications = () => async dispatch => {
     const token = localStorage.getItem("token");
     try {
         const res = await fetch(
-            "http://localhost:5000/notifications/clearUserNotifications",
+            "/notifications/clearUserNotifications",
             {
                 method: "POST",
                 headers: {
