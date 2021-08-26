@@ -128,12 +128,16 @@ export const deleteItem = item_id => async dispatch => {
     try {
         const res = await axios.delete("http://localhost:5000/items/deleteItem", {
             headers: {
-                "token": token
+                "token": token,
+                Authorization: token,
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Headers": "X-Requested-With",
+                'Content-Type': 'application/json',
             },
             data: {
                 item_id: item_id
             },
-            __method: 'delete'
+            _method: 'DELETE'
         });
         if(res){
             dispatch({
