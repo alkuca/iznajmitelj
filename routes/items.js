@@ -95,7 +95,7 @@ router.delete("/deleteItem", authorization, async (req, res) => {
 
     try {
         await pool.query("DELETE FROM items WHERE item_id=$1 AND item_owner=$2", [item_id, user_id]);
-        res.json({item_id, user_id});
+        res.json(true);
     } catch (err) {
         console.error(err.message);
         res.status(500).send("Server error");
