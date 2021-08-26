@@ -124,7 +124,7 @@ export const uploadItemImage = base64EncodedImage => async dispatch => {
 export const deleteItem = item_id => async dispatch => {
     const token = localStorage.getItem("token");
     try {
-        const response = await fetch(
+        const res = await fetch(
             `/deleteItem/${item_id}`,
             {
                 "Access-Control-Allow-Origin": "*",
@@ -138,10 +138,11 @@ export const deleteItem = item_id => async dispatch => {
                 }
             }
         );
-        if(response.ok){
+        const parseRes = await res.json()
+        if(parseRes.ok){
             dispatch({
                 type: "DELETE",
-                payload: response
+                payload: parseRes
             })
         }
     } catch (err) {
