@@ -89,14 +89,12 @@ router.post("/uploadItemImage", async (req, res) => {
     }
 });
 
-router.delete("/deleteItem/:id", authorization, async (req, res) => {
+router.delete("/deleteItem", authorization, async (req, res) => {
     const user_id = req.user.id;
-    const item_id = req.params.id;
+    const item_id = req.body.item_id;
 
     try {
-
         await pool.query("DELETE FROM items WHERE item_id=$1 AND item_owner=$2", [item_id, user_id]);
-
         res.json(true);
     } catch (err) {
         console.error(err.message);
