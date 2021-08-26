@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export const getAllItems = () => async dispatch => {
     try {
         const res = await fetch(
@@ -121,16 +123,11 @@ export const uploadItemImage = base64EncodedImage => async dispatch => {
     }
 }
 
-export const deleteItem = item_id => async dispatch => {
+export const deleteItem = item_id => async () => {
     const token = localStorage.getItem("token");
     try {
-        const res = await fetch(
-            `/deleteItem/${item_id}`,
+        await axios.delete(`http://localhost:5000/items/deleteItem/${item_id}`,
             {
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Headers":  "Origin, X-Requested-With, Content-Type, Accept",
-                "Access-Control-Allow-Method":  "DELETE",
-                "Content-Length": Buffer.byteLength(item_id),
                 method: "DELETE",
                 headers: {
                     "Content-type": "application/json",
@@ -138,13 +135,6 @@ export const deleteItem = item_id => async dispatch => {
                 }
             }
         );
-        const parseRes = await res.json()
-        if(parseRes.ok){
-            dispatch({
-                type: "DELETE",
-                payload: parseRes
-            })
-        }
     } catch (err) {
         console.error(err.message);
     }
