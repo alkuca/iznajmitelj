@@ -89,9 +89,9 @@ router.post("/uploadItemImage", async (req, res) => {
     }
 });
 
-router.delete("/deleteItem/:id", authorization, async (req, res) => {
+router.delete("/deleteItem", authorization, async (req, res) => {
     const user_id = req.user.id;
-    const item_id = req.params.id;
+    const item_id = req.body.item_id;
 
     try {
 

@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export const getAllItems = () => async dispatch => {
     try {
         const res = await fetch(
@@ -121,25 +123,20 @@ export const uploadItemImage = base64EncodedImage => async dispatch => {
     }
 }
 
-export const deleteItem = item_id => async dispatch => {
+export const deleteItem = item_id => async () => {
     const token = localStorage.getItem("token");
     try {
-        const response = await fetch(
-            `http://localhost:5000/items/deleteItem/${item_id}`,
-            {
-                method: "DELETE",
-                headers: {
-                    "Content-type": "application/json",
-                    "token": token
-                }
+
+       await axios.delete("http://localhost:5000/items/deleteItem", {
+            headers: {
+                token: token
+            },
+            data: {
+                item_id: item_id
             }
-        );
-        if(response.ok){
-            dispatch({
-                type: "DELETE",
-                payload: response
-            })
-        }
+        });
+
+
     } catch (err) {
         console.error(err.message);
     }
