@@ -1,8 +1,9 @@
 const express = require("express")
 const app = express();
-const cors = require("cors");
+const cors = require('cors')
 const PORT = process.env.PORT || 5000;
 const path = require("path");
+app.use(cors());
 
 app.use(express.static('public'));
 app.use(express.json({ limit: '50mb' }));
@@ -11,7 +12,6 @@ app.use(express.urlencoded({ limit: '50mb', extended: true }));
 //middleware
 
 app.use(express.json()); // req.body
-app.use(cors());
 
 if (process.env.NODE_ENV === "production") {
     //serve static content
