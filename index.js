@@ -3,6 +3,7 @@ const app = express();
 const cors = require('cors')
 const PORT = process.env.PORT || 5000;
 const path = require("path");
+const methodOverride = require('method-override')
 app.use(cors());
 
 app.use(express.static('public'));
@@ -17,7 +18,7 @@ const handleCORS = function(req, res, next) {
 }
 
 app.use(handleCORS);
-app.use(express.methodOverride());
+app.use(methodOverride());
 
 //middleware
 

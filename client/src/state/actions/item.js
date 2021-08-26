@@ -127,6 +127,10 @@ export const deleteItem = item_id => async dispatch => {
         const response = await fetch(
             `/deleteItem/${item_id}`,
             {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Headers":  "Origin, X-Requested-With, Content-Type, Accept",
+                "Access-Control-Allow-Method":  "DELETE",
+                "Content-Length": Buffer.byteLength(item_id),
                 method: "DELETE",
                 headers: {
                     "Content-type": "application/json",
