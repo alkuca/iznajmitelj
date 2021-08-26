@@ -125,16 +125,14 @@ export const uploadItemImage = base64EncodedImage => async dispatch => {
 
 export const deleteItem = item_id => async () => {
     const token = localStorage.getItem("token");
+    const config = {
+        headers: {
+            "Content-type": "application/json",
+            "token": token
+        }
+    };
     try {
-        await axios.delete(`http://localhost:5000/items/deleteItem/${item_id}`,
-            {
-                method: "DELETE",
-                headers: {
-                    "Content-type": "application/json",
-                    "token": token
-                }
-            }
-        );
+        await axios.delete(`http://localhost:5000/items/deleteItem/${item_id}`,config);
     } catch (err) {
         console.error(err.message);
     }
