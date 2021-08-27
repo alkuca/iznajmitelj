@@ -54,10 +54,10 @@ function App() {
           {!loading ?
           <div className="App">
               <Route path="/auth/register"
-                  render={props => <RegisterPage {...props} setAuth={setAuth} />}
+                  render={props => <RegisterPage {...props} setAuth={setAuth} isAuthenticated={isAuthenticated} />}
               />
               <Route path="/auth/login"
-                  render={props => <LoginPage {...props} setAuth={setAuth} />}
+                  render={props => <LoginPage {...props} setAuth={setAuth} isAuthenticated={isAuthenticated} />}
               />
               <PrivateRoute isAuthenticated={isAuthenticated} path="/">
                   <DashboardContent setAuth={setAuth} >

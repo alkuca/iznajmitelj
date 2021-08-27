@@ -6,8 +6,10 @@ import emptyImage from "../../../images/empty_picture.png";
 import {useDispatch, useSelector} from "react-redux";
 import {bindActionCreators} from "redux";
 import {itemActions} from "../../../state";
+import LoaderWhite from "../LoaderWhite";
 
 const CreateItemModal = props => {
+    const [itemCreationLoading, setItemCreationLoading] = useState(false)
     const [previewImage, setPreviewImage] = useState(null)
     const [selectedFile, setSelectedFile] = useState()
     const [step, setStep] = useState(1)
@@ -50,8 +52,11 @@ const CreateItemModal = props => {
     }
 
     const createItemAction = async () => {
+        setItemCreationLoading(true)
         const reader = new FileReader();
-        reader.readAsDataURL(selectedFile);
+        if(selectedFile){
+            reader.readAsDataURL(selectedFile);
+        }
         if(formData.name.length && formData.price.length){
             reader.onloadend = async () => {
                 await uploadItemImage(reader.result).then( r => {
@@ -60,6 +65,7 @@ const CreateItemModal = props => {
                             createItem(r).then(r => {
                                     if(r){
                                         getUserItems()
+                                        setItemCreationLoading(false)
                                         props.closeModal()
                                     }
                                 }
@@ -67,11 +73,13 @@ const CreateItemModal = props => {
                         })
                     }else{
                         alert("pokusaj ponovno")
+                        setItemCreationLoading(false)
                     }
                 })
             };
         }else{
             alert("nedostaju podaci")
+            setItemCreationLoading(false)
         }
     }
 
@@ -110,7 +118,7 @@ const CreateItemModal = props => {
                 {step !== 2 ?
                     <button onClick={moveStep} className="confirm">Dalje</button>
                     :
-                    <button onClick={createItemAction} className="confirm">Dodaj</button>
+                    <button onClick={createItemAction} className="confirm">{itemCreationLoading ? <LoaderWhite/> : "Dodaj"}</button>
                 }
                 <button onClick={props.closeModal} className="cancel">Odustani</button>
             </div>

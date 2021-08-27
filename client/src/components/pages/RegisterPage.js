@@ -1,9 +1,12 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import InputField from "../ui/InputField";
 import {Link, useHistory} from "react-router-dom";
 import logo from "../../images/LogoF.svg";
+import LoaderWhite from "../ui/LoaderWhite";
 
-function RegisterPage ({setAuth}) {
+const RegisterPage = props => {
+
+    const [registerLoading, setRegisterLoading] = useState(false);
 
     const [formData, setFormData] = useState({
         email: "",
@@ -22,6 +25,7 @@ function RegisterPage ({setAuth}) {
     });
 
     const gatherUserInputs = () => {
+        setRegisterLoading(true)
         getCoordinates()
             .then(coordinates =>
                 addCoordinatesToForm(coordinates)
@@ -57,11 +61,12 @@ function RegisterPage ({setAuth}) {
             const parseRes = await res.json();
             if (parseRes.token) {
                 localStorage.setItem("token", parseRes.token);
-                setAuth(true);
+                props.setAuth(true);
                 history.push("/dashboard/stvari")
             } else {
-                setAuth(false);
+                props.setAuth(false);
             }
+            setRegisterLoading(false)
         } catch (err) {
             console.error(err.message);
         }
@@ -81,7 +86,11 @@ function RegisterPage ({setAuth}) {
         }
     };
 
-
+    useEffect(() => {
+        if(props.isAuthenticated){
+            history.push("/dashboard/stvari")
+        }
+    }, [props.isAuthenticated]);
 
     return (
         <div className="auth-page">
@@ -104,7 +113,7 @@ function RegisterPage ({setAuth}) {
                             Prijavi se ovdje
                         </Link>
                     </div>
-                    <button onClick={gatherUserInputs}>Izradi Račun</button>
+                    <button onClick={gatherUserInputs}>{registerLoading ? <LoaderWhite/> : "Izradi Račun"}</button>
                 </div>
             </div>
         </div>

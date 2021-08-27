@@ -1,9 +1,12 @@
-import React,{useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import InputField from "../ui/InputField";
 import {Link, useHistory, withRouter} from "react-router-dom";
 import logo from "../../images/LogoF.svg";
+import LoaderWhite from "../ui/LoaderWhite";
 
-function LoginPage ({setAuth}) {
+const LoginPage = (props) => {
+
+    const [loginLoading, setLoginLoading] = useState(false);
 
     const history = useHistory();
 
@@ -18,6 +21,7 @@ function LoginPage ({setAuth}) {
         setFormData({ ...formData, [e.target.name]: e.target.value });
 
     const onSubmitForm = async () => {
+        setLoginLoading(true)
         try {
             const body = { email, password };
             const response = await fetch(
@@ -33,15 +37,22 @@ function LoginPage ({setAuth}) {
             const parseRes = await response.json();
             if (parseRes.token) {
                 localStorage.setItem("token", parseRes.token);
-                setAuth(true);
+                props.setAuth(true);
                 history.push("/dashboard/stvari")
             } else {
-                setAuth(false);
+                props.setAuth(false);
             }
+            setLoginLoading(false)
         } catch (err) {
             console.error(err.message);
         }
     };
+
+    useEffect(() => {
+        if(props.isAuthenticated){
+            history.push("/dashboard/stvari")
+        }
+    }, [props.isAuthenticated]);
 
     return (
         <div className="auth-page">
@@ -59,7 +70,7 @@ function LoginPage ({setAuth}) {
                             Izradi ga ovdje
                         </Link>
                     </div>
-                    <button onClick={onSubmitForm}>Prijavi se</button>
+                    <button onClick={onSubmitForm}>{loginLoading ? <LoaderWhite/> : "Prijavi se"}</button>
                 </div>
             </div>
         </div>
