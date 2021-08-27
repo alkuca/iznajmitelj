@@ -627,6 +627,10 @@ button:hover {
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.17);
 }
 
+.loader-white{
+  width: 30px !important;
+}
+
 .item-card-container {
   margin: 0 35px 35px 0;
   transition: 0.2s;
@@ -641,18 +645,16 @@ button:hover {
 
   .image-container {
     position: relative;
-
     .card-image-container {
       padding: 20px 15px;
       height: 147px;
       @include center;
-
       img {
         width: 100%;
         border-radius: 8px;
+        max-height: 100%;
       }
     }
-
     .image-overlay {
       width: 100%;
       height: 100%;
@@ -1434,7 +1436,8 @@ input[type="file"] {
       flex-direction: column;
 
       button {
-        padding: 10px 30px;
+        width: 135px;
+        height: 42px;
         border-radius: 3px;
         align-self: center;
         margin: 20px 0 0 -20px;
@@ -2542,8 +2545,30 @@ input[type="file"] {
         width: 0 !important;
       }
     }
+    .navbar-dropdown{
+      left: -20px;
+      min-width: 150px;
+    }
   }
-}
+  .sidebar-mobile{
+      .inner-container{
+        .links-container{
+          a{
+            div{
+              padding: 20px 0 20px 0;
+              p{
+                font-size: 20px;
+              }
+              i{
+                font-size: 20px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
 
 .input-modal {
   overflow: hidden !important;
