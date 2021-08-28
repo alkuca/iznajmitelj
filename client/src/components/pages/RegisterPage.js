@@ -33,7 +33,7 @@ const RegisterPage = props => {
                         .then(fullForm =>
                             register(fullForm))
                 }else{
-                    alert("Kriva adresa, ispravi unos")
+                    alert("Kriva adresa, upisi puni naziv ulice npr: Ulica Ljudevita Gaja ili Zagrebačka ulica")
                     setRegisterLoading(false)
                 }
             })
