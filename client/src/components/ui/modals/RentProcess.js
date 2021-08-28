@@ -32,7 +32,8 @@ function RentProcess (props) {
         price: "",
         finalPrice: 0,
         duration: 0,
-        paid: false
+        paid: false,
+        item_image:props.item_image
     });
 
     const handleCheckmarkClick = () => {
@@ -59,8 +60,8 @@ function RentProcess (props) {
         finalPrice: e.target.value * itemState.currentItem[0].item_price
     });
 
-    const rentItemAction = () => {
-        rentItem(formData)
+    const rentItemAction = async () => {
+        await rentItem(formData)
         history.push("/dashboard/unajmljeno")
     }
 

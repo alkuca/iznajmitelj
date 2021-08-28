@@ -283,6 +283,7 @@ export const rentItem = formData => async dispatch => {
                 type: "RENT_ITEM",
                 payload: parseRes
             })
+            return true
         }
     } catch (err) {
         console.error(err.message);
