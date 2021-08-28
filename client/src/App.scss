@@ -625,6 +625,7 @@ button:hover {
 
 .item-card-container:hover {
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.17);
+  transition: 0.2s;
 }
 .lazyload-wrapper{
   width: min-content !important;
@@ -635,7 +636,6 @@ button:hover {
 
 .item-card-container {
   margin: 0 35px 35px 0;
-  transition: 0.2s;
   flex-shrink: 0;
   width: 24%;
   border: 1px solid transparent;
