@@ -24,13 +24,19 @@ const RegisterPage = props => {
         ...formData, [e.target.name]: e.target.value
     });
 
-    const gatherUserInputs = () => {
-        setRegisterLoading(true)
+    const gatherUserInputs = async () => {
+        await setRegisterLoading(true)
         getCoordinates()
-            .then(coordinates =>
-                addCoordinatesToForm(coordinates)
-                .then(fullForm =>
-                    register(fullForm)))
+            .then(coordinates => {
+                if (coordinates) {
+                    addCoordinatesToForm(coordinates)
+                        .then(fullForm =>
+                            register(fullForm))
+                }else{
+                    alert("Kriva adresa, ispravi unos")
+                    setRegisterLoading(false)
+                }
+            })
     }
 
     const addCoordinatesToForm = async coordinates => {
@@ -48,7 +54,7 @@ const RegisterPage = props => {
     const register = async fullForm => {
         try {
             const res = await fetch(
-                "http://localhost:5000/auth/register",
+                "/auth/register",
                 {
                     method: "POST",
                     headers: {
