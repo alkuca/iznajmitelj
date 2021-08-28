@@ -132,7 +132,7 @@ const ItemPage = props => {
                     />
                 }
                 {rentModal &&
-                <RentProcess handleModalToggle={handleRentModalToggle}/>
+                <RentProcess handleModalToggle={handleRentModalToggle} item_image={itemState.currentItem[0].item_image}/>
                 }
                 {newMessageModal &&
                 <NewMessageModal
