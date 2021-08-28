@@ -13,6 +13,7 @@ import {itemActions} from "../../state";
 import {useDispatch} from "react-redux";
 import moment from "moment";
 import classnames from "classnames";
+import LazyLoad from 'react-lazyload';
 
 const ItemCard = props => {
 
@@ -84,6 +85,7 @@ const ItemCard = props => {
 
 
     return (
+        <LazyLoad height={200}>
         <div className={classnames("item-card-container", {
             "is-renting-glow": window.location.pathname === "/dashboard/unajmljeno" && props.codeEntered && !timePassed
         })}>
@@ -256,6 +258,7 @@ const ItemCard = props => {
                 item_id={props.item_id}/>
             }
         </div>
+        </LazyLoad>
     )
 }
 

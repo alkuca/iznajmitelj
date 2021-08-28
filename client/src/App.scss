@@ -626,7 +626,9 @@ button:hover {
 .item-card-container:hover {
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.17);
 }
-
+.lazyload-wrapper{
+  width: min-content !important;
+}
 .loader-white{
   width: 30px !important;
 }
