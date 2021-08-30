@@ -111,7 +111,7 @@ const RegisterPage = props => {
                     <InputField className="input-container auth-input" type="text" label="Email*" name="email" onChange={e => onFormChange(e)}/>
                     <InputField className="input-container auth-input" type="text" label="Ime i prezime*" name="name" onChange={e => onFormChange(e)}/>
                     <InputField className="input-container auth-input" type="password" label="Lozinka*" name="password" onChange={e => onFormChange(e)}/>
-                    <InputField className="input-container auth-input" type="text" label="Puni naziv ulice" name="street" onChange={e => onFormChange(e)}/>
+                    <InputField className="input-container auth-input" type="text" label="Puni naziv ulice*" name="street" onChange={e => onFormChange(e)}/>
                     <InputField className="input-container auth-input" type="text" label="Broj*" name="street_number" onChange={e => onFormChange(e)}/>
                     <InputField className="input-container auth-input" type="text" label="Grad*" name="city" onChange={e => onFormChange(e)}/>
                     <InputField className="input-container auth-input" type="text" label="Županija*" name="state" onChange={e => onFormChange(e)}/>
