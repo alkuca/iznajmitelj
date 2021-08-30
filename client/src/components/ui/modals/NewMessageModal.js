@@ -36,8 +36,8 @@ const NewMessageModal = props => {
         <InputModal>
             <div className="sender-title">
                 <p className="weight-500">Prima:</p>
-                <Link to="/dashboard/profile">
-                    <p>{props.receiver_name}</p>
+                <Link to={`/dashboard/profil/${props.receiver_id}`}>
+                    {props.receiver_name}
                 </Link>
             </div>
             <div className="new-message-modal-container">
