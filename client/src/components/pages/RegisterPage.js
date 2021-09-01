@@ -65,7 +65,7 @@ const RegisterPage = props => {
     const register = async fullForm => {
         try {
             const res = await fetch(
-                "http://localhost:5000/auth/register",
+                "/auth/register",
                 {
                     method: "POST",
                     headers: {
