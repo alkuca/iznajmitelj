@@ -43,9 +43,11 @@ const SearchPage = () => {
 
     const handleStateChange = (e) => {
         setState(e.target.outerText)
+        setCurrentPage(1)
     }
     const handleStateChange2 = (e) => {
         setCategory(e.target.outerText)
+        setCurrentPage(1)
     }
 
     useEffect(() => {
