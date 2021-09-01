@@ -32,7 +32,7 @@ const CreateItemModal = props => {
 
     const categories = [
         "Informatika","Sport i oprema","Odjeća","Strojevi i alati","Za djecu","Audio i video","Glazba","Literatura",
-        "Za kućne ljubimce","Sve za dom","Auto oprema","Kampiranje","Plaža",
+        "Za kućne ljubimce","Sve za dom","Auto oprema","Kampiranje"
     ]
 
     const onSelect = e => {
