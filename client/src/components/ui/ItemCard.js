@@ -30,7 +30,6 @@ const ItemCard = props => {
 
     const handlePostClick = () => {
         togglePostConfirmation(!postConfirmation)
-        console.log("post click")
     }
 
     const handleCodeEnterClick = () => {
@@ -83,7 +82,6 @@ const ItemCard = props => {
         }
     }, []);
 
-
     return (
         <LazyLoad height={200}>
         <div className={classnames("item-card-container", {
@@ -98,20 +96,30 @@ const ItemCard = props => {
                     <div className="image-overlay">
                         {props.codeEntered ?
                             <Fragment>
-                                {timePassed ?
+                                {timePassed && props.return_type === null &&
                                     <Fragment>
                                         <p>NAJAM ZAVRŠIO</p>
                                         <p>Vrati proizvod</p>
                                     </Fragment>
-                                    :
+                                }
+                                {!timePassed &&
                                     <Fragment>
-                                        <p>Datum zavšetka najma:</p>
+                                        <p>Datum završetka najma:</p>
                                         <time>{date_rent_ends.format("DD.MM.YYYY")}</time>
                                     </Fragment>
                                 }
+                                {timePassed && props.return_type !== null &&
+                                <Fragment>
+                                    <p>Povratak u tijeku</p>
+                                    <p>Čekanje na potvrdu</p>
+                                </Fragment>
+                                }
                             </Fragment>
                             :
-                            <i className="fi-rr-lock"/>
+                            <Fragment>
+                                <i className="locked fi-rr-lock"/>
+                                <p>Predaj šifru najmodavcu</p>
+                            </Fragment>
                         }
                     </div>
                     }
@@ -122,6 +130,7 @@ const ItemCard = props => {
                                 {timePassed ?
                                     <Fragment>
                                         <p>NAJAM ZAVRŠIO</p>
+                                        <p>Čekanje na povrat proizvoda</p>
                                     </Fragment>
                                     :
                                     <Fragment>
@@ -131,7 +140,7 @@ const ItemCard = props => {
                                 }
                             </Fragment>
                             :
-                            <p>Cekanje na unos koda od unajmitelja</p>
+                            <p>Unesi šifru nakon predaje proizvoda</p>
                         }
                     </div>
                     }
@@ -153,23 +162,23 @@ const ItemCard = props => {
                         {(!props.codeEntered && props.code) &&
                             <p className="item-code">{props.code}</p>
                         }
-                        {(props.codeEntered && window.location.pathname === "/dashboard/iznajmljeno") &&
-                            <p className="item-code">Kod unesen</p>
+                        {(props.codeEntered && props.return_type === null && window.location.pathname === "/dashboard/unajmljeno") &&
+                            <p className="item-code">Šifra unesena</p>
                         }
                         {(props.codeEntered && window.location.pathname === "/dashboard/iznajmljeno" && !props.renting_status) &&
-                        <p className="item-code">ZAVŠRENO</p>
+                        <p className="item-code">ZAVRŠENO</p>
                         }
                         {props.renterName &&
                             <Fragment>
-                                <p>Unajmljeno na {props.duration} dana za {props.fullPrice} Kn</p>
+                                <p>Iznajmljeno na {props.duration} dana za {props.fullPrice} Kn</p>
                                 <div className="same-row card-renter">
                                     <p>Unajmitelj:</p>
                                     <Link to={`/dashboard/profil/${props.renterId}`}>
                                         {props.renterName}
                                     </Link>
                                 </div>
-                                {timePassed &&
-                                    <button onClick={finishRentingByOwnerAction} className="enter-code-button">Zavrsi</button>
+                                {timePassed && props.return_type !== null &&
+                                    <button onClick={finishRentingByOwnerAction} className="enter-code-button">Završi</button>
                                 }
                             </Fragment>
                         }
@@ -184,11 +193,15 @@ const ItemCard = props => {
                         </Fragment>
                         }
                     </Fragment>
-                    {(!props.codeEntered && window.location.pathname === "/dashboard/unajmljeno") &&
-                        <button onClick={handleCodeEnterClick} className="enter-code-button">Unesi kod</button>
+                    {(!props.codeEntered && window.location.pathname === "/dashboard/iznajmljeno") &&
+                        <button onClick={handleCodeEnterClick} className="enter-code-button">Unesi šifru</button>
                     }
-                    {(props.codeEntered && window.location.pathname === "/dashboard/unajmljeno") &&
-                        <button onClick={handleReturnClick} className="enter-code-button">{timePassed ? "Vrati" : "Vrati Ranije" }</button>
+                    {(props.codeEntered && props.return_type === null && window.location.pathname === "/dashboard/unajmljeno") &&
+                        <button onClick={handleReturnClick} className="enter-code-button">
+                            {
+                                timePassed ? "Vrati" : "Vrati Ranije"
+                            }
+                        </button>
                     }
                 </div>
 

@@ -128,7 +128,7 @@ router.post("/finishRentingByRenter/:id", authorization, async (req, res) => {
     today.toLocaleDateString()
 
     try {
-        await pool.query("UPDATE rented_items SET renting_status=false , return_type=$2 WHERE rented_item_id=$1 AND renter_id=$3",[id,returnType,user_id]);
+        await pool.query("UPDATE rented_items SET return_type=$2 WHERE rented_item_id=$1 AND renter_id=$3",[id,returnType,user_id]);
 
         const r = await pool.query("SELECT * FROM rented_items WHERE rented_item_id=$1", [id]);
 

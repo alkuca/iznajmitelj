@@ -18,6 +18,13 @@ const RegisterPage = props => {
         state: ""
     });
 
+    const states = [
+        "Bjelovarsko-bilogorska","Brodsko-posavska","Dubrovačko-neretvanska","Grad Zagreb","Istarska","Karlovačka","Koprivničko-križevačka",
+        "Krapinsko-zagorska","Ličko-senjska","Međimurska","Osječko-baranjska","Požeško-slavonska","Primorsko-goranska",
+        "Sisačko-moslavačka","Splitsko-dalmatinska","Šibensko-kninska","Varaždinska","Virovitičko-podravska","Vukovarsko-srijemska",
+        "Zadarska","Zagrebačka"
+    ]
+
     const history = useHistory();
 
     const onFormChange = e => setFormData({
@@ -51,10 +58,14 @@ const RegisterPage = props => {
         return fullForm
     }
 
+    const onSelect = e => {
+        setFormData({ ...formData, state: e.target.value });
+    }
+
     const register = async fullForm => {
         try {
             const res = await fetch(
-                "/auth/register",
+                "http://localhost:5000/auth/register",
                 {
                     method: "POST",
                     headers: {
@@ -114,7 +125,11 @@ const RegisterPage = props => {
                     <InputField className="input-container auth-input" type="text" label="Puni naziv ulice*" name="street" onChange={e => onFormChange(e)}/>
                     <InputField className="input-container auth-input" type="text" label="Broj*" name="street_number" onChange={e => onFormChange(e)}/>
                     <InputField className="input-container auth-input" type="text" label="Grad*" name="city" onChange={e => onFormChange(e)}/>
-                    <InputField className="input-container auth-input" type="text" label="Županija*" name="state" onChange={e => onFormChange(e)}/>
+                    <select value={formData.state} onChange={onSelect}>
+                        {states.map(state => {
+                            return <option key={state} value={state}>{state}</option>
+                        })}
+                    </select>
                     <div className="auth-question">
                         <p>Već imate Račun?</p>
                         <Link to="/auth/login">

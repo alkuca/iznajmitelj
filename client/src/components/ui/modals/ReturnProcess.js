@@ -27,6 +27,7 @@ function ReturnProcess (props) {
             .then(r => {
                 if(r){
                     getRentedItems()
+                    props.handleModalToggle()
                 }
             })
     }
@@ -59,13 +60,13 @@ function ReturnProcess (props) {
                         <DeliveryTypeCard
                             moveStep={setDelivery}
                             title="Poslat ću dostavom"
-                            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget suscipit arcu, at pretium risus."
+                            description="Proizvod ću poslat dostavnom službom na adresu vlasnika."
                             icon="fi-rr-location-alt"
                         />
                         <DeliveryTypeCard
                             moveStep={setOwn}
                             title="Vlastito ću dostavit"
-                            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec eget suscipit arcu."
+                            description="Proizvod ću vlastito dostavit na adresu vlasnika."
                             icon="fi-rr-home"
                         />
                         <div className="button-container">

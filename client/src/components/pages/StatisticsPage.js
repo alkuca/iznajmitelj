@@ -10,7 +10,6 @@ const StatisticsPage = () => {
 
     const itemState = useSelector((state) => state.itemsState)
     const userState = useSelector((state) => state.userState)
-    const notificationState = useSelector((state) => state.notificationState)
 
     const { getRentedOutItems,getRentedItems } = bindActionCreators(itemActions, useDispatch())
 

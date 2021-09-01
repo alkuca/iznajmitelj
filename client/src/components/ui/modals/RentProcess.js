@@ -126,9 +126,9 @@ function RentProcess (props) {
                 {step === 3 &&
                 <div className="code-info-container">
                     <i className="fi-rr-exclamation icon-large"/>
-                    <h1>Jedinstveni kod od iznajmitelja</h1>
+                    <h1>Jedinstvena šifra najma</h1>
                     <div className="code-info">
-                        <p>Prilikom preuzimanja ili dostave proizvoda dobit ćes jedinstvenu šifru koju je potrebno unijet kako bi zapoćeo najam</p>
+                        <p>Prilikom preuzimanja ili dostave proizvoda potrebno je predat šifru najmodavcu kako bi pokrenuo proces najma.</p>
                     </div>
                     <div className="full-line"/>
                     <h1>Plaćanje</h1>

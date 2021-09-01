@@ -27,7 +27,6 @@ const RentedOutPage = () => {
                             name={item.item_name}
                             price={item.price_per_day}
                             codeEntered={item.code_entered}
-                            code={item.confirmation_code}
                             fullPrice={item.price}
                             item_image={item.item_image}
                             duration={item.duration}
@@ -37,6 +36,8 @@ const RentedOutPage = () => {
                             showLocation={false}
                             time_rent_started={item.time_rent_started}
                             renting_status={item.renting_status}
+                            rented_item_id={item.rented_item_id}
+                            return_type={item.return_type}
                         />
                     })
                 }

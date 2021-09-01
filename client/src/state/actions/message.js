@@ -75,3 +75,72 @@ export const getSingleMessage = message_id => async dispatch => {
         console.error(err.message);
     }
 }
+
+export const hideSendMessage = message_id => async dispatch => {
+    const token = localStorage.getItem("token");
+    try {
+        const res = await fetch(
+            `http://localhost:5000/messages/hideSendMessage/${message_id}`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json",
+                    "token": token
+                }
+            }
+        );
+        if(res){
+            dispatch({
+                type: "HIDE_SEND_MESSAGE"
+            })
+        }
+    } catch (err) {
+        console.error(err.message);
+    }
+}
+
+export const hideReceivedMessage = message_id => async dispatch => {
+    const token = localStorage.getItem("token");
+    try {
+        const res = await fetch(
+            `http://localhost:5000/messages/hideReceivedMessage/${message_id}`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json",
+                    "token": token
+                }
+            }
+        );
+        if(res){
+            dispatch({
+                type: "HIDE_RECEIVED_MESSAGE"
+            })
+        }
+    } catch (err) {
+        console.error(err.message);
+    }
+}
+
+export const markAsUnread = message_id => async dispatch => {
+    const token = localStorage.getItem("token");
+    try {
+        const res = await fetch(
+            `http://localhost:5000/messages/markAsUnread/${message_id}`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json",
+                    "token": token
+                }
+            }
+        );
+        if(res){
+            dispatch({
+                type: "MARK_AS_UNREAD"
+            })
+        }
+    } catch (err) {
+        console.error(err.message);
+    }
+}

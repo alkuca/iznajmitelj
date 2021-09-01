@@ -70,4 +70,43 @@ router.post("/sendMessage", authorization, async (req, res) => {
     }
 });
 
+router.post("/hideSendMessage/:message_id", authorization, async (req, res) => {
+    const user_id = req.user.id;
+    const message_id = req.params.message_id;
+
+    try {
+        await pool.query("UPDATE messages SET hidden_by_sender=true WHERE message_id=$1 AND sender_id=$2",[message_id, user_id]);
+
+        res.json(true);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Server error");
+    }
+});
+
+router.post("/hideReceivedMessage/:message_id", authorization, async (req, res) => {
+    const user_id = req.user.id;
+    const message_id = req.params.message_id;
+
+    try {
+        await pool.query("UPDATE messages SET hidden_by_receiver=true WHERE message_id=$1 AND receiver_id=$2",[message_id, user_id]);
+        res.json(true);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Server error");
+    }
+});
+
+router.post("/markAsUnread/:message_id", authorization, async (req, res) => {
+    const user_id = req.user.id;
+    const message_id = req.params.message_id;
+
+    try {
+        await pool.query("UPDATE messages SET message_is_read=false WHERE message_id=$1 AND receiver_id=$2",[message_id, user_id]);
+        res.json(true);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Server error");
+    }
+});
 module.exports = router;
