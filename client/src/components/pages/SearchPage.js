@@ -19,12 +19,12 @@ const SearchPage = () => {
     const { getAllPosts } = bindActionCreators(itemActions, useDispatch())
 
     const categories = [
-        "Informatika","Sport i oprema","Odjeća","Strojevi i alati","Za djecu","Audio i video","Glazba","Literatura",
+        "Sve","Informatika","Sport i oprema","Odjeća","Strojevi i alati","Za djecu","Audio i video","Glazba","Literatura",
         "Za kućne ljubimce","Sve za dom","Auto oprema","Kampiranje"
     ]
 
     const states = [
-        "Bjelovarsko-bilogorska","Brodsko-posavska","Dubrovačko-neretvanska","Grad Zagreb","Istarska","Karlovačka","Koprivničko-križevačka",
+        "Sve","Bjelovarsko-bilogorska","Brodsko-posavska","Dubrovačko-neretvanska","Grad Zagreb","Istarska","Karlovačka","Koprivničko-križevačka",
         "Krapinsko-zagorska","Ličko-senjska","Međimurska","Osječko-baranjska","Požeško-slavonska","Primorsko-goranska",
         "Sisačko-moslavačka","Splitsko-dalmatinska","Šibensko-kninska","Varaždinska","Virovitičko-podravska","Vukovarsko-srijemska",
         "Zadarska","Zagrebačka"
