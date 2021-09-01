@@ -80,7 +80,7 @@ export const hideSendMessage = message_id => async dispatch => {
     const token = localStorage.getItem("token");
     try {
         const res = await fetch(
-            `http://localhost:5000/messages/hideSendMessage/${message_id}`,
+            `/messages/hideSendMessage/${message_id}`,
             {
                 method: "POST",
                 headers: {
@@ -103,7 +103,7 @@ export const hideReceivedMessage = message_id => async dispatch => {
     const token = localStorage.getItem("token");
     try {
         const res = await fetch(
-            `http://localhost:5000/messages/hideReceivedMessage/${message_id}`,
+            `/messages/hideReceivedMessage/${message_id}`,
             {
                 method: "POST",
                 headers: {
@@ -126,7 +126,7 @@ export const markAsUnread = message_id => async dispatch => {
     const token = localStorage.getItem("token");
     try {
         const res = await fetch(
-            `http://localhost:5000/messages/markAsUnread/${message_id}`,
+            `/messages/markAsUnread/${message_id}`,
             {
                 method: "POST",
                 headers: {
