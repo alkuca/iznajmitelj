@@ -19,6 +19,13 @@ const EditProfileModal = props => {
         long:""
     });
 
+    const states = [
+        "Bjelovarsko-bilogorska","Brodsko-posavska","Dubrovačko-neretvanska","Grad Zagreb","Istarska","Karlovačka","Koprivničko-križevačka",
+        "Krapinsko-zagorska","Ličko-senjska","Međimurska","Osječko-baranjska","Požeško-slavonska","Primorsko-goranska",
+        "Sisačko-moslavačka","Splitsko-dalmatinska","Šibensko-kninska","Varaždinska","Virovitičko-podravska","Vukovarsko-srijemska",
+        "Zadarska","Zagrebačka"
+    ]
+
     const onFormChange = e => setFormData({
         ...formData, [e.target.name]: e.target.value
     });
@@ -63,13 +70,21 @@ const EditProfileModal = props => {
         }
     };
 
+    const onSelect = e => {
+        setFormData({ ...formData, state: e.target.value });
+    }
+
     return (
         <InputModal>
             <div className="new-message-modal-container">
                 <InputField className="input-container" type="text" label="Grad" name="city" onChange={e => onFormChange(e)}/>
-                <InputField className="input-container" type="text" label="Županija" name="state" onChange={e => onFormChange(e)}/>
                 <InputField className="input-container" type="text" label="Ulica" name="street" onChange={e => onFormChange(e)}/>
                 <InputField className="input-container" type="text" label="Broj Ulice" name="street_number" onChange={e => onFormChange(e)}/>
+                <select value={formData.state} onChange={onSelect}>
+                    {states.map(state => {
+                        return <option key={state} value={state}>{state}</option>
+                    })}
+                </select>
             </div>
             <div className="button-container">
                 <button onClick={gatherUserInputs} className="confirm">Spremi</button>
