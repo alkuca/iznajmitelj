@@ -1,9 +1,10 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import PageTitle from "../layout/PageTitle";
 import {useDispatch, useSelector} from "react-redux";
 import {bindActionCreators} from "redux";
 import {notificationActions} from "../../state";
 import NotificationItem from "../ui/NotificationItem";
+import Pagination from "../Pagination";
 
 
 
@@ -17,11 +18,23 @@ const NotificationsPage = () => {
         getUserNotifications()
     }, []);
 
+    let PageSize = 10;
+
+    const [currentPage, setCurrentPage] = useState(1);
+
+    const currentTableData = useMemo(() => {
+        if(!notificationState.loading){
+            const firstPageIndex = (currentPage - 1) * PageSize;
+            const lastPageIndex = firstPageIndex + PageSize;
+            return notificationState.notifications.slice(firstPageIndex, lastPageIndex);
+        }
+    }, [currentPage,notificationState.loading]);
+
     return (
         <div className="statistics-page-container">
             <PageTitle renderButton={false} title="Sve Obavijesti"/>
             { (!notificationState.loading ) &&
-            notificationState.notifications.slice(0).reverse().map( notification => {
+            currentTableData.sort((a,b) => new Date(b.time_created) - new Date(a.time_created)).map( notification => {
                 return <NotificationItem
                     className="notification-container-page"
                     key={notification.notification_id}
@@ -35,6 +48,15 @@ const NotificationsPage = () => {
                     isCleared={notification.clear_notification}
                 />
             })
+            }
+            { !notificationState.loading &&
+                <Pagination
+                    className="pagination-bar"
+                    currentPage={currentPage}
+                    totalCount={notificationState.notifications.length}
+                    pageSize={PageSize}
+                    onPageChange={page => setCurrentPage(page)}
+                />
             }
         </div>
     );

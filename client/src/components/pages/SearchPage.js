@@ -1,20 +1,34 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import SelectDropdown from "../ui/SelectDropdown";
 import ItemCard from "../ui/ItemCard";
 import {useDispatch} from "react-redux";
 import {bindActionCreators} from "redux";
 import {itemActions} from "../../state";
 import { useLocation } from "react-router-dom";
+import Pagination from "../Pagination";
+
 
 const SearchPage = () => {
     const location = useLocation();
     const [search, setSearch] = useState("");
     const [items, setItems] = useState([]);
     const [filteredItems, setFilteredItems] = useState([]);
-    const [type, setType] = useState("Sve");
-    const [states, setStates] = useState();
+    const [state, setState] = useState("Sve");
+    const [category, setCategory] = useState("Sve");
 
     const { getAllPosts } = bindActionCreators(itemActions, useDispatch())
+
+    const categories = [
+        "Informatika","Sport i oprema","Odjeća","Strojevi i alati","Za djecu","Audio i video","Glazba","Literatura",
+        "Za kućne ljubimce","Sve za dom","Auto oprema","Kampiranje","Plaža",
+    ]
+
+    const states = [
+        "Bjelovarsko-bilogorska","Brodsko-posavska","Dubrovačko-neretvanska","Grad Zagreb","Istarska","Karlovačka","Koprivničko-križevačka",
+        "Krapinsko-zagorska","Ličko-senjska","Međimurska","Osječko-baranjska","Požeško-slavonska","Primorsko-goranska",
+        "Sisačko-moslavačka","Splitsko-dalmatinska","Šibensko-kninska","Varaždinska","Virovitičko-podravska","Vukovarsko-srijemska",
+        "Zadarska","Zagrebačka"
+    ]
 
     useEffect( () => {
         getAllPosts().then( r => setItems(r));
@@ -28,29 +42,48 @@ const SearchPage = () => {
 
 
     const handleStateChange = (e) => {
-        setType(e.target.outerText)
+        setState(e.target.outerText)
+    }
+    const handleStateChange2 = (e) => {
+        setCategory(e.target.outerText)
     }
 
     useEffect(() => {
-        if(type === "Sve"){
+        if(state === "Sve" && category === "Sve"){
             setFilteredItems(
-                items.filter((item) => item.item_name.toLowerCase().includes(search.toLowerCase()))
+                items.map((item) => item)
             );
-        }else{
+            console.log(1)
+        }
+        if(state !== "Sve" && category === "Sve"){
             setFilteredItems(
-                items.filter((item) => item.item_name.toLowerCase().includes(search.toLowerCase()) && item.item_state === type)
+                items.filter((item) => item.item_state === state)
             );
+            console.log(2)
         }
-    }, [type,items,search]);
-
-
-    useEffect(() => {
-        if(items){
-            const a = items.map(item => item.item_state)
-            a.unshift("Sve")
-            setStates([...new Set(a)])
+        if(state === "Sve" && category !== "Sve"){
+            setFilteredItems(
+                items.filter((item) => item.item_category === category)
+            );
+            console.log(3)
         }
-    }, [items]);
+        if(state !== "Sve" && category !== "Sve"){
+            setFilteredItems(
+                items.filter((item) => item.item_state === state && item.item_category === category)
+            );
+            console.log(4)
+        }
+    }, [state,items,category]);
+
+    let PageSize = 10;
+
+    const [currentPage, setCurrentPage] = useState(1);
+
+    const currentTableData = useMemo(() => {
+        const firstPageIndex = (currentPage - 1) * PageSize;
+        const lastPageIndex = firstPageIndex + PageSize;
+        return filteredItems.slice(firstPageIndex, lastPageIndex);
+    }, [currentPage,filteredItems]);
 
 
         return (
@@ -64,13 +97,18 @@ const SearchPage = () => {
                 <div className="filters-container">
                     <SelectDropdown selectItems={states}
                                     type="Županija:"
-                                    active={type}
+                                    active={state}
                                     onClick={handleStateChange}
+                    />
+                    <SelectDropdown selectItems={categories}
+                                    type="Kategorija:"
+                                    active={category}
+                                    onClick={handleStateChange2}
                     />
                 </div>
                 <div className="items-container">
                     {
-                        filteredItems.map( item => {
+                        currentTableData.filter((item) => item.item_name.toLowerCase().includes(search.toLowerCase())).map( item => {
                             return <ItemCard
                                 key={item.item_id}
                                 item_id={item.item_id}
@@ -84,6 +122,13 @@ const SearchPage = () => {
                         })
                     }
                 </div>
+                <Pagination
+                    className="pagination-bar"
+                    currentPage={currentPage}
+                    totalCount={filteredItems.length}
+                    pageSize={PageSize}
+                    onPageChange={page => setCurrentPage(page)}
+                />
             </div>
         )
 }

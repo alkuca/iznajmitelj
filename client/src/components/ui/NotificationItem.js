@@ -12,7 +12,7 @@ const NotificationItem = props => {
                         <Link to={`/dashboard/profil/${props.maker_id}`}>{props.maker} </Link>
                         je iznajmio
                         <Link to="/dashboard/iznajmljeno"> { props.related_item_name } </Link>
-                        {props.delivery_type !== 0 ? "kojeg će vlastito preuzeti." : "kojeg ce vlastito preuzeti"}
+                        {!props.delivery_type ? "kojeg će vlastito preuzeti." : "i zatražio dostavu na svoju adresu"}
                     </p>
                 </Fragment>
             }
@@ -21,7 +21,7 @@ const NotificationItem = props => {
                 <i className="fi-br-arrow-small-up"/>
                 <p className="notification-data">
                     <Link to={`/dashboard/profil/${props.maker_id}`}>{props.maker} </Link>
-                    je zavrsio sa iznajmljivanjem
+                    je završio sa iznajmljivanjem
                     <Link to="/dashboard/iznajmljeno"> { props.related_item_name } </Link>
                     {props.return_type !== 0 ? "kojeg će vlastito dostaviti." : "i vratit će ga dostavnom službom"}
                 </p>

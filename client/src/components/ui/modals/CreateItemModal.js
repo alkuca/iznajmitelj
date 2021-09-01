@@ -26,9 +26,18 @@ const CreateItemModal = props => {
         item_city: currentUser.user_city,
         item_lat: currentUser.lat,
         item_long: currentUser.long,
-        item_image: ""
+        item_image: "",
+        item_category: ""
     });
 
+    const categories = [
+        "Informatika","Sport i oprema","Odjeća","Strojevi i alati","Za djecu","Audio i video","Glazba","Literatura",
+        "Za kućne ljubimce","Sve za dom","Auto oprema","Kampiranje","Plaža",
+    ]
+
+    const onSelect = e => {
+        setFormData({ ...formData, item_category: e.target.value });
+    }
 
     const { createItem, getUserItems,uploadItemImage } = bindActionCreators(itemActions, useDispatch())
 
@@ -94,6 +103,11 @@ const CreateItemModal = props => {
                 <div className="data-input-container">
                     <InputField required={"required"} className="input-container" type="text" label="Naziv proizvoda"
                                 name="name" onChange={e => onFormChange(e)}/>
+                    <select value={formData.item_category} onChange={onSelect}>
+                        {categories.map(category => {
+                            return <option key={category} value={category}>{category}</option>
+                        })}
+                    </select>
                     <InputField required={"required"} className="input-container number-input" type="number"
                                 label="Cijena (kn/24h)" min={1} name="price" onChange={e => onFormChange(e)}/>
                     <InputTextarea required={"required"} rows={4} className="textarea-container" label="Opis"

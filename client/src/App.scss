@@ -327,7 +327,7 @@ button:hover {
   position: relative;
   display: flex;
   align-items: center;
-  margin: 15px 0;
+  margin: 10px 0;
   background: #f3faff;
 
   i {
@@ -390,7 +390,7 @@ button:hover {
 }
 
 .notification-dropdown {
-  z-index: 10;
+  z-index: 101;
   padding: 0;
   background: white;
   border: 1px solid #d4d4d4;
@@ -508,8 +508,11 @@ button:hover {
 
       .select-dropdown {
         position: absolute;
-        top: 42px;
+        top: 55px;
         left: 5px;
+        max-height: 50vh;
+        overflow: auto;
+        min-height: fit-content;
         z-index: 9;
         background: white;
         border-radius: 4px;
@@ -530,6 +533,8 @@ button:hover {
 
         p:hover {
           color: #3C7BFF;
+          background: #f1f6ff;
+          transition: 0.2s;
         }
       }
     }
@@ -677,21 +682,23 @@ button:hover {
 
     p {
       font-weight: 500;
-      margin: 5px;
-      font-size: 20px;
+      margin: 4px 10px;
+      font-size: 19px;
       color: #c6d9ff;
       text-align: center;
     }
 
     p:nth-child(2) {
-      font-size: 25px;
+      font-size: 22px;
       font-weight: 600;
+      margin: 4px 10px;
     }
 
     i {
-      font-size: 80px;
+      font-size: 50px;
       color: #d3e2ff;
-      margin-top: 20px;
+      margin-top: 10px;
+      height:70px;
     }
   }
 
@@ -1090,7 +1097,7 @@ button:hover {
 }
 
 .search-page-container {
-  padding: 0 30px 0 10px;
+  padding: 0 30px 80px 10px;
 
   .item-search-container {
     padding: 5px 1px 5px 0;
@@ -1353,6 +1360,14 @@ button:hover {
   .data-input-container {
     width: 100%;
     min-width: 250px;
+    select{
+      margin-left:-10px;
+      height: 40px;
+      border:none;
+      border-bottom: 1px solid #b1b1b1;
+      outline: none;
+      margin-bottom: 25px;
+    }
   }
 
   .image-input-container {
@@ -1435,6 +1450,16 @@ input[type="file"] {
     .input-form {
       display: flex;
       flex-direction: column;
+      select{
+        margin-left:-10px;
+        height: 40px;
+        border:none;
+        border-bottom: 1px solid #b1b1b1;
+        outline: none;
+        option{
+          font-size: 16px;
+        }
+      }
 
       button {
         width: 135px;
@@ -1530,11 +1555,15 @@ input[type="file"] {
     margin-top: 15px;
     width: calc(100% - 45px);
   }
+  p{
+    margin-top:25px;
+    font-weight: 500;
+  }
 }
 
 .sender-title {
   display: flex;
-
+  align-items: center;
   p {
     font-weight: 500;
     font-size: 20px;
@@ -1543,35 +1572,77 @@ input[type="file"] {
   a {
     color: #3C7BFF;
     margin-left: 6px;
+    font-weight: 500;
+    font-size: 20px;
   }
 }
 
+
 .message {
-  width: 100%;
+  width: 50%;
+  min-width: 450px;
   border-radius: 4px;
   border: 1px solid #e0e0e0;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-  margin: 5px 0 20px 0;
+  margin: 5px 0 14px 0;
   display: flex;
   justify-content: space-between;
   flex-direction: row;
   align-items: center;
   cursor: pointer;
+  a{
+    width: 100%;
+  }
+  button{
+    padding:0 15px 0 15px;
+    min-width: 181px;
+    height: 55px;
+    color: #676767;
+    font-weight: 600;
+    background: none;
+    border:none;
+    transition: 0.2s;
+    font-size: 13px;
+  }
+  button:hover{
+    background: #f1f5ff;
+    transition: 0.2s;
+    color: #3C7BFF;
+  }
+  .message-read{
+    color: #3C7BFF;
+    font-weight: 600;
+    margin:0 20px;
+    font-size: 15px;
+    padding: 15px 0;
+  }
+
+  .message-not-read{
+    color: #565656;
+    font-weight: 600;
+    margin:0 20px;
+    width: 118px;
+    font-size: 15px;
+    padding: 15px 0;
+  }
 
   .user-container {
     @include center_vertical;
 
     i {
       margin-top: 8px;
-      font-size: 25px;
+      font-size: 20px;
       padding: 0 20px;
       color: #565656;
     }
 
     p {
-      font-size: 18px;
+      font-size: 16px;
+      margin: 12px 5px 12px 0;
       font-weight: 500;
       color: #565656;
+
+      word-break: break-word;
     }
   }
 }
@@ -1914,6 +1985,7 @@ input[type="file"] {
     .delivery-card {
       padding: 60px 50px 30px 50px;
       margin: 10px 0 10px 0;
+      width: 100%;
     }
   }
 }
@@ -2042,7 +2114,7 @@ input[type="file"] {
     align-items: center;
     justify-content: space-between;
     margin: 10px 0 10px 0;
-    padding: 5px 15px;
+    padding: 0 15px;
     border-radius: 5px;
   }
 }
@@ -2188,6 +2260,25 @@ input[type="file"] {
 }
 
 @media screen and (max-width: 795px) {
+  .message{
+    min-width: initial;
+    width: 100%;
+    flex-wrap: wrap;
+    .user-container{
+      border-bottom: 1px solid #d4d4d4;
+    }
+    button{
+      width: 100%;
+    }
+    .message-not-read{
+      text-align: center;
+      width: 100%;
+    }
+    .message-read{
+      text-align: center;
+      width: 100%;
+    }
+  }
   .auth-page {
     height: auto;
 
@@ -2589,3 +2680,82 @@ input[type="file"] {
 }
 
 
+.pagination-container {
+  display: flex;
+  list-style-type: none;
+
+  .pagination-item {
+    padding: 0 14px;
+    height: 42px;
+    text-align: center;
+    margin: auto 4px;
+    color: rgba(0, 0, 0, 0.87);
+    display: flex;
+    font-weight: 600;
+    box-sizing: border-box;
+    align-items: center;
+    letter-spacing: 0.01071em;
+    border-radius: 50px;
+    line-height: 1.43;
+    font-size: 21px;
+    min-width: 40px;
+    border: 2px solid transparent;
+
+    &.dots:hover {
+      background-color: transparent;
+      cursor: default;
+    }
+    &:hover {
+      border:2px solid #3c7bff;
+      cursor: pointer;
+    }
+
+    &.selected {
+      background-color: #3c7bff;
+      color:white;
+    }
+
+    .arrow {
+      &::before {
+        position: relative;
+        /* top: 3pt; Uncomment this to lower the icons as requested in comments*/
+        content: '';
+        /* By using an em scale, the arrows will size with the font */
+        display: inline-block;
+        width: 0.4em;
+        height: 0.4em;
+        border-right: 0.17em solid #3c7bff;
+        border-top: 0.17em solid #3c7bff;
+      }
+
+      &.left {
+        transform: rotate(-135deg) translate(-50%);
+      }
+
+      &.right {
+        transform: rotate(45deg);
+      }
+    }
+
+    &.disabled {
+      pointer-events: none;
+
+      .arrow::before {
+        border-right:  0.17em solid #91b4ff;
+        border-top:  0.17em solid #91b4ff;
+      }
+
+      &:hover {
+        background-color: transparent;
+        cursor: default;
+      }
+    }
+  }
+}
+
+.pagination-bar {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding:20px 0;
+}

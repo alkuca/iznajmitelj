@@ -27,11 +27,11 @@ const NotificationDropdown = props => {
             "t2": props.notificationDropdown
         })}>
             <div className="notification-buttons">
-                <Link to="/dashboard/obavijesti"><button className="clear-notifications">Prikazi sve</button></Link>
-                <button onClick={clearUserNotificationsAction} className="clear-notifications">Izbrisi</button>
+                <Link to="/dashboard/obavijesti"><button className="clear-notifications">Prikaži sve</button></Link>
+                <button onClick={clearUserNotificationsAction} className="clear-notifications">Izbriši</button>
             </div>
             { (!notificationState.loading ) &&
-            notificationState.notifications.filter(n => !n.clear_notification).map( notification => {
+            notificationState.notifications.sort((a,b) => new Date(b.time_created) - new Date(a.time_created)).filter(n => !n.clear_notification).map( notification => {
                 return <NotificationItem
                     className="notification-container"
                     key={notification.notification_id}

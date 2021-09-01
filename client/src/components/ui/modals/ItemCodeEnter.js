@@ -7,7 +7,7 @@ import classnames from "classnames";
 
 const ItemCodeEnter = props => {
 
-    const {verifyRentedItem,getRentedItems} = bindActionCreators(itemActions, useDispatch())
+    const {verifyRentedItem,getRentedOutItems} = bindActionCreators(itemActions, useDispatch())
     const [code, setCode] = useState("");
     const [codeVerified, setCodeVerified] = useState(null)
 
@@ -22,7 +22,7 @@ const ItemCodeEnter = props => {
 
     useEffect(() => {
         if(codeVerified){
-            getRentedItems()
+            getRentedOutItems()
             setTimeout(() => {
                 props.closeModal();
             }, 600)

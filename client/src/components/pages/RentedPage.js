@@ -33,6 +33,8 @@ const RentedPage = () => {
                             time_rent_started={item.time_rent_started}
                             showPricePerDay={true}
                             item_image={item.item_image}
+                            code={item.confirmation_code}
+                            return_type={item.return_type}
                         />
                     })
                 }

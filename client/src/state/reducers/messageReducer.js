@@ -29,6 +29,21 @@ const reducer = (state = initialState, action) => {
                 currentMessageLoading: false
             }
         }
+        case "HIDE_SEND_MESSAGE":{
+            return {
+                ...state
+            }
+        }
+        case "HIDE_RECEIVED_MESSAGE":{
+            return {
+                ...state
+            }
+        }
+        case "MARK_AS_UNREAD":{
+            return {
+                ...state
+            }
+        }
         default:
             return state
     }
