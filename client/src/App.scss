@@ -1670,6 +1670,18 @@ input[type="file"] {
 
 .new-message-modal-container {
   width: 100%;
+  select{
+    margin-left:-10px;
+    height: 40px;
+    border:none;
+    border-bottom: 1px solid #b1b1b1;
+    outline: none;
+    margin-bottom: 40px;
+    width: 100%;
+    option{
+      font-size: 16px;
+    }
+  }
 }
 
 .edit-profile-info-container {
