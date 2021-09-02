@@ -42,7 +42,9 @@ const MessagesPage = () => {
                 <p>Poslano:</p>
                 }
                 { (!messageState.loading ) &&
-                messageState.messages.slice(0).reverse().filter(m => (m.sender_id === userState.currentUser.user_id) && !m.hidden_by_sender).map( message => {
+                messageState.messages.sort((a,b) => new Date(b.time_created) - new Date(a.time_created))
+                    .filter(m => (m.sender_id === userState.currentUser.user_id) && !m.hidden_by_sender)
+                    .map( message => {
                     return <Message
                         key={message.message_id}
                         message_id={message.message_id}
