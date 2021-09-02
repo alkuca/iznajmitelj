@@ -136,7 +136,7 @@ const ItemCard = props => {
                                 {!timePassed && props.return_type !== null &&
                                 <Fragment>
                                     <p>NAJAM ZAVRŠEN RANIJE</p>
-                                    <p>Čekanje na povrat proizvoda</p>
+                                    <p>Povrat proizvoda u tijeku</p>
                                 </Fragment>
                                 }
                                 {!timePassed && props.return_type === null &&
@@ -184,11 +184,8 @@ const ItemCard = props => {
                                         {props.renterName}
                                     </Link>
                                 </div>
-                                {timePassed && props.return_type !== null &&
+                                {props.return_type !== null &&
                                     <button onClick={finishRentingByOwnerAction} className="enter-code-button">Završi</button>
-                                }
-                                {!timePassed && props.return_type !== null &&
-                                <button onClick={finishRentingByOwnerAction} className="enter-code-button">Završi Ranije</button>
                                 }
                             </Fragment>
                         }
