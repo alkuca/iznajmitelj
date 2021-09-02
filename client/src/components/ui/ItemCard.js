@@ -108,7 +108,7 @@ const ItemCard = props => {
                                         <time>{date_rent_ends.format("DD.MM.YYYY")}</time>
                                     </Fragment>
                                 }
-                                {timePassed && props.return_type !== null &&
+                                {props.return_type !== null &&
                                 <Fragment>
                                     <p>Povratak u tijeku</p>
                                     <p>Čekanje na potvrdu</p>
