@@ -102,7 +102,7 @@ const ItemCard = props => {
                                         <p>Vrati proizvod</p>
                                     </Fragment>
                                 }
-                                {!timePassed &&
+                                {!timePassed && props.return_type === null &&
                                     <Fragment>
                                         <p>Datum završetka najma:</p>
                                         <time>{date_rent_ends.format("DD.MM.YYYY")}</time>
