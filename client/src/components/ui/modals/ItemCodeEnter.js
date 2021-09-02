@@ -33,7 +33,7 @@ const ItemCodeEnter = props => {
     return (
         <InputModal>
             <div className="item-code-enter">
-                <h1 className="title">Unesi sifru za:</h1>
+                <h1 className="title">Unesi šifru za:</h1>
                 <h1 className="item-name">{props.item_name}</h1>
                 <div className={classnames("code-enter-wrapper", {
                     "confirmed": codeVerified === true,
