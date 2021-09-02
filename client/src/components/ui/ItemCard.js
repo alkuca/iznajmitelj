@@ -127,16 +127,23 @@ const ItemCard = props => {
                     <div className="image-overlay">
                         {props.codeEntered ?
                             <Fragment>
-                                {timePassed ?
+                                {timePassed && props.return_type !== null &&
                                     <Fragment>
                                         <p>NAJAM ZAVRŠIO</p>
                                         <p>Čekanje na povrat proizvoda</p>
                                     </Fragment>
-                                    :
-                                    <Fragment>
-                                        <p>Datum zavšetka najma:</p>
-                                        <time>{date_rent_ends.format("DD.MM.YYYY")}</time>
-                                    </Fragment>
+                                }
+                                {!timePassed && props.return_type !== null &&
+                                <Fragment>
+                                    <p>NAJAM ZAVRŠEN RANIJE</p>
+                                    <p>Čekanje na povrat proizvoda</p>
+                                </Fragment>
+                                }
+                                {!timePassed && props.return_type === null &&
+                                <Fragment>
+                                    <p>Datum zavšetka najma:</p>
+                                    <time>{date_rent_ends.format("DD.MM.YYYY")}</time>
+                                </Fragment>
                                 }
                             </Fragment>
                             :
@@ -179,6 +186,9 @@ const ItemCard = props => {
                                 </div>
                                 {timePassed && props.return_type !== null &&
                                     <button onClick={finishRentingByOwnerAction} className="enter-code-button">Završi</button>
+                                }
+                                {!timePassed && props.return_type !== null &&
+                                <button onClick={finishRentingByOwnerAction} className="enter-code-button">Završi Ranije</button>
                                 }
                             </Fragment>
                         }
