@@ -84,8 +84,8 @@ const SearchPage = () => {
     const currentTableData = useMemo(() => {
         const firstPageIndex = (currentPage - 1) * PageSize;
         const lastPageIndex = firstPageIndex + PageSize;
-        return filteredItems.slice(firstPageIndex, lastPageIndex);
-    }, [currentPage,filteredItems]);
+        return filteredItems.filter((item) => item.item_name.toLowerCase().includes(search.toLowerCase())).slice(firstPageIndex, lastPageIndex);
+    }, [currentPage,filteredItems,search]);
 
 
         return (
@@ -110,7 +110,7 @@ const SearchPage = () => {
                 </div>
                 <div className="items-container">
                     {
-                        currentTableData.filter((item) => item.item_name.toLowerCase().includes(search.toLowerCase())).map( item => {
+                        currentTableData.map( item => {
                             return <ItemCard
                                 key={item.item_id}
                                 item_id={item.item_id}
