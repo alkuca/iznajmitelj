@@ -12,7 +12,7 @@ const NotificationItem = props => {
                         <Link to={`/dashboard/profil/${props.maker_id}`}>{props.maker} </Link>
                         je iznajmio
                         <Link to="/dashboard/iznajmljeno"> { props.related_item_name } </Link>
-                        {!props.delivery_type ? "kojeg će vlastito preuzeti." : "i zatražio dostavu na svoju adresu"}
+                        {props.delivery_type === 1 ? "kojeg će vlastito preuzeti." : "i zatražio dostavu na svoju adresu"}
                     </p>
                 </Fragment>
             }
