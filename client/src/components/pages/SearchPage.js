@@ -85,7 +85,7 @@ const SearchPage = () => {
         const firstPageIndex = (currentPage - 1) * PageSize;
         const lastPageIndex = firstPageIndex + PageSize;
         return filteredItems.filter((item) => item.item_name.toLowerCase().includes(search.toLowerCase())).slice(firstPageIndex, lastPageIndex);
-    }, [currentPage,filteredItems]);
+    }, [currentPage,filteredItems,search]);
 
 
         return (
