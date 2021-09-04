@@ -375,7 +375,7 @@ export const verifyRentedItem = formData => async dispatch => {
 export const verifyReturnItem = formData => async dispatch => {
     try {
         const res = await fetch(
-            "http://localhost:5000/rentedItems/verifyReturnCode",
+            "/rentedItems/verifyReturnCode",
             {
                 method: "POST",
                 headers: {
