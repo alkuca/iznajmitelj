@@ -847,7 +847,7 @@ button:hover {
       height: 500px;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
       z-index: 0;
-      margin-top: 10px;
+      margin-top: 15px;
     }
 
     h1 {
@@ -1191,6 +1191,10 @@ button:hover {
       font-size: 20px;
     }
   }
+}
+
+.middle{
+  text-align: center;
 }
 
 .flex-start {
@@ -1666,7 +1670,7 @@ input[type="file"] {
       color: #578eff;
     }
   }
-}
+}o
 
 .new-message-modal-container {
   width: 100%;
@@ -1795,12 +1799,36 @@ input[type="file"] {
   background: #f7fbff;
 }
 
+.return-step-code-container {
+  font-size: 24px;
+  padding: 4px 20px;
+  border-radius: 5px;
+  h3{
+    font-weight: 600;
+    font-size: 21px;
+    text-align: center;
+  }
+  p{
+    font-weight: 700;
+    color: #3c7bff;
+    text-align: center;
+    font-size: 32px;
+    background: #e2efff;
+    padding: 4px 15px;
+  }
+  h4{
+    font-weight: 500;
+    font-size: 17px;
+    text-align: center;
+  }
+}
+
 .item-code {
   color: #3c7bff;
   font-size: 24px;
   background: #e2efff;
   font-weight: 700;
-  padding: 4px 15px;
+  padding: 3px 15px;
   border-radius: 4px;
 }
 

@@ -95,6 +95,25 @@ router.post("/verifyCode", async (req, res) => {
     }
 });
 
+router.post("/verifyReturnCode", async (req, res) => {
+    const {code,rented_item_id} = req.body;
+
+    try {
+
+        const verifyReturnCode = await pool.query("SELECT return_code FROM rented_items WHERE rented_item_id=$1", [rented_item_id]);
+
+        if(verifyReturnCode.rows[0].return_code === code) {
+            await pool.query("UPDATE rented_items SET return_code_entered=true WHERE rented_item_id=$1",[rented_item_id]);
+            res.json(true);
+        }else {
+            res.json(false);
+        }
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Server error");
+    }
+});
+
 
 /*
 Sets item renting_status to true

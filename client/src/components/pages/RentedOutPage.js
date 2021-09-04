@@ -38,6 +38,8 @@ const RentedOutPage = () => {
                             renting_status={item.renting_status}
                             rented_item_id={item.rented_item_id}
                             return_type={item.return_type}
+                            return_code={item.return_code}
+                            returnCodeEntered={item.return_code_entered}
                         />
                     })
                 }
