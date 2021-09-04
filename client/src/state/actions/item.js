@@ -372,6 +372,30 @@ export const verifyRentedItem = formData => async dispatch => {
     }
 }
 
+export const verifyReturnItem = formData => async dispatch => {
+    try {
+        const res = await fetch(
+            "http://localhost:5000/rentedItems/verifyReturnCode",
+            {
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json"
+                },
+                body: JSON.stringify(formData)
+            }
+        );
+        const parseRes = await res.json()
+        if(res.ok){
+            dispatch({
+                type: "VERIFY_RENTED_ITEM"
+            })
+            return parseRes;
+        }
+    } catch (err) {
+        console.error(err.message);
+    }
+}
+
 export const clearCurrentItem = () => dispatch => {
     dispatch({
         type: "CLEAR_CURRENT_ITEM"

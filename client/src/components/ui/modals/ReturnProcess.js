@@ -92,6 +92,9 @@ function ReturnProcess (props) {
                                 <p>{props.owner_name}</p>
                             </Link>
                         </div>
+                        <div className="same-row">
+                            <h1 className="red-font">Nakon predaje proizvoda zatraži šifru od vlasnika.</h1>
+                        </div>
                         <MapInfo lat={userState.singleUser[0].lat}
                                  long={userState.singleUser[0].long}
                                  zoom={12}

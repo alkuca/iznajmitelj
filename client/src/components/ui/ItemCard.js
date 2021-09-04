@@ -14,12 +14,14 @@ import {useDispatch} from "react-redux";
 import moment from "moment";
 import classnames from "classnames";
 import LazyLoad from 'react-lazyload';
+import ReturnCodeEnter from "./modals/ReturnCodeEnter";
 
 const ItemCard = props => {
 
     const [postConfirmation, togglePostConfirmation] = useState(false)
     const [deleteConfirmation, toggleDeleteConfirmation] = useState(false)
     const [codeEnterModal, toggleCodeEnterModal] = useState(false)
+    const [returnCodeEnterModal, toggleReturnCodeEnterModal] = useState(false)
     const [returnProcessModal, toggleReturnProcessModal] = useState(false)
     const [timePassed, setTimePassed] = useState(false)
 
@@ -34,6 +36,10 @@ const ItemCard = props => {
 
     const handleCodeEnterClick = () => {
         toggleCodeEnterModal(!codeEnterModal)
+    }
+
+    const handleReturnCodeEnterClick = () => {
+        toggleReturnCodeEnterModal(!returnCodeEnterModal)
     }
 
     const handleReturnClick = () => {
@@ -111,7 +117,11 @@ const ItemCard = props => {
                                 {props.return_type !== null &&
                                 <Fragment>
                                     <p>Povratak u tijeku</p>
-                                    <p>Čekanje na potvrdu</p>
+                                    {!props.returnCodeEntered ?
+                                        <p>Čekanje na šifru</p>
+                                        :
+                                        <p>Šifra unesena</p>
+                                    }
                                 </Fragment>
                                 }
                             </Fragment>
@@ -127,11 +137,11 @@ const ItemCard = props => {
                     <div className="image-overlay">
                         {props.codeEntered ?
                             <Fragment>
-                                {timePassed && props.return_type !== null &&
-                                    <Fragment>
-                                        <p>NAJAM ZAVRŠIO</p>
-                                        <p>Čekanje na povrat proizvoda</p>
-                                    </Fragment>
+                                {timePassed && props.return_type === null &&
+                                <Fragment>
+                                    <p>NAJAM ZAVRŠIO</p>
+                                    <p>Čekanje na povrat proizvoda</p>
+                                </Fragment>
                                 }
                                 {!timePassed && props.return_type !== null &&
                                 <Fragment>
@@ -143,6 +153,15 @@ const ItemCard = props => {
                                 <Fragment>
                                     <p>Datum zavšetka najma:</p>
                                     <time>{date_rent_ends.format("DD.MM.YYYY")}</time>
+                                </Fragment>
+                                }
+                                {props.return_type !== null && !props.returnCodeEntered &&
+                                <p>Nakon primitka proizvoda, predaj šifru unajmitelju</p>
+                                }
+                                {props.return_type !== null && props.returnCodeEntered &&
+                                <Fragment>
+                                    <p>Šifra Unesena</p>
+                                    <p>Završi najam</p>
                                 </Fragment>
                                 }
                             </Fragment>
@@ -169,22 +188,24 @@ const ItemCard = props => {
                         {(!props.codeEntered && props.code) &&
                             <p className="item-code">{props.code}</p>
                         }
-                        {(props.codeEntered && props.return_type === null && window.location.pathname === "/dashboard/unajmljeno") &&
-                            <p className="item-code">Šifra unesena</p>
-                        }
                         {(props.codeEntered && window.location.pathname === "/dashboard/iznajmljeno" && !props.renting_status) &&
                         <p className="item-code">ZAVRŠENO</p>
                         }
                         {props.renterName &&
                             <Fragment>
+                                {(props.codeEntered && props.return_type !== null && window.location.pathname === "/dashboard/iznajmljeno" && !props.returnCodeEntered) &&
+                                <p className="item-code">{props.return_code}</p>
+                                }
+                                {props.return_type === null &&
                                 <p>Iznajmljeno na {props.duration} dana za {props.fullPrice} Kn</p>
+                                }
                                 <div className="same-row card-renter">
                                     <p>Unajmitelj:</p>
                                     <Link to={`/dashboard/profil/${props.renterId}`}>
                                         {props.renterName}
                                     </Link>
                                 </div>
-                                {props.return_type !== null &&
+                                {props.return_type !== null && props.returnCodeEntered &&
                                     <button onClick={finishRentingByOwnerAction} className="enter-code-button">Završi</button>
                                 }
                             </Fragment>
@@ -209,6 +230,9 @@ const ItemCard = props => {
                                 timePassed ? "Vrati" : "Vrati Ranije"
                             }
                         </button>
+                    }
+                    {(props.codeEntered && props.return_type !== null && !props.returnCodeEntered && window.location.pathname === "/dashboard/unajmljeno") &&
+                    <button onClick={handleReturnCodeEnterClick} className="enter-code-button">Unesi šifru</button>
                     }
                 </div>
 
@@ -269,13 +293,21 @@ const ItemCard = props => {
                 rented_item_id={props.rented_item_id}
             />
             }
+            {returnCodeEnterModal &&
+            <ReturnCodeEnter
+                closeModal={handleReturnCodeEnterClick}
+                item_name={props.name}
+                rented_item_id={props.rented_item_id}
+            />
+            }
             {returnProcessModal &&
             <ReturnProcess
                 handleModalToggle={handleReturnClick}
                 rented_item_id={props.rented_item_id}
                 owner_id={props.owner_id}
                 owner_name={props.owner_name}
-                item_id={props.item_id}/>
+                item_id={props.item_id}
+                />
             }
         </div>
         </LazyLoad>

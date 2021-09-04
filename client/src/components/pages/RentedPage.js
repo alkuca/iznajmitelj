@@ -35,6 +35,7 @@ const RentedPage = () => {
                             item_image={item.item_image}
                             code={item.confirmation_code}
                             return_type={item.return_type}
+                            returnCodeEntered={item.return_code_entered}
                         />
                     })
                 }
