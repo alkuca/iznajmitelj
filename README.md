@@ -2,9 +2,7 @@
 
 <br />
 <p align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="https://github.com/alkuca/iznajmitelj/blob/main/client/src/images/LogoF.svg?raw=true" alt="Logo" width="80" height="80">
-  </a>
+   <img src="https://github.com/alkuca/iznajmitelj/blob/main/client/src/images/LogoF.svg?raw=true" alt="Logo" width="80" height="80">
   <h3 align="center">Rentmi</h3>
   <p align="center">
     Web aplikacija za iznajmljivane i unajmljivane dobara
