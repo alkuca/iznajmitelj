@@ -14,7 +14,10 @@
   </p>
 </p>
 <br />
-<img src="https://res.cloudinary.com/dkwlvbeyk/image/upload/v1630408521/misc/moje_stvari_zszcvm.png" alt="Dashboard">
+<img src="https://res.cloudinary.com/dgq3h1sri/image/upload/v1634812415/Github%20images/screencapture-rentmi-herokuapp-dashboard-stvari-2021-10-20-17_42_35_1.png" alt="Dashboard">
+<img src="https://res.cloudinary.com/dgq3h1sri/image/upload/v1634812417/Github%20images/screencapture-rentmi-herokuapp-dashboard-iznajmljeno-2021-10-20-18_59_05.png" alt="Dashboard">
+<img src="https://res.cloudinary.com/dgq3h1sri/image/upload/v1634812458/Github%20images/screencapture-rentmi-herokuapp-dashboard-trazi-2021-10-20-17_43_14.png" alt="Dashboard">
+<img src="https://res.cloudinary.com/dgq3h1sri/image/upload/v1634812471/Github%20images/screencapture-rentmi-herokuapp-dashboard-stvar-983fbcc4-c67e-479b-a488-633d9c101550-2021-10-21-11_48_32.png" alt="Dashboard">
 <br />
 <br />
 
